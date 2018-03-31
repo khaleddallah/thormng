@@ -1050,7 +1050,7 @@ bool OnlineWalkingModule::checkBalanceOnOff()
       (fabs(online_walking->balance_ctrl_.left_foot_torque_roll_ctrl_.d_gain_    ) < 1e-7) &&
       (fabs(online_walking->balance_ctrl_.left_foot_torque_pitch_ctrl_.d_gain_   ) < 1e-7))
   {
-    return false;
+    return true;
   }
   else
     return true;
