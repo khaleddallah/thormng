@@ -6,7 +6,7 @@
   <xacro:property name="pi" value="3.141592654" />
 
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find thormang3_description)/urdf/thormang3.gazebo" />
+
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find thormang3_description)/urdf/materials.xacro" />
 <!--
@@ -16,7 +16,7 @@
  -->
   <xacro:include filename="$(find thormang3_description)/urdf/thormang3.transmissions.xacro" />
   <xacro:include filename="$(find thormang3_description)/urdf/thormang3.structure.leg.xacro" />
-
+  <xacro:include filename="$(find thormang3_description)/urdf/thormang3.gazebo" />
   <!-- Used for fixing robot -->
 <!--
   <link name="world">

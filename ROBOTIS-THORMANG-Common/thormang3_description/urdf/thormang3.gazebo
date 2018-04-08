@@ -109,7 +109,30 @@
             </imu>
         </plugin>
     </gazebo>
-
+  <!-- FT sensors -->
+  <!-- Left leg -->
+  <gazebo reference="l_leg_ft">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>125.0</updateRate>
+      <topicName>/gazebo/johnny5/sensor/ft/left_foot</topicName>
+      <jointName>l_leg_ft</jointName>
+    </plugin>
+  </gazebo>
+  <!-- Right leg -->
+  <gazebo reference="r_leg_ft">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+  <gazebo>
+    <plugin filename="libgazebo_ros_ft_sensor.so" name="ft_sensor">
+      <updateRate>125.0</updateRate>
+      <topicName>/gazebo/johnny5/sensor/ft/right_foot</topicName>
+      <jointName>r_leg_ft</jointName>
+    </plugin>
+  </gazebo>
+    
   <!-- World -->
   <gazebo reference="world">
   </gazebo>
