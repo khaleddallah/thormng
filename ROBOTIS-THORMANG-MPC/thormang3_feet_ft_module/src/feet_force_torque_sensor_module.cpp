@@ -151,7 +151,7 @@ void FeetForceTorqueSensor::initializeFeetForceTorqueSensor()
 
   r_foot_ft_sensor_.initialize(foot_ft_data_path, "ft_right_foot", "r_foot_ft_link" , "/robotis/sensor/ft_right_foot/raw", "/robotis/sensor/ft_right_foot/scaled");
   l_foot_ft_sensor_.initialize(foot_ft_data_path, "ft_left_foot",  "l_foot_ft_link",  "/robotis/sensor/ft_left_foot/raw",  "/robotis/sensor/ft_left_foot/scaled");
-
+  
 
   YAML::Node doc;
 
