@@ -831,6 +831,8 @@ void BalanceControlUsingPDController::process(int *balance_error, Eigen::MatrixX
   mat_robot_to_left_foot_modified_.coeffRef(1,3) = desired_robot_to_left_foot_.coeff(1,3) + pose_left_foot_adjustment_.coeff(1);
   mat_robot_to_left_foot_modified_.coeffRef(2,3) = desired_robot_to_left_foot_.coeff(2,3) + pose_left_foot_adjustment_.coeff(2);
 
+  //ROS_INFO(l_foot_x_adjustment_by_force_x_ );
+  
   if(balance_error != 0)
     *balance_error = balance_control_error_;
 

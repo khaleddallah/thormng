@@ -237,6 +237,9 @@ void OnlineWalkingModule::queueThread()
   status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>("robotis/status", 1);
   pelvis_base_msg_pub_ = ros_node.advertise<geometry_msgs::PoseStamped>("/robotis/pelvis_pose_base_walking", 1);
   done_msg_pub_ = ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
+  blnc = ros_node.advertise<std_msgs::Float64MultiArray >("/z/blnc", 1);
+
+
 #ifdef WALKING_TUNE
   walking_joint_states_pub_ = ros_node.advertise<thormang3_walking_module_msgs::WalkingJointStatesStamped>("/robotis/walking/walking_joint_states", 1);
 #endif
@@ -255,7 +258,6 @@ void OnlineWalkingModule::queueThread()
 
   ros::Subscriber johnny5FtLeft      = ros_node.subscribe("/gazebo/johnny5/sensor/ft/left_foot", 3, &OnlineWalkingModule::JohnnyFtLeftCallback, this);
   ros::Subscriber johnny5FtRight      = ros_node.subscribe("/gazebo/johnny5/sensor/ft/right_foot", 3, &OnlineWalkingModule::JohnnyFtRightCallback, this);
-
 
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
@@ -1335,10 +1337,10 @@ void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynam
 
   process_mutex_.lock();
   online_walking->process();
-
   desired_matrix_g_to_cob_   = online_walking->mat_g_to_cob_;
   desired_matrix_g_to_rfoot_ = online_walking->mat_g_to_rfoot_;
   desired_matrix_g_to_lfoot_ = online_walking->mat_g_to_lfoot_;
+  blnc.publish(online_walking->map_info);
   process_mutex_.unlock();
 
   publishRobotPose();

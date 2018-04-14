@@ -158,6 +158,7 @@ private:
   ros::Publisher status_msg_pub_;
   ros::Publisher pelvis_base_msg_pub_;
   ros::Publisher done_msg_pub_;
+  ros::Publisher blnc;
 #ifdef WALKING_TUNE
   ros::Publisher walking_joint_states_pub_;
   ros::Publisher imu_orientation_states_pub_;

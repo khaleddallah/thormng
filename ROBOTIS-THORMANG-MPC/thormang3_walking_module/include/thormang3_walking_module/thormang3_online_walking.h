@@ -44,6 +44,10 @@
 #include <vector>
 #include <boost/thread.hpp>
 #include <yaml-cpp/yaml.h>
+#include <std_msgs/Float64MultiArray.h>
+#include <tf/transform_datatypes.h>
+#include <eigen_conversions/eigen_msg.h>
+
 
 #include "thormang3_balance_control/thormang3_balance_control.h"
 #include "robotis_framework_common/singleton.h"
@@ -126,6 +130,8 @@ public:
   double current_imu_roll_rad_, current_imu_pitch_rad_;
   double current_gyro_roll_rad_per_sec_, current_gyro_pitch_rad_per_sec_;
 
+  std_msgs::Float64MultiArray map_info;
+  Eigen::MatrixXd tata_mat_robot_to_cob_modified_;
 private:
   void calcStepIdxData();
   void calcRefZMP();
