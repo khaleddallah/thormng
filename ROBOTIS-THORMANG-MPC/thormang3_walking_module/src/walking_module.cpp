@@ -1419,6 +1419,7 @@ void OnlineWalkingModule::stop()
 }
 
 
+//======================================================Exo=========================================
 
 void OnlineWalkingModule::modifyMotorExo ()
 {
@@ -1432,6 +1433,13 @@ void OnlineWalkingModule::modifyMotorExo ()
   //r_kn
   result_["r_leg_kn_p" ]->goal_position_ = - result_["r_leg_kn_p" ]->goal_position_;
 
+  //add offset right
+  result_["r_leg_hip_y"]->goal_position_ = result_["r_leg_hip_y"]->goal_position_ + r_leg_hip_y_ofst ;
+  result_["r_leg_hip_r"]->goal_position_ = result_["r_leg_hip_r"]->goal_position_ + r_leg_hip_r_ofst ;
+  result_["r_leg_hip_p"]->goal_position_ = result_["r_leg_hip_p"]->goal_position_ + r_leg_hip_p_ofst ;
+  result_["r_leg_kn_p" ]->goal_position_ = result_["r_leg_kn_p" ]->goal_position_ + r_leg_kn_p_ofst  ;
+  result_["r_leg_an_p" ]->goal_position_ = result_["r_leg_an_p" ]->goal_position_ + r_leg_an_p_ofst  ;
+  result_["r_leg_an_r" ]->goal_position_ = result_["r_leg_an_r" ]->goal_position_ + r_leg_an_r_ofst  ;
 
     //=================Left leg=========================
   //l_hip
@@ -1442,6 +1450,16 @@ void OnlineWalkingModule::modifyMotorExo ()
   result_["l_leg_hip_p"]->goal_position_ = -2 * result_["l_leg_hip_p"]->goal_position_;
   //l_kn
   result_["l_leg_kn_p" ]->goal_position_ = - result_["l_leg_kn_p" ]->goal_position_;
+ 
+  //add offset left
+  result_["l_leg_hip_y"]->goal_position_ = result_["l_leg_hip_y"]->goal_position_ + l_leg_hip_y_ofst ;
+  result_["l_leg_hip_r"]->goal_position_ = result_["l_leg_hip_r"]->goal_position_ + l_leg_hip_r_ofst ;
+  result_["l_leg_hip_p"]->goal_position_ = result_["l_leg_hip_p"]->goal_position_ + l_leg_hip_p_ofst ;
+  result_["l_leg_kn_p" ]->goal_position_ = result_["l_leg_kn_p" ]->goal_position_ + l_leg_kn_p_ofst  ;
+  result_["l_leg_an_p" ]->goal_position_ = result_["l_leg_an_p" ]->goal_position_ + l_leg_an_p_ofst  ;
+  result_["l_leg_an_r" ]->goal_position_ = result_["l_leg_an_r" ]->goal_position_ + l_leg_an_r_ofst  ;
+
+
 }
 
 void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)
@@ -1472,6 +1490,20 @@ void OnlineWalkingModule::parseOffsetData(const std::string &path)
 
   an_kx = doc["an_kx"].as<double>();
   an_ky = doc["an_ky"].as<double>();
+
+r_leg_hip_y_ofst = doc["r_leg_hip_y_ofst"].as<double>();
+r_leg_hip_r_ofst = doc["r_leg_hip_r_ofst"].as<double>();
+r_leg_hip_p_ofst = doc["r_leg_hip_p_ofst"].as<double>();
+r_leg_kn_p_ofst  = doc["r_leg_kn_p_ofst"].as<double>();
+r_leg_an_p_ofst  = doc["r_leg_an_p_ofst"].as<double>();
+r_leg_an_r_ofst  = doc["r_leg_an_r_ofst"].as<double>();
+
+l_leg_hip_y_ofst = doc["l_leg_hip_y_ofst"].as<double>();
+l_leg_hip_r_ofst = doc["l_leg_hip_r_ofst"].as<double>();
+l_leg_hip_p_ofst = doc["l_leg_hip_p_ofst"].as<double>();
+l_leg_kn_p_ofst  = doc["l_leg_kn_p_ofst"].as<double>();
+l_leg_an_p_ofst  = doc["l_leg_an_p_ofst"].as<double>();
+l_leg_an_r_ofst  = doc["l_leg_an_r_ofst"].as<double>();
 
   ROS_INFO("hip_kx : %f", hip_kx);
   ROS_INFO("hip_ky : %f", hip_ky);

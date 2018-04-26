@@ -81,6 +81,20 @@ public:
   double an_kx = 0 ;
   double an_ky = 0 ;
 
+  double r_leg_hip_y_ofst = 0 ;
+  double r_leg_hip_r_ofst = 0 ;
+  double r_leg_hip_p_ofst = 0 ;
+  double r_leg_kn_p_ofst  = 0 ;
+  double r_leg_an_p_ofst  = 0 ;
+  double r_leg_an_r_ofst  = 0 ;
+
+  double l_leg_hip_y_ofst = 0 ;
+  double l_leg_hip_r_ofst = 0 ;
+  double l_leg_hip_p_ofst = 0 ;
+  double l_leg_kn_p_ofst  = 0 ;
+  double l_leg_an_p_ofst  = 0 ;
+  double l_leg_an_r_ofst  = 0 ;
+
   void initialize(const int control_cycle_msec, robotis_framework::Robot *robot);
   void process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors);
   void modifyMotorExo ();
