@@ -1,0 +1,183 @@
+<robot
+  name="assembly_foot">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.057586 0.085205 0.11532"
+        rpy="0 0 0" />
+      <mass
+        value="4.0351" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.80784 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="knee_y">
+    <inertial>
+      <origin
+        xyz="0.030939 2.9907E-09 0.058"
+        rpy="0 0 0" />
+      <mass
+        value="0.55783" />
+      <inertia
+        ixx="3.4898E-05"
+        ixy="-1.9612E-12"
+        ixz="-1.4719E-11"
+        iyy="5.5187E-05"
+        iyz="-2.8528E-18"
+        izz="2.0288E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/knee_y.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0.80784 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/knee_y.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jknee_y"
+    type="revolute">
+    <origin
+      xyz="0.047312 -0.057348 0.023041"
+      rpy="1.5708 0.10978 -6.749E-18" />
+    <parent
+      link="base_link" />
+    <child
+      link="knee_y" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="knee_x">
+    <inertial>
+      <origin
+        xyz="-0.014029 -0.041642 0.0086143"
+        rpy="0 0 0" />
+      <mass
+        value="1.4091" />
+      <inertia
+        ixx="1.4298E-05"
+        ixy="-1.9233E-05"
+        ixz="2.8371E-07"
+        iyy="2.588E-05"
+        iyz="2.1087E-07"
+        izz="4.0172E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/knee_x.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.64706 0.51765 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://assembly_foot/meshes/knee_x.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="jknee_x"
+    type="revolute">
+    <origin
+      xyz="0 0 0.05"
+      rpy="0.0001124 -3.8964E-20 3.3307E-16" />
+    <parent
+      link="knee_y" />
+    <child
+      link="knee_x" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+
+    <transmission name="m_knee_y">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="jknee_y">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="m_y">
+    <mechanicalReduction>1</mechanicalReduction>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+	</transmission>	
+
+    <transmission name="m_knee_x">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="jknee_x">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="m_x">
+    <mechanicalReduction>1</mechanicalReduction>
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </actuator>
+	</transmission>	
+
+	<gazebo>
+   		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      	  <robotNamespace>/assembly_foot</robotNamespace>
+ 	   </plugin>
+	</gazebo>
+</robot>

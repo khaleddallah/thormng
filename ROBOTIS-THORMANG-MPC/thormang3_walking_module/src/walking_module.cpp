@@ -90,6 +90,8 @@ OnlineWalkingModule::OnlineWalkingModule()
   result_["l_leg_an_p" ] = new robotis_framework::DynamixelState();
   result_["l_leg_an_r" ] = new robotis_framework::DynamixelState();
 
+ 
+
   joint_name_to_index_["r_leg_hip_y"] = 0;
   joint_name_to_index_["r_leg_hip_r"] = 1;
   joint_name_to_index_["r_leg_hip_p"] = 2;
@@ -170,6 +172,8 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
                                  0,  0.093, -0.63, 0, 0, 0,
                                  0,      0,     0, 0, 0, 0);
 
+  std::string offset_path = ros::package::getPath("thormang3_walking_module") + "/config/motorConfigExo.yaml";
+  parseOffsetData(offset_path);
 
   online_walking->hip_roll_feedforward_angle_rad_ = 0.0*M_PI/180.0;
   online_walking->balance_ctrl_.setCOBManualAdjustment(-10.0*0.001, 0, 0);
@@ -1359,6 +1363,8 @@ void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynam
   result_["l_leg_an_p" ]->goal_position_ = online_walking->out_angle_rad_[10];
   result_["l_leg_an_r" ]->goal_position_ = online_walking->out_angle_rad_[11];
 
+  modifyMotorExo ();
+
 #ifdef WALKING_TUNE
   walking_joint_states_msg_.header.stamp = ros::Time::now();
   walking_joint_states_msg_.r_goal_hip_y = online_walking->r_leg_out_angle_rad_[0];
@@ -1410,4 +1416,65 @@ void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynam
 void OnlineWalkingModule::stop()
 {
   return;
+}
+
+
+
+void OnlineWalkingModule::modifyMotorExo ()
+{
+  //=================right leg=========================
+  //r_hip
+  wtdExo (&result_["r_leg_hip_y"]->goal_position_ , &result_["r_leg_hip_r"]->goal_position_ , hip_kx , hip_ky );
+  //r_ankle
+  wtdExo (&result_["r_leg_an_p"]->goal_position_ , &result_["r_leg_an_r"]->goal_position_ , hip_kx , hip_ky );
+  //r_hip_p
+  result_["r_leg_hip_p"]->goal_position_ = -2 * result_["r_leg_hip_p"]->goal_position_;
+  //r_kn
+  result_["r_leg_kn_p" ]->goal_position_ = - result_["r_leg_kn_p" ]->goal_position_;
+
+
+    //=================Left leg=========================
+  //l_hip
+  wtdExo (&result_["l_leg_hip_y"]->goal_position_ , &result_["l_leg_hip_r"]->goal_position_ , hip_kx , hip_ky );
+  //l_ankle
+  wtdExo (&result_["l_leg_an_p"]->goal_position_ , &result_["l_leg_an_r"]->goal_position_ , hip_kx , hip_ky );
+  //l_hip_p
+  result_["l_leg_hip_p"]->goal_position_ = -2 * result_["l_leg_hip_p"]->goal_position_;
+  //l_kn
+  result_["l_leg_kn_p" ]->goal_position_ = - result_["l_leg_kn_p" ]->goal_position_;
+}
+
+void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)
+{
+  double temp_m1 , temp_m2;
+  temp_m1 = (kx * (*x)) - (ky * (*y));
+  temp_m2 = (kx * (*x)) + (ky * (*y));
+  *x = temp_m1;
+  *y = temp_m2;
+}
+
+void OnlineWalkingModule::parseOffsetData(const std::string &path)
+{
+  YAML::Node doc;
+  try
+  {
+    // load yaml
+    doc = YAML::LoadFile(path.c_str());
+  }
+  catch (const std::exception& e)
+  {
+    ROS_ERROR("Fail to load yaml file OFFsetExo.");
+    return;
+  }
+
+  hip_kx = doc["hip_kx"].as<double>();
+  hip_ky = doc["hip_ky"].as<double>();
+
+  an_kx = doc["an_kx"].as<double>();
+  an_ky = doc["an_ky"].as<double>();
+
+  ROS_INFO("hip_kx : %f", hip_kx);
+  ROS_INFO("hip_ky : %f", hip_ky);
+  ROS_INFO("an_kx : %f", an_kx);
+  ROS_INFO("an_ky : %f", an_ky);
 }

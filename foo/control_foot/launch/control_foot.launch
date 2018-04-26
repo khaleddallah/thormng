@@ -1,0 +1,11 @@
+<launch>
+  <rosparam file="$(find control_foot)/config/joint_names_assembly_foot.yaml" command="load"/>
+
+  <node name="controller_spawner" 
+		pkg="controller_manager" 
+		type="spawner" respawn="false" 
+		output="screen" 
+		ns="/assembly_foot" 
+		args="joint1_position_controller joint2_position_controller  joint_state_controller"/>
+
+</launch>

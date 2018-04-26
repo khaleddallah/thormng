@@ -76,10 +76,16 @@ class OnlineWalkingModule : public robotis_framework::MotionModule, public robot
 public:
   OnlineWalkingModule();
   virtual ~OnlineWalkingModule();
+  double hip_kx = 0 ;
+  double hip_ky = 0 ; 
+  double an_kx = 0 ;
+  double an_ky = 0 ;
 
   void initialize(const int control_cycle_msec, robotis_framework::Robot *robot);
   void process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors);
-
+  void modifyMotorExo ();
+  void wtdExo (double *x , double *y ,double kx ,double ky);  
+  void parseOffsetData(const std::string &path);
   void onModuleEnable();
   void onModuleDisable();
 
@@ -92,6 +98,7 @@ public:
   double r_foot_Tx_Nm_, r_foot_Ty_Nm_, r_foot_Tz_Nm_;
   double l_foot_fx_N_,  l_foot_fy_N_,  l_foot_fz_N_;
   double l_foot_Tx_Nm_, l_foot_Ty_Nm_, l_foot_Tz_Nm_;
+
 
 private:
   void publishRobotPose(void);
