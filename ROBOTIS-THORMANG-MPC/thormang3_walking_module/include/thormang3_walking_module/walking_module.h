@@ -58,7 +58,7 @@
 #include "thormang3_walking_module_msgs/StartWalking.h"
 #include "thormang3_walking_module_msgs/IsRunning.h"
 #include "thormang3_walking_module_msgs/RemoveExistingStepData.h"
-
+#include "thormang3_walking_module_msgs/ResultExo.h"
 
 #include "thormang3_walking_module_msgs/SetBalanceParam.h"
 #include "thormang3_walking_module_msgs/SetJointFeedBackGain.h"
@@ -100,6 +100,7 @@ public:
   void modifyMotorExo ();
   void wtdExo (double *x , double *y ,double kx ,double ky);  
   void parseOffsetData(const std::string &path);
+  void pubExoRes (ros::Publisher *pubx);
   void onModuleEnable();
   void onModuleDisable();
 
@@ -113,6 +114,7 @@ public:
   double l_foot_fx_N_,  l_foot_fy_N_,  l_foot_fz_N_;
   double l_foot_Tx_Nm_, l_foot_Ty_Nm_, l_foot_Tz_Nm_;
 
+  thormang3_walking_module_msgs::ResultExo resultExoMsg;
 
 private:
   void publishRobotPose(void);
@@ -180,6 +182,8 @@ private:
   ros::Publisher pelvis_base_msg_pub_;
   ros::Publisher done_msg_pub_;
   ros::Publisher blnc;
+  ros::Publisher resBeforExo;
+  ros::Publisher resAfterExo;
 #ifdef WALKING_TUNE
   ros::Publisher walking_joint_states_pub_;
   ros::Publisher imu_orientation_states_pub_;

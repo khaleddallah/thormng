@@ -241,7 +241,9 @@ void OnlineWalkingModule::queueThread()
   status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>("robotis/status", 1);
   pelvis_base_msg_pub_ = ros_node.advertise<geometry_msgs::PoseStamped>("/robotis/pelvis_pose_base_walking", 1);
   done_msg_pub_ = ros_node.advertise<std_msgs::String>("/robotis/movement_done", 1);
-  blnc = ros_node.advertise<std_msgs::Float64MultiArray >("/z/blnc", 1);
+  blnc = ros_node.advertise<std_msgs::Float64MultiArray >("/Exo/blnc", 1);
+  resBeforExo = ros_node.advertise<thormang3_walking_module_msgs::ResultExo>("/Exo/resultBefor",1);
+  resAfterExo = ros_node.advertise<thormang3_walking_module_msgs::ResultExo>("/Exo/resultAfter",1);
 
 
 #ifdef WALKING_TUNE
@@ -1362,9 +1364,9 @@ void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynam
   result_["l_leg_kn_p" ]->goal_position_ = online_walking->out_angle_rad_[9];
   result_["l_leg_an_p" ]->goal_position_ = online_walking->out_angle_rad_[10];
   result_["l_leg_an_r" ]->goal_position_ = online_walking->out_angle_rad_[11];
-
+  pubExoRes(&resBeforExo);
   modifyMotorExo ();
-
+  pubExoRes(&resAfterExo);
 #ifdef WALKING_TUNE
   walking_joint_states_msg_.header.stamp = ros::Time::now();
   walking_joint_states_msg_.r_goal_hip_y = online_walking->r_leg_out_angle_rad_[0];
@@ -1509,4 +1511,24 @@ l_leg_an_r_ofst  = doc["l_leg_an_r_ofst"].as<double>();
   ROS_INFO("hip_ky : %f", hip_ky);
   ROS_INFO("an_kx : %f", an_kx);
   ROS_INFO("an_ky : %f", an_ky);
+}
+
+void OnlineWalkingModule::pubExoRes(ros::Publisher *pubx)
+{
+
+  resultExoMsg.l_leg_hip_y = result_["l_leg_hip_y"]->goal_position_;
+  resultExoMsg.l_leg_hip_r = result_["l_leg_hip_r"]->goal_position_;
+  resultExoMsg.l_leg_hip_p = result_["l_leg_hip_p"]->goal_position_;
+  resultExoMsg.l_leg_kn_p = result_["l_leg_kn_p" ]->goal_position_;
+  resultExoMsg.l_leg_an_p = result_["l_leg_an_p" ]->goal_position_;
+  resultExoMsg.l_leg_an_r = result_["l_leg_an_r" ]->goal_position_;
+
+  resultExoMsg.r_leg_hip_y = result_["r_leg_hip_y"]->goal_position_;
+  resultExoMsg.r_leg_hip_r = result_["r_leg_hip_r"]->goal_position_;
+  resultExoMsg.r_leg_hip_p = result_["r_leg_hip_p"]->goal_position_;
+  resultExoMsg.r_leg_kn_p = result_["r_leg_kn_p" ]->goal_position_;
+  resultExoMsg.r_leg_an_p = result_["r_leg_an_p" ]->goal_position_;
+  resultExoMsg.r_leg_an_r = result_["r_leg_an_r" ]->goal_position_;
+
+  pubx->publish(resultExoMsg);
 }

@@ -29,6 +29,7 @@ add_message_files(
   BalanceParam.msg
   DampingBalanceParam.msg
   RobotPose.msg
+  ResultExo.msg
   JointFeedBackGain.msg
   WalkingJointStatesStamped.msg
 )
