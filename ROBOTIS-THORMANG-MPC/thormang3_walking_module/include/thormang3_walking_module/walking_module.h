@@ -100,7 +100,8 @@ public:
   void modifyMotorExo ();
   void wtdExo (double *x , double *y ,double kx ,double ky);  
   void parseOffsetData(const std::string &path);
-  void pubExoRes (ros::Publisher *pubx);
+  void pubExoRes_ ();
+  void pubExoRes2 ();
   void onModuleEnable();
   void onModuleDisable();
 
@@ -161,7 +162,7 @@ private:
   void updateJointFeedBackGain();
 
   std::map<std::string, int> joint_name_to_index_;
-
+  std::map<std::string, double> result2;
   bool            gazebo_;
   int             control_cycle_msec_;
   boost::thread   queue_thread_;
@@ -182,8 +183,8 @@ private:
   ros::Publisher pelvis_base_msg_pub_;
   ros::Publisher done_msg_pub_;
   ros::Publisher blnc;
-  ros::Publisher resBeforExo;
-  ros::Publisher resAfterExo;
+  ros::Publisher ExoRes_;
+  ros::Publisher ExoRes2;
 #ifdef WALKING_TUNE
   ros::Publisher walking_joint_states_pub_;
   ros::Publisher imu_orientation_states_pub_;
