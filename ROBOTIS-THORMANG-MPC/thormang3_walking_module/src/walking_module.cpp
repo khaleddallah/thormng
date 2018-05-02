@@ -1076,7 +1076,7 @@ bool OnlineWalkingModule::checkBalanceOnOff()
       (fabs(online_walking->balance_ctrl_.left_foot_torque_roll_ctrl_.d_gain_    ) < 1e-7) &&
       (fabs(online_walking->balance_ctrl_.left_foot_torque_pitch_ctrl_.d_gain_   ) < 1e-7))
   {
-    return false;
+    return true;
   }
   else
     return true;
@@ -1454,7 +1454,7 @@ void OnlineWalkingModule::modifyMotorExo ()
   //r_hip
   wtdExo (&result2["r_leg_hip_y"] , &result2["r_leg_hip_r"] , hip_kx , hip_ky );
   //r_ankle
-  wtdExo (&result2["r_leg_an_p"] , &result2["r_leg_an_r"] , hip_kx , hip_ky );
+  wtdExo (&result2["r_leg_an_r"] , &result2["r_leg_an_p"], an_kx , an_ky );
   //r_hip_p
   result2["r_leg_hip_p"] = -2 * result2["r_leg_hip_p"];
   //r_kn
@@ -1472,7 +1472,7 @@ void OnlineWalkingModule::modifyMotorExo ()
   //l_hip
   wtdExo (&result2["l_leg_hip_y"] , &result2["l_leg_hip_r"] , hip_kx , hip_ky );
   //l_ankle
-  wtdExo (&result2["l_leg_an_p"] , &result2["l_leg_an_r"] , hip_kx , hip_ky );
+  wtdExo (&result2["l_leg_an_p"] , &result2["l_leg_an_r"] ,an_kx , an_ky );
   //l_hip_p
   result2["l_leg_hip_p"] = -2 * result2["l_leg_hip_p"];
   //l_kn
@@ -1505,6 +1505,7 @@ void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)
   temp_m2 = (kx * (*x)) + (ky * (*y));
   *x = temp_m1;
   *y = temp_m2;
+
 }
 
 void OnlineWalkingModule::parseOffsetData(const std::string &path)

@@ -361,10 +361,10 @@ l_leg_an_p  :   # H54-200-B500-R
    return_delay_time     :  10    
    operating_mode        :  3     
    shutdown              :  58    
-   homing_offset         :  -8365   # 6 deg
+   homing_offset         :  2340   # 6 deg
    torque_limit          :  1240
-   max_position_limit    :  250950
-   min_position_limit    : -250950
+   max_position_limit    :  4096
+   min_position_limit    :  0
    external_port_mod_1   : 0
    external_port_mod_2   : 0
    goal_torque           : 1240
@@ -397,10 +397,10 @@ l_leg_an_r  :   # H54-200-S500-R
    return_delay_time     :  10    
    operating_mode        :  3     
    shutdown              :  58    
-   homing_offset         :  0
+   homing_offset         :  1843
    torque_limit          :  1240
-   max_position_limit    :  250950
-   min_position_limit    : -250950
+   max_position_limit    :  4096
+   min_position_limit    :  0
    external_port_mod_1   : 0
    external_port_mod_2   : 0
    external_port_mod_3   : 0
