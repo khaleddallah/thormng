@@ -1461,12 +1461,12 @@ void OnlineWalkingModule::modifyMotorExo ()
   result2["r_leg_kn_p" ] = - result2["r_leg_kn_p" ];
 
   //add offset right
-  result2["r_leg_hip_y"] = result2["r_leg_hip_y"] + r_leg_hip_y_ofst ;
-  result2["r_leg_hip_r"] = result2["r_leg_hip_r"] + r_leg_hip_r_ofst ;
-  result2["r_leg_hip_p"] = result2["r_leg_hip_p"] + r_leg_hip_p_ofst ;
-  result2["r_leg_kn_p" ] = result2["r_leg_kn_p" ] + r_leg_kn_p_ofst  ;
-  result2["r_leg_an_p" ] = result2["r_leg_an_p" ] + r_leg_an_p_ofst  ;
-  result2["r_leg_an_r" ] = result2["r_leg_an_r" ] + r_leg_an_r_ofst  ;
+  result2["r_leg_hip_y"] = result2["r_leg_hip_y"] + (r_leg_hip_y_ofst/180) ;
+  result2["r_leg_hip_r"] = result2["r_leg_hip_r"] + (r_leg_hip_r_ofst/180) ;
+  result2["r_leg_hip_p"] = result2["r_leg_hip_p"] + (r_leg_hip_p_ofst/180) ;
+  result2["r_leg_kn_p" ] = result2["r_leg_kn_p" ] + (r_leg_kn_p_ofst/180)  ;
+  result2["r_leg_an_p" ] = result2["r_leg_an_p" ] + (r_leg_an_p_ofst/180)  ;
+  result2["r_leg_an_r" ] = result2["r_leg_an_r" ] + (r_leg_an_r_ofst/180)  ;
 
     //=================Left leg=========================
   //l_hip
@@ -1479,12 +1479,12 @@ void OnlineWalkingModule::modifyMotorExo ()
   result2["l_leg_kn_p" ] = - result2["l_leg_kn_p" ];
  
   //add offset left
-  result2["l_leg_hip_y"] = result2["l_leg_hip_y"] + l_leg_hip_y_ofst ;
-  result2["l_leg_hip_r"] = result2["l_leg_hip_r"] + l_leg_hip_r_ofst ;
-  result2["l_leg_hip_p"] = result2["l_leg_hip_p"] + l_leg_hip_p_ofst ;
-  result2["l_leg_kn_p" ] = result2["l_leg_kn_p" ] + l_leg_kn_p_ofst  ;
-  result2["l_leg_an_p" ] = result2["l_leg_an_p" ] + l_leg_an_p_ofst  ;
-  result2["l_leg_an_r" ] = result2["l_leg_an_r" ] + l_leg_an_r_ofst  ;
+  result2["l_leg_hip_y"] = result2["l_leg_hip_y"] + (l_leg_hip_y_ofst/180) ;
+  result2["l_leg_hip_r"] = result2["l_leg_hip_r"] + (l_leg_hip_r_ofst/180) ;
+  result2["l_leg_hip_p"] = result2["l_leg_hip_p"] + (l_leg_hip_p_ofst/180) ;
+  result2["l_leg_kn_p" ] = result2["l_leg_kn_p" ] + (l_leg_kn_p_ofst/180)  ;
+  result2["l_leg_an_p" ] = result2["l_leg_an_p" ] + (l_leg_an_p_ofst/180)  ;
+  result2["l_leg_an_r" ] = result2["l_leg_an_r" ] + (l_leg_an_r_ofst/180)  ;
  
   if (gazebo_ == false){
     for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
