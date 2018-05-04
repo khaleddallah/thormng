@@ -299,7 +299,7 @@ l_leg_hip_p :   # H54-200-B500-R
    return_delay_time     :  10    
    operating_mode        :  3     
    shutdown              :  58    
-   homing_offset         :  8365
+   homing_offset         :  0
    torque_limit          :  1240
    max_position_limit    :  250950
    min_position_limit    : -250950
@@ -329,7 +329,7 @@ l_leg_kn_p  :   # H54-200-S500-R
    return_delay_time     :  10    
    operating_mode        :  3     
    shutdown              :  58    
-   homing_offset         :  12548   #9 deg
+   homing_offset         :  0   #9 deg
    torque_limit          :  1240
    max_position_limit    :  250950
    min_position_limit    : -250950

@@ -861,7 +861,7 @@ void RobotisController::loadOffset(const std::string path)
 
     auto dxl_it = robot_->dxls_.find(joint_name);
     if (dxl_it != robot_->dxls_.end())
-      dxl_it->second->dxl_state_->position_offset_ = offset;
+      dxl_it->second->dxl_state_->position_offset_ = offset/180;
   }
 }
 
@@ -1398,12 +1398,12 @@ void RobotisController::process()
     Dynamixel  *dxl         = dxl_it.second;
 
     present_state.name.push_back(joint_name);
-    present_state.position.push_back(dxl->dxl_state_->present_position_);
+    present_state.position.push_back(dxl->dxl_state_->present_position_*180);
     present_state.velocity.push_back(dxl->dxl_state_->present_velocity_);
     present_state.effort.push_back(dxl->dxl_state_->present_torque_);
 
     goal_state.name.push_back(joint_name);
-    goal_state.position.push_back(dxl->dxl_state_->goal_position_);
+    goal_state.position.push_back(dxl->dxl_state_->goal_position_*180);
     goal_state.velocity.push_back(dxl->dxl_state_->goal_velocity_);
     goal_state.effort.push_back(dxl->dxl_state_->goal_torque_);
   }

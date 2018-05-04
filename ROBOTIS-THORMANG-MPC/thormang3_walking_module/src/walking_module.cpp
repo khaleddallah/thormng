@@ -181,8 +181,8 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   control_cycle_msec_ = control_cycle_msec;
 
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
-  online_walking->setInitialPose(0, -0.093, -0.63, 0, 0, 0,
-                                 0,  0.093, -0.63, 0, 0, 0,
+  online_walking->setInitialPose(0, -0.093, -0.69, 0, 0, 0,
+                                 0,  0.093, -0.69, 0, 0, 0,
                                  0,      0,     0, 0, 0, 0);
 
   std::string offset_path = ros::package::getPath("thormang3_walking_module") + "/config/motorConfigExo.yaml";
@@ -212,7 +212,7 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   result_["l_leg_kn_p" ]->goal_position_ = online_walking->out_angle_rad_[9];
   result_["l_leg_an_p" ]->goal_position_ = online_walking->out_angle_rad_[10];
   result_["l_leg_an_r" ]->goal_position_ = online_walking->out_angle_rad_[11];
-
+  modifyMotorExo();
   online_walking->start();
   online_walking->process();
 
@@ -1456,9 +1456,9 @@ void OnlineWalkingModule::modifyMotorExo ()
   //r_ankle
   wtdExo (&result2["r_leg_an_r"] , &result2["r_leg_an_p"], an_kx , an_ky );
   //r_hip_p
-  result2["r_leg_hip_p"] = -2 * result2["r_leg_hip_p"];
+  result2["r_leg_hip_p"] = 2 * result2["r_leg_hip_p"];
   //r_kn
-  result2["r_leg_kn_p" ] = - result2["r_leg_kn_p" ];
+  result2["r_leg_kn_p" ] =  result2["r_leg_kn_p" ];
 
   //add offset right
   result2["r_leg_hip_y"] = result2["r_leg_hip_y"] + (r_leg_hip_y_ofst/180) ;
@@ -1474,9 +1474,9 @@ void OnlineWalkingModule::modifyMotorExo ()
   //l_ankle
   wtdExo (&result2["l_leg_an_p"] , &result2["l_leg_an_r"] ,an_kx , an_ky );
   //l_hip_p
-  result2["l_leg_hip_p"] = -2 * result2["l_leg_hip_p"];
+  result2["l_leg_hip_p"] = 2 * result2["l_leg_hip_p"];
   //l_kn
-  result2["l_leg_kn_p" ] = - result2["l_leg_kn_p" ];
+  result2["l_leg_kn_p" ] =  result2["l_leg_kn_p" ];
  
   //add offset left
   result2["l_leg_hip_y"] = result2["l_leg_hip_y"] + (l_leg_hip_y_ofst/180) ;
@@ -1551,19 +1551,19 @@ l_leg_an_r_ofst  = doc["l_leg_an_r_ofst"].as<double>();
 void OnlineWalkingModule::pubExoRes_()
 {
 
-  resultExoMsg.l_leg_hip_y = result_["l_leg_hip_y"]->goal_position_;
-  resultExoMsg.l_leg_hip_r = result_["l_leg_hip_r"]->goal_position_;
-  resultExoMsg.l_leg_hip_p = result_["l_leg_hip_p"]->goal_position_;
-  resultExoMsg.l_leg_kn_p = result_["l_leg_kn_p" ]->goal_position_;
-  resultExoMsg.l_leg_an_p = result_["l_leg_an_p" ]->goal_position_;
-  resultExoMsg.l_leg_an_r = result_["l_leg_an_r" ]->goal_position_;
+  resultExoMsg.l_leg_hip_y = result_["l_leg_hip_y"]->goal_position_*180;
+  resultExoMsg.l_leg_hip_r = result_["l_leg_hip_r"]->goal_position_*180;
+  resultExoMsg.l_leg_hip_p = result_["l_leg_hip_p"]->goal_position_*180;
+  resultExoMsg.l_leg_kn_p = result_["l_leg_kn_p" ]->goal_position_*180;
+  resultExoMsg.l_leg_an_p = result_["l_leg_an_p" ]->goal_position_*180;
+  resultExoMsg.l_leg_an_r = result_["l_leg_an_r" ]->goal_position_*180;
 
-  resultExoMsg.r_leg_hip_y = result_["r_leg_hip_y"]->goal_position_;
-  resultExoMsg.r_leg_hip_r = result_["r_leg_hip_r"]->goal_position_;
-  resultExoMsg.r_leg_hip_p = result_["r_leg_hip_p"]->goal_position_;
-  resultExoMsg.r_leg_kn_p = result_["r_leg_kn_p" ]->goal_position_;
-  resultExoMsg.r_leg_an_p = result_["r_leg_an_p" ]->goal_position_;
-  resultExoMsg.r_leg_an_r = result_["r_leg_an_r" ]->goal_position_;
+  resultExoMsg.r_leg_hip_y = result_["r_leg_hip_y"]->goal_position_*180;
+  resultExoMsg.r_leg_hip_r = result_["r_leg_hip_r"]->goal_position_*180;
+  resultExoMsg.r_leg_hip_p = result_["r_leg_hip_p"]->goal_position_*180;
+  resultExoMsg.r_leg_kn_p = result_["r_leg_kn_p" ]->goal_position_*180;
+  resultExoMsg.r_leg_an_p = result_["r_leg_an_p" ]->goal_position_*180;
+  resultExoMsg.r_leg_an_r = result_["r_leg_an_r" ]->goal_position_*180;
 
   ExoRes_.publish(resultExoMsg);
 }
@@ -1571,19 +1571,19 @@ void OnlineWalkingModule::pubExoRes_()
 void OnlineWalkingModule::pubExoRes2()
 {
 
-  resultExoMsg.l_leg_hip_y = result2["l_leg_hip_y"];
-  resultExoMsg.l_leg_hip_r = result2["l_leg_hip_r"];
-  resultExoMsg.l_leg_hip_p = result2["l_leg_hip_p"];
-  resultExoMsg.l_leg_kn_p = result2["l_leg_kn_p" ];
-  resultExoMsg.l_leg_an_p = result2["l_leg_an_p" ];
-  resultExoMsg.l_leg_an_r = result2["l_leg_an_r" ];
+  resultExoMsg.l_leg_hip_y = result2["l_leg_hip_y"]*180;
+  resultExoMsg.l_leg_hip_r = result2["l_leg_hip_r"]*180;
+  resultExoMsg.l_leg_hip_p = result2["l_leg_hip_p"]*180;
+  resultExoMsg.l_leg_kn_p = result2["l_leg_kn_p" ]*180;
+  resultExoMsg.l_leg_an_p = result2["l_leg_an_p" ]*180;
+  resultExoMsg.l_leg_an_r = result2["l_leg_an_r" ]*180;
 
-  resultExoMsg.r_leg_hip_y = result2["r_leg_hip_y"];
-  resultExoMsg.r_leg_hip_r = result2["r_leg_hip_r"];
-  resultExoMsg.r_leg_hip_p = result2["r_leg_hip_p"];
-  resultExoMsg.r_leg_kn_p = result2["r_leg_kn_p" ];
-  resultExoMsg.r_leg_an_p = result2["r_leg_an_p" ];
-  resultExoMsg.r_leg_an_r = result2["r_leg_an_r" ];
+  resultExoMsg.r_leg_hip_y = result2["r_leg_hip_y"]*180;
+  resultExoMsg.r_leg_hip_r = result2["r_leg_hip_r"]*180;
+  resultExoMsg.r_leg_hip_p = result2["r_leg_hip_p"]*180;
+  resultExoMsg.r_leg_kn_p = result2["r_leg_kn_p" ]*180;
+  resultExoMsg.r_leg_an_p = result2["r_leg_an_p" ]*180;
+  resultExoMsg.r_leg_an_r = result2["r_leg_an_r" ]*180;
 
   ExoRes2.publish(resultExoMsg);
 }
