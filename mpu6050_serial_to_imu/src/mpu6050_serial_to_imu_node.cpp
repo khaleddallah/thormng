@@ -52,7 +52,7 @@ int main(int argc, char** argv)
   private_node_handle.param<double>("orientation_stddev", orientation_stddev, 0.0);
 
   ros::NodeHandle nh("imu");
-  ros::Publisher imu_pub = nh.advertise<sensor_msgs::Imu>("data", 50);
+  ros::Publisher imu_pub = nh.advertise<sensor_msgs::Imu>("/robotis/sensor/imu/imu", 3);
   ros::Publisher imu_temperature_pub = nh.advertise<sensor_msgs::Temperature>("temperature", 50);
   ros::ServiceServer service = nh.advertiseService("set_zero_orientation", set_zero_orientation);
 
