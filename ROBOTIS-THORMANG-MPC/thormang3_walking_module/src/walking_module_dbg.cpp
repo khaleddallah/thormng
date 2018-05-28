@@ -71,8 +71,8 @@ const std::string WalkingStatusMSG::WALKING_FINISH_MSG = "Walking_Finished";
 
 OnlineWalkingModule::OnlineWalkingModule()
 : control_cycle_msec_(8)
-  {
-ROS_DEBUG_ONCE("$$$OnlineWalkingModule::OnlineWalkingModule()");
+{
+dbg_pub("OnlineWalkingModule::OnlineWalkingModule()");
   gazebo_          = false;
   enable_          = false;
   module_name_     = "walking_module";
@@ -172,15 +172,14 @@ ROS_DEBUG_ONCE("$$$OnlineWalkingModule::OnlineWalkingModule()");
 }
 
 OnlineWalkingModule::~OnlineWalkingModule()
-  {
-ROS_DEBUG_ONCE("$$$OnlineWalkingModule::~OnlineWalkingModule()");
+{
+dbg_pub("OnlineWalkingModule::~OnlineWalkingModule()");
   queue_thread_.join();
 }
 
 void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_framework::Robot *robot)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_framework::Robot *robot)");
-
+{
+dbg_pub("void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_framework::Robot *robot)");
   queue_thread_ = boost::thread(boost::bind(&OnlineWalkingModule::queueThread, this));
   control_cycle_msec_ = control_cycle_msec;
 
@@ -247,8 +246,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::initialize(const int control_cycle_
 }
 
 void OnlineWalkingModule::queueThread()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::queueThread()");
+{
+dbg_pub("void OnlineWalkingModule::queueThread()");
   ros::NodeHandle     ros_node;
   ros::CallbackQueue  callback_queue;
 
@@ -262,7 +261,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::queueThread()");
   blnc = ros_node.advertise<std_msgs::Float64MultiArray >("/Exo/blnc", 1);
   ExoRes_ = ros_node.advertise<thormang3_walking_module_msgs::ResultExo>("/Exo/res_",1);
   ExoRes2 = ros_node.advertise<thormang3_walking_module_msgs::ResultExo>("/Exo/res2",1);
-  
+  wmdbg = ros_node.advertise<std_msgs::String>("dbglsn",1);
+
 
 #ifdef WALKING_TUNE
   walking_joint_states_pub_ = ros_node.advertise<thormang3_walking_module_msgs::WalkingJointStatesStamped>("/robotis/walking/walking_joint_states", 1);
@@ -298,12 +298,19 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::queueThread()");
 //  }
 }
 
+void OnlineWalkingModule::dbg_pub(std::string msg)
+{
+dbg_pub("void OnlineWalkingModule::dbg_pub(std::string msg)");
+  std_msgs::String dbg_msg;
+  dbg_msg.data = "[WM]:"+msg;
 
+  wmdbg.publish(dbg_msg);
+}
 
 
 void OnlineWalkingModule::publishRobotPose(void)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishRobotPose(void)");
+{
+dbg_pub("void OnlineWalkingModule::publishRobotPose(void)");
   //process_mutex_.lock();
   robot_pose_msg_.global_to_center_of_body.position.x = desired_matrix_g_to_cob_.coeff(0, 3);
   robot_pose_msg_.global_to_center_of_body.position.y = desired_matrix_g_to_cob_.coeff(1, 3);
@@ -347,8 +354,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishRobotPose(void)");
 }
 
 void OnlineWalkingModule::publishStatusMsg(unsigned int type, std::string msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishStatusMsg(unsigned int type, std::string msg)");
+{
+dbg_pub("void OnlineWalkingModule::publishStatusMsg(unsigned int type, std::string msg)");
   robotis_controller_msgs::StatusMsg status_msg;
   status_msg.header.stamp = ros::Time::now();
   status_msg.type = type;
@@ -359,8 +366,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishStatusMsg(unsigned int type,
 }
 
 void OnlineWalkingModule::publishDoneMsg(std::string msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishDoneMsg(std::string msg)");
+{
+dbg_pub("void OnlineWalkingModule::publishDoneMsg(std::string msg)");
   std_msgs::String done_msg;
   done_msg.data = msg;
 
@@ -368,8 +375,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::publishDoneMsg(std::string msg)");
 }
 
 int OnlineWalkingModule::convertStepDataMsgToStepData(thormang3_walking_module_msgs::StepData& src, robotis_framework::StepData& des)
-  {
-ROS_DEBUG_ONCE("$$$int OnlineWalkingModule::convertStepDataMsgToStepData(thormang3_walking_module_msgs::StepData& src, robotis_framework::StepData& des)");
+{
+dbg_pub("int OnlineWalkingModule::convertStepDataMsgToStepData(thormang3_walking_module_msgs::StepData& src, robotis_framework::StepData& des)");
   int copy_result = thormang3_walking_module_msgs::AddStepDataArray::Response::NO_ERROR;
   des.time_data.   walking_state        = src.time_data.walking_state;
   des.time_data.abs_step_time           = src.time_data.abs_step_time;
@@ -450,12 +457,13 @@ ROS_DEBUG_ONCE("$$$int OnlineWalkingModule::convertStepDataMsgToStepData(thorman
 
   if(src.position_data.foot_z_swap < 0)
     copy_result |= thormang3_walking_module_msgs::AddStepDataArray::Response::PROBLEM_IN_POSITION_DATA;
+
   return copy_result;
 }
 
 int OnlineWalkingModule::convertStepDataToStepDataMsg(robotis_framework::StepData& src, thormang3_walking_module_msgs::StepData& des)
-  {
-ROS_DEBUG_ONCE("$$$int OnlineWalkingModule::convertStepDataToStepDataMsg(robotis_framework::StepData& src, thormang3_walking_module_msgs::StepData& des)");
+{
+dbg_pub("int OnlineWalkingModule::convertStepDataToStepDataMsg(robotis_framework::StepData& src, thormang3_walking_module_msgs::StepData& des)");
   des.time_data.walking_state   = src.time_data.walking_state;
   des.time_data.abs_step_time   = src.time_data.abs_step_time;
   des.time_data.dsp_ratio       = src.time_data.dsp_ratio;
@@ -494,8 +502,8 @@ ROS_DEBUG_ONCE("$$$int OnlineWalkingModule::convertStepDataToStepDataMsg(robotis
 
 bool OnlineWalkingModule::getReferenceStepDataServiceCallback(thormang3_walking_module_msgs::GetReferenceStepData::Request &req,
                                                               thormang3_walking_module_msgs::GetReferenceStepData::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::getReferenceStepDataServiceCallback(thormang3_walking_module_msgs::GetReferenceStepData::Request &req,");
+{
+dbg_pub("bool OnlineWalkingModule::getReferenceStepDataServiceCallback(thormang3_walking_module_msgs::GetReferenceStepData::Request &req,");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   robotis_framework::StepData refStepData;
@@ -509,8 +517,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::getReferenceStepDataServiceCallback
 
 bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_msgs::AddStepDataArray::Request &req,
                                                      thormang3_walking_module_msgs::AddStepDataArray::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_msgs::AddStepDataArray::Request &req,");
+{
+dbg_pub("bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_msgs::AddStepDataArray::Request &req,");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
   res.result = thormang3_walking_module_msgs::AddStepDataArray::Response::NO_ERROR;
 
@@ -609,8 +617,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::addStepDataServiceCallback(thormang
 
 bool OnlineWalkingModule::startWalkingServiceCallback(thormang3_walking_module_msgs::StartWalking::Request &req,
                                                       thormang3_walking_module_msgs::StartWalking::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::startWalkingServiceCallback(thormang3_walking_module_msgs::StartWalking::Request &req,");
+{
+dbg_pub("bool OnlineWalkingModule::startWalkingServiceCallback(thormang3_walking_module_msgs::StartWalking::Request &req,");
   THORMANG3OnlineWalking *prev_walking = THORMANG3OnlineWalking::getInstance();
   res.result = thormang3_walking_module_msgs::StartWalking::Response::NO_ERROR;
 
@@ -649,8 +657,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::startWalkingServiceCallback(thorman
 
 bool OnlineWalkingModule::IsRunningServiceCallback(thormang3_walking_module_msgs::IsRunning::Request &req,
                                                    thormang3_walking_module_msgs::IsRunning::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::IsRunningServiceCallback(thormang3_walking_module_msgs::IsRunning::Request &req,");
+{
+dbg_pub("bool OnlineWalkingModule::IsRunningServiceCallback(thormang3_walking_module_msgs::IsRunning::Request &req,");
   bool is_running = isRunning();
   res.is_running = is_running;
 
@@ -658,15 +666,15 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::IsRunningServiceCallback(thormang3_
 }
 
 bool OnlineWalkingModule::isRunning()
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::isRunning()");
+{
+dbg_pub("bool OnlineWalkingModule::isRunning()");
   return THORMANG3OnlineWalking::getInstance()->isRunning();
 }
 
 bool OnlineWalkingModule::setJointFeedBackGainServiceCallback(thormang3_walking_module_msgs::SetJointFeedBackGain::Request &req,
                                                               thormang3_walking_module_msgs::SetJointFeedBackGain::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::setJointFeedBackGainServiceCallback(thormang3_walking_module_msgs::SetJointFeedBackGain::Request &req,");
+{
+dbg_pub("bool OnlineWalkingModule::setJointFeedBackGainServiceCallback(thormang3_walking_module_msgs::SetJointFeedBackGain::Request &req,");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   res.result = thormang3_walking_module_msgs::SetJointFeedBackGain::Response::NO_ERROR;
@@ -748,8 +756,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::setJointFeedBackGainServiceCallback
 
 bool OnlineWalkingModule::setBalanceParamServiceCallback(thormang3_walking_module_msgs::SetBalanceParam::Request  &req,
                                                          thormang3_walking_module_msgs::SetBalanceParam::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::setBalanceParamServiceCallback(thormang3_walking_module_msgs::SetBalanceParam::Request  &req,");
+{
+dbg_pub("bool OnlineWalkingModule::setBalanceParamServiceCallback(thormang3_walking_module_msgs::SetBalanceParam::Request  &req,");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
   res.result = thormang3_walking_module_msgs::SetBalanceParam::Response::NO_ERROR;
 
@@ -872,15 +880,15 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::setBalanceParamServiceCallback(thor
   std::string status_msg = WalkingStatusMSG::BALANCE_PARAM_SETTING_STARTED_MSG;
   publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, status_msg);
 
-  //("HHHHH");
+  //dbg_pub("HHHHH");
 
   return true;
 }
 
 
 void OnlineWalkingModule::setBalanceParam(thormang3_walking_module_msgs::BalanceParam& balance_param_msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::setBalanceParam(thormang3_walking_module_msgs::BalanceParam& balance_param_msg)");
+{
+dbg_pub("void OnlineWalkingModule::setBalanceParam(thormang3_walking_module_msgs::BalanceParam& balance_param_msg)");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   online_walking->hip_roll_feedforward_angle_rad_ = balance_param_msg.hip_roll_swap_angle_rad;
@@ -944,8 +952,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::setBalanceParam(thormang3_walking_m
 
 
 void OnlineWalkingModule::updateBalanceParam()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::updateBalanceParam()");
+{
+dbg_pub("void OnlineWalkingModule::updateBalanceParam()");
   double current_update_gain =  balance_update_polynomial_coeff_.coeff(0,0) * robotis_framework::powDI(balance_update_sys_time_ , 5)
   + balance_update_polynomial_coeff_.coeff(1,0) * robotis_framework::powDI(balance_update_sys_time_ , 4)
   + balance_update_polynomial_coeff_.coeff(2,0) * robotis_framework::powDI(balance_update_sys_time_ , 3)
@@ -992,8 +1000,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::updateBalanceParam()");
 
 
 void OnlineWalkingModule::setJointFeedBackGain(thormang3_walking_module_msgs::JointFeedBackGain& msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::setJointFeedBackGain(thormang3_walking_module_msgs::JointFeedBackGain& msg)");
+{
+dbg_pub("void OnlineWalkingModule::setJointFeedBackGain(thormang3_walking_module_msgs::JointFeedBackGain& msg)");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
   online_walking->leg_angle_feed_back_[0].p_gain_  = msg.r_leg_hip_y_p_gain ;
   online_walking->leg_angle_feed_back_[0].d_gain_  = msg.r_leg_hip_y_d_gain ;
@@ -1024,8 +1032,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::setJointFeedBackGain(thormang3_walk
 
 
 void OnlineWalkingModule::updateJointFeedBackGain()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::updateJointFeedBackGain()");
+{
+dbg_pub("void OnlineWalkingModule::updateJointFeedBackGain()");
   double current_update_gain =  joint_feedback_update_polynomial_coeff_.coeff(0,0) * robotis_framework::powDI(joint_feedback_update_sys_time_, 5)
   + joint_feedback_update_polynomial_coeff_.coeff(1,0) * robotis_framework::powDI(joint_feedback_update_sys_time_ , 4)
   + joint_feedback_update_polynomial_coeff_.coeff(2,0) * robotis_framework::powDI(joint_feedback_update_sys_time_ , 3)
@@ -1066,8 +1074,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::updateJointFeedBackGain()");
 
 
 bool OnlineWalkingModule::checkBalanceOnOff()
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::checkBalanceOnOff()");
+{
+  dbg_pub("bool OnlineWalkingModule::checkBalanceOnOff()");
   if(gazebo_)
     return true;
 
@@ -1111,8 +1119,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::checkBalanceOnOff()");
 
 bool OnlineWalkingModule::removeExistingStepDataServiceCallback(thormang3_walking_module_msgs::RemoveExistingStepData::Request  &req,
                                                                 thormang3_walking_module_msgs::RemoveExistingStepData::Response &res)
-  {
-ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::removeExistingStepDataServiceCallback(thormang3_walking_module_msgs::RemoveExistingStepData::Request  &req,");
+{
+dbg_pub("bool OnlineWalkingModule::removeExistingStepDataServiceCallback(thormang3_walking_module_msgs::RemoveExistingStepData::Request  &req,");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   res.result = thormang3_walking_module_msgs::RemoveExistingStepData::Response::NO_ERROR;
@@ -1133,8 +1141,8 @@ ROS_DEBUG_ONCE("$$$bool OnlineWalkingModule::removeExistingStepDataServiceCallba
 
 
 void OnlineWalkingModule::imuDataOutputCallback(const sensor_msgs::Imu::ConstPtr &msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::imuDataOutputCallback(const sensor_msgs::Imu::ConstPtr &msg)");
+{
+dbg_pub("void OnlineWalkingModule::imuDataOutputCallback(const sensor_msgs::Imu::ConstPtr &msg)");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   online_walking->setCurrentIMUSensorOutput(-1.0*(msg->angular_velocity.x), -1.0*(msg->angular_velocity.y),
@@ -1144,8 +1152,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::imuDataOutputCallback(const sensor_
 
 
 void OnlineWalkingModule::JohnnyFtRightCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::JohnnyFtRightCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)");
+{
+dbg_pub("void OnlineWalkingModule::JohnnyFtRightCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   r_foot_fx_N_  = msg->wrench.force.x;
@@ -1172,8 +1180,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::JohnnyFtRightCallback(const geometr
 
 
 void OnlineWalkingModule::JohnnyFtLeftCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::JohnnyFtLeftCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)");
+{
+dbg_pub("void OnlineWalkingModule::JohnnyFtLeftCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg)");
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
 
   l_foot_fx_N_  = msg->wrench.force.x;
@@ -1202,16 +1210,16 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::JohnnyFtLeftCallback(const geometry
 
 
 void OnlineWalkingModule::onModuleEnable()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::onModuleEnable()");
+{
+dbg_pub("void OnlineWalkingModule::onModuleEnable()");
   std::string status_msg = WalkingStatusMSG::WALKING_MODULE_IS_ENABLED_MSG;
   publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_INFO, status_msg);
 }
 
 
 void OnlineWalkingModule::onModuleDisable()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::onModuleDisable()");
+{
+dbg_pub("void OnlineWalkingModule::onModuleDisable()");
   previous_running_ = present_running = false;
 
   THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
@@ -1278,8 +1286,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::onModuleDisable()");
 }
 
 void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors)");
+{
+dbg_pub("void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynamixel *> dxls, std::map<std::string, double> sensors)");
   if(enable_ == false)
     return;
 
@@ -1464,8 +1472,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::process(std::map<std::string, robot
 }
 
 void OnlineWalkingModule::stop()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::stop()");
+{
+dbg_pub("void OnlineWalkingModule::stop()");
   return;
 }
 
@@ -1473,8 +1481,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::stop()");
 //======================================================Exo=========================================
 
 void OnlineWalkingModule::modifyMotorExo ()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::modifyMotorExo ()");
+{
+dbg_pub("void OnlineWalkingModule::modifyMotorExo ()");
   //=================trans result_ to result2=================
   for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
       result_it != result_.end();
@@ -1534,8 +1542,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::modifyMotorExo ()");
 }
 
 void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)");
+{
+dbg_pub("void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)");
   double temp_m1 , temp_m2;
   temp_m1 = (kx * (*x)) - (ky * (*y));
   temp_m2 = (kx * (*x)) + (ky * (*y));
@@ -1545,8 +1553,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::wtdExo (double *x , double *y , dou
 }
 
 void OnlineWalkingModule::parseOffsetData(const std::string &path)
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::parseOffsetData(const std::string &path)");
+{
+dbg_pub("void OnlineWalkingModule::parseOffsetData(const std::string &path)");
   YAML::Node doc;
   try
   {
@@ -1586,8 +1594,8 @@ l_leg_an_r_ofst  = doc["l_leg_an_r_ofst"].as<double>();
 }
 
 void OnlineWalkingModule::pubExoRes_()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::pubExoRes_()");
+{
+dbg_pub("void OnlineWalkingModule::pubExoRes_()");
 
   resultExoMsg.l_leg_hip_y = result_["l_leg_hip_y"]->goal_position_*180;
   resultExoMsg.l_leg_hip_r = result_["l_leg_hip_r"]->goal_position_*180;
@@ -1607,8 +1615,8 @@ ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::pubExoRes_()");
 }
 
 void OnlineWalkingModule::pubExoRes2()
-  {
-ROS_DEBUG_ONCE("$$$void OnlineWalkingModule::pubExoRes2()");
+{
+dbg_pub("void OnlineWalkingModule::pubExoRes2()");
 
   resultExoMsg.l_leg_hip_y = result2["l_leg_hip_y"]*180;
   resultExoMsg.l_leg_hip_r = result2["l_leg_hip_r"]*180;
