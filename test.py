@@ -1,3 +1,6 @@
+#code to parse ROS log file and get some information from them
+
+
 import re
 import sys,os
 import json
@@ -26,21 +29,24 @@ essen2=[]
 sort=dict()
 sort2=[]
 for i in range(len(hand)):
-
-		mhm = re.findall('\$\$\$(.*)', hand[i])
+		print(i)
+		mhm = re.findall('\$(.*)', hand[i])
 		if (len(mhm) > 0)  :
 			new_data.append("$"+mhm[0][:-4]+"\n")
 			found=found+1
+			print("$")
 
-		mhm2 = re.findall('\$\$\#(.*)', hand[i])
+		mhm2 = re.findall('\#(.*)', hand[i])
 		if (len(mhm2) > 0)  :
 			new_data.append("#"+mhm2[0][:-4]+"\n")
 			found=found+1
+			print("#")
 
-		mhm3 = re.findall('\$\@\#(.*)', hand[i])
+		mhm3 = re.findall('\@(.*)', hand[i])
 		if (len(mhm3) > 0)  :
 			new_data.append("@"+mhm3[0][:-4]+"\n")
 			found=found+1
+			print("@")
 
 count_sort=1
 for j in range(len(new_data)):

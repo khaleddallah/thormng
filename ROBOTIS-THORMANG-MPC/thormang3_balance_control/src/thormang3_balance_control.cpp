@@ -43,7 +43,6 @@ using namespace thormang3;
 
 DampingController::DampingController()
   {
-ROS_DEBUG_ONCE("$@#DampingController::DampingController()");
   desired_ = 0.0;
 
   gain_ = 0.0;
@@ -56,7 +55,6 @@ ROS_DEBUG_ONCE("$@#DampingController::DampingController()");
 
 DampingController::DampingController(double time_unit_sec)
   {
-ROS_DEBUG_ONCE("$@#DampingController::DampingController(double time_unit_sec)");
   desired_ = 0.0;
 
   gain_ = 0.0;
@@ -69,11 +67,9 @@ ROS_DEBUG_ONCE("$@#DampingController::DampingController(double time_unit_sec)");
 
 DampingController::~DampingController()
   {
-ROS_DEBUG_ONCE("$@#DampingController::~DampingController()");
 }
 double DampingController::getDampingControllerOutput(double present_sensor_output)
   {
-ROS_DEBUG_ONCE("$@#double DampingController::getDampingControllerOutput(double present_sensor_output)");
   double cut_off_freq = 1.0/time_constant_sec_;
   double alpha = 1.0;
   alpha = (2.0*M_PI*cut_off_freq*control_cycle_sec_)/(1.0+2.0*M_PI*cut_off_freq*control_cycle_sec_);
@@ -87,7 +83,6 @@ ROS_DEBUG_ONCE("$@#double DampingController::getDampingControllerOutput(double p
 
 BalanceLowPassFilter::BalanceLowPassFilter()
   {
-ROS_DEBUG_ONCE("$@#BalanceLowPassFilter::BalanceLowPassFilter()");
   cut_off_freq_ = 1.0;
   control_cycle_sec_ = 0.008;
   prev_output_ = 0;
@@ -97,7 +92,6 @@ ROS_DEBUG_ONCE("$@#BalanceLowPassFilter::BalanceLowPassFilter()");
 
 BalanceLowPassFilter::BalanceLowPassFilter(double control_cycle_sec, double cut_off_frequency)
   {
-ROS_DEBUG_ONCE("$@#BalanceLowPassFilter::BalanceLowPassFilter(double control_cycle_sec, double cut_off_frequency)");
   cut_off_freq_ = cut_off_frequency;
   control_cycle_sec_ = control_cycle_sec;
   prev_output_ = 0;
@@ -110,11 +104,9 @@ ROS_DEBUG_ONCE("$@#BalanceLowPassFilter::BalanceLowPassFilter(double control_cyc
 
 BalanceLowPassFilter::~BalanceLowPassFilter()
   {
-ROS_DEBUG_ONCE("$@#BalanceLowPassFilter::~BalanceLowPassFilter()");
 }
 void BalanceLowPassFilter::initialize(double control_cycle_sec, double cut_off_frequency)
   {
-ROS_DEBUG_ONCE("$@#void BalanceLowPassFilter::initialize(double control_cycle_sec, double cut_off_frequency)");
   cut_off_freq_ = cut_off_frequency;
   control_cycle_sec_ = control_cycle_sec;
   prev_output_ = 0;
@@ -127,7 +119,6 @@ ROS_DEBUG_ONCE("$@#void BalanceLowPassFilter::initialize(double control_cycle_se
 
 void BalanceLowPassFilter::setCutOffFrequency(double cut_off_frequency)
   {
-ROS_DEBUG_ONCE("$@#void BalanceLowPassFilter::setCutOffFrequency(double cut_off_frequency)");
   cut_off_freq_ = cut_off_frequency;
 
   if(cut_off_frequency > 0)
@@ -138,13 +129,11 @@ ROS_DEBUG_ONCE("$@#void BalanceLowPassFilter::setCutOffFrequency(double cut_off_
 
 double BalanceLowPassFilter::getCutOffFrequency(void)
   {
-ROS_DEBUG_ONCE("$@#double BalanceLowPassFilter::getCutOffFrequency(void)");
   return cut_off_freq_;
 }
 
 double BalanceLowPassFilter::getFilteredOutput(double present_raw_value)
   {
-ROS_DEBUG_ONCE("$@#double BalanceLowPassFilter::getFilteredOutput(double present_raw_value)");
   prev_output_ = alpha_*present_raw_value + (1.0 - alpha_)*prev_output_;
   return prev_output_;
 }
@@ -152,7 +141,6 @@ ROS_DEBUG_ONCE("$@#double BalanceLowPassFilter::getFilteredOutput(double present
 
 BalancePDController::BalancePDController()
   {
-ROS_DEBUG_ONCE("$@#BalancePDController::BalancePDController()");
   desired_ = 0;
   p_gain_ = 0;
   d_gain_ = 0;
@@ -162,11 +150,9 @@ ROS_DEBUG_ONCE("$@#BalancePDController::BalancePDController()");
 
 BalancePDController::~BalancePDController()
   {
-ROS_DEBUG_ONCE("$@#BalancePDController::~BalancePDController()");
 }
 double BalancePDController::getFeedBack(double present_sensor_output)
   {
-ROS_DEBUG_ONCE("$@#double BalancePDController::getFeedBack(double present_sensor_output)");
   prev_err_ = curr_err_;
   curr_err_ = desired_ - present_sensor_output;
 
@@ -176,7 +162,6 @@ ROS_DEBUG_ONCE("$@#double BalancePDController::getFeedBack(double present_sensor
 
 BalanceControlUsingDampingConroller::BalanceControlUsingDampingConroller()
   {
-ROS_DEBUG_ONCE("$@#BalanceControlUsingDampingConroller::BalanceControlUsingDampingConroller()");
   balance_control_error_ = BalanceControlError::NoError;
   control_cycle_sec_ = 0.008;
 
@@ -260,11 +245,9 @@ ROS_DEBUG_ONCE("$@#BalanceControlUsingDampingConroller::BalanceControlUsingDampi
 
 BalanceControlUsingDampingConroller::~BalanceControlUsingDampingConroller()
   {
-ROS_DEBUG_ONCE("$@#BalanceControlUsingDampingConroller::~BalanceControlUsingDampingConroller()");
 }
 void BalanceControlUsingDampingConroller::initialize(const int control_cycle_msec)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::initialize(const int control_cycle_msec)");
   ROS_INFO("DampingController initialize");
   balance_control_error_ = BalanceControlError::NoError;
 
@@ -297,7 +280,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::initialize(const in
 
 void BalanceControlUsingDampingConroller::setGyroBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setGyroBalanceEnable(bool enable)");
   if(enable)
     gyro_enable_ = 1.0;
   else
@@ -306,7 +288,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setGyroBalanceEnabl
 
 void BalanceControlUsingDampingConroller::setOrientationBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setOrientationBalanceEnable(bool enable)");
   if(enable)
     orientation_enable_ = 1.0;
   else
@@ -315,7 +296,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setOrientationBalan
 
 void BalanceControlUsingDampingConroller::setForceTorqueBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setForceTorqueBalanceEnable(bool enable)");
   if(enable)
     ft_enable_ = 1.0;
   else
@@ -324,7 +304,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setForceTorqueBalan
 
 void BalanceControlUsingDampingConroller::process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified)");
   balance_control_error_ = BalanceControlError::NoError;
 
   pose_cob_adjustment_.fill(0);
@@ -460,7 +439,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::process(int *balanc
 
 void BalanceControlUsingDampingConroller::setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot)");
   desired_robot_to_cob_        = robot_to_cob;
   desired_robot_to_right_foot_ = robot_to_right_foot;
   desired_robot_to_left_foot_  = robot_to_left_foot;
@@ -468,7 +446,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredPose(cons
 //###
 void BalanceControlUsingDampingConroller::setDesiredCOBGyro(double gyro_roll, double gyro_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredCOBGyro(double gyro_roll, double gyro_pitch)");
 
   desired_gyro_roll_  = gyro_roll;
   desired_gyro_pitch_ = gyro_pitch;
@@ -476,7 +453,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredCOBGyro(d
 
 void BalanceControlUsingDampingConroller::setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch)");
   foot_roll_angle_ctrl_.desired_  = cob_orientation_roll;
   foot_pitch_angle_ctrl_.desired_ = cob_orientation_pitch;
 }
@@ -486,7 +462,6 @@ void BalanceControlUsingDampingConroller::setDesiredFootForceTorque(double r_for
                                                double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
                                                double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredFootForceTorque(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,");
   foot_force_z_diff_ctrl_.desired_ = l_force_z_N - r_force_z_N;
   right_foot_force_z_ctrl_.desired_ = r_force_z_N;
   left_foot_force_z_ctrl_.desired_ = l_force_z_N;
@@ -505,14 +480,12 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setDesiredFootForce
 
 void BalanceControlUsingDampingConroller::setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch)");
   current_gyro_roll_rad_per_sec_  = gyro_roll;
   current_gyro_pitch_rad_per_sec_ = gyro_pitch;
 }
 
 void BalanceControlUsingDampingConroller::setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch)");
   current_orientation_roll_rad_  = cob_orientation_roll;
   current_orientation_pitch_rad_ = cob_orientation_pitch;
 }
@@ -522,7 +495,6 @@ void BalanceControlUsingDampingConroller::setCurrentFootForceTorqueSensorOutput(
                                                            double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
                                                            double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setCurrentFootForceTorqueSensorOutput(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,");
   current_right_fx_N_  = r_force_x_N;
   current_right_fy_N_  = r_force_y_N;
   current_right_fz_N_  = r_force_z_N;
@@ -544,7 +516,6 @@ void BalanceControlUsingDampingConroller::setMaximumAdjustment(double cob_x_max_
                                           double foot_x_max_adjustment_m, double foot_y_max_adjustment_m, double foot_z_max_adjustment_m,
                                           double foot_roll_max_adjustment_rad, double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setMaximumAdjustment(double cob_x_max_adjustment_m,  double cob_y_max_adjustment_m,  double cob_z_max_adjustment_m,");
   cob_x_adjustment_abs_max_m_        = cob_x_max_adjustment_m;
   cob_y_adjustment_abs_max_m_        = cob_y_max_adjustment_m;
   cob_z_adjustment_abs_max_m_        = cob_z_max_adjustment_m;
@@ -562,7 +533,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setMaximumAdjustmen
 //Manual Adjustment
 void BalanceControlUsingDampingConroller::setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m)");
   cob_x_manual_adjustment_m_ = cob_x_adjustment_m;
   cob_y_manual_adjustment_m_ = cob_y_adjustment_m;
   cob_z_manual_adjustment_m_ = cob_z_adjustment_m;
@@ -570,25 +540,21 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setCOBManualAdjustm
 
 double BalanceControlUsingDampingConroller::getCOBManualAdjustmentX()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingDampingConroller::getCOBManualAdjustmentX()");
   return cob_x_manual_adjustment_m_;
 }
 
 double BalanceControlUsingDampingConroller::getCOBManualAdjustmentY()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingDampingConroller::getCOBManualAdjustmentY()");
   return cob_y_manual_adjustment_m_;
 }
 
 double BalanceControlUsingDampingConroller::getCOBManualAdjustmentZ()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingDampingConroller::getCOBManualAdjustmentZ()");
   return cob_z_manual_adjustment_m_;
 }
 
 void BalanceControlUsingDampingConroller::setGyroBalanceGainRatio(double gyro_balance_gain_ratio)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setGyroBalanceGainRatio(double gyro_balance_gain_ratio)");
   gyro_balance_gain_ratio_ = gyro_balance_gain_ratio;
   gyro_balance_roll_gain_  = -0.10*0.75*gyro_balance_gain_ratio_;
   gyro_balance_pitch_gain_ = -0.10*0.5 *gyro_balance_gain_ratio_;
@@ -596,14 +562,12 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingDampingConroller::setGyroBalanceGainR
 
 double BalanceControlUsingDampingConroller::getGyroBalanceGainRatio(void)
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingDampingConroller::getGyroBalanceGainRatio(void)");
   return gyro_balance_gain_ratio_;
 }
 
 
 BalanceControlUsingPDController::BalanceControlUsingPDController()
   {
-ROS_DEBUG_ONCE("$@#BalanceControlUsingPDController::BalanceControlUsingPDController()");
   balance_control_error_ = BalanceControlError::NoError;
   control_cycle_sec_ = 0.008;
 
@@ -675,11 +639,9 @@ ROS_DEBUG_ONCE("$@#BalanceControlUsingPDController::BalanceControlUsingPDControl
 
 BalanceControlUsingPDController::~BalanceControlUsingPDController()
   {
-ROS_DEBUG_ONCE("$@#BalanceControlUsingPDController::~BalanceControlUsingPDController()");
 }
 void BalanceControlUsingPDController::initialize(const int control_cycle_msec)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::initialize(const int control_cycle_msec)");
   balance_control_error_ = BalanceControlError::NoError;
 
   control_cycle_sec_ = control_cycle_msec * 0.001;
@@ -709,7 +671,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::initialize(const int co
 
 void BalanceControlUsingPDController::setGyroBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setGyroBalanceEnable(bool enable)");
   if(enable)
     gyro_enable_ = 1.0;
   else
@@ -718,7 +679,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setGyroBalanceEnable(bo
 
 void BalanceControlUsingPDController::setOrientationBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setOrientationBalanceEnable(bool enable)");
   if(enable)
     orientation_enable_ = 1.0;
   else
@@ -727,7 +687,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setOrientationBalanceEn
 
 void BalanceControlUsingPDController::setForceTorqueBalanceEnable(bool enable)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setForceTorqueBalanceEnable(bool enable)");
   if(enable)
     ft_enable_ = 1.0;
   else
@@ -736,7 +695,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setForceTorqueBalanceEn
 
 void BalanceControlUsingPDController::process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::process(int *balance_error, Eigen::MatrixXd *robot_to_cob_modified, Eigen::MatrixXd *robot_to_right_foot_modified, Eigen::MatrixXd *robot_to_left_foot_modified)");
   balance_control_error_ = BalanceControlError::NoError;
 
   pose_cob_adjustment_.fill(0);
@@ -887,7 +845,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::process(int *balance_er
 
 void BalanceControlUsingPDController::setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredPose(const Eigen::MatrixXd &robot_to_cob, const Eigen::MatrixXd &robot_to_right_foot, const Eigen::MatrixXd &robot_to_left_foot)");
   desired_robot_to_cob_        = robot_to_cob;
   desired_robot_to_right_foot_ = robot_to_right_foot;
   desired_robot_to_left_foot_  = robot_to_left_foot;
@@ -895,7 +852,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredPose(const Ei
 //###
 void BalanceControlUsingPDController::setDesiredCOBGyro(double gyro_roll, double gyro_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredCOBGyro(double gyro_roll, double gyro_pitch)");
 
   foot_roll_gyro_ctrl_.desired_  = gyro_roll;
   foot_pitch_gyro_ctrl_.desired_ = gyro_pitch;
@@ -903,7 +859,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredCOBGyro(doubl
 
 void BalanceControlUsingPDController::setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredCOBOrientation(double cob_orientation_roll, double cob_orientation_pitch)");
   foot_roll_angle_ctrl_.desired_  = cob_orientation_roll;
   foot_pitch_angle_ctrl_.desired_ = cob_orientation_pitch;
 }
@@ -913,7 +868,6 @@ void BalanceControlUsingPDController::setDesiredFootForceTorque(double r_force_x
                                                double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
                                                double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredFootForceTorque(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,");
   right_foot_force_x_ctrl_.desired_      = r_force_x_N;
   right_foot_force_y_ctrl_.desired_      = r_force_y_N;
   right_foot_force_z_ctrl_.desired_      = r_force_z_N;
@@ -930,14 +884,12 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setDesiredFootForceTorq
 
 void BalanceControlUsingPDController::setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setCurrentGyroSensorOutput(double gyro_roll, double gyro_pitch)");
   current_gyro_roll_rad_per_sec_  = gyro_roll;
   current_gyro_pitch_rad_per_sec_ = gyro_pitch;
 }
 
 void BalanceControlUsingPDController::setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setCurrentOrientationSensorOutput(double cob_orientation_roll, double cob_orientation_pitch)");
   current_orientation_roll_rad_  = cob_orientation_roll;
   current_orientation_pitch_rad_ = cob_orientation_pitch;
 }
@@ -947,7 +899,6 @@ void BalanceControlUsingPDController::setCurrentFootForceTorqueSensorOutput(doub
                                                            double l_force_x_N,      double l_force_y_N,       double l_force_z_N,
                                                            double l_torque_roll_Nm, double l_torque_pitch_Nm, double l_torque_yaw_Nm)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setCurrentFootForceTorqueSensorOutput(double r_force_x_N,      double r_force_y_N,       double r_force_z_N,");
   current_right_fx_N_  = r_force_x_N;
   current_right_fy_N_  = r_force_y_N;
   current_right_fz_N_  = r_force_z_N;
@@ -969,7 +920,6 @@ void BalanceControlUsingPDController::setMaximumAdjustment(double cob_x_max_adju
                                           double foot_x_max_adjustment_m, double foot_y_max_adjustment_m, double foot_z_max_adjustment_m,
                                           double foot_roll_max_adjustment_rad, double foot_pitch_max_adjustment_rad, double foot_yaw_max_adjustment_rad)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setMaximumAdjustment(double cob_x_max_adjustment_m,  double cob_y_max_adjustment_m,  double cob_z_max_adjustment_m,");
   cob_x_adjustment_abs_max_m_        = cob_x_max_adjustment_m;
   cob_y_adjustment_abs_max_m_        = cob_y_max_adjustment_m;
   cob_z_adjustment_abs_max_m_        = cob_z_max_adjustment_m;
@@ -987,7 +937,6 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setMaximumAdjustment(do
 //Manual Adjustment
 void BalanceControlUsingPDController::setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m)
   {
-ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setCOBManualAdjustment(double cob_x_adjustment_m, double cob_y_adjustment_m, double cob_z_adjustment_m)");
   cob_x_manual_adjustment_m_ = cob_x_adjustment_m;
   cob_y_manual_adjustment_m_ = cob_y_adjustment_m;
   cob_z_manual_adjustment_m_ = cob_z_adjustment_m;
@@ -995,18 +944,15 @@ ROS_DEBUG_ONCE("$@#void BalanceControlUsingPDController::setCOBManualAdjustment(
 
 double BalanceControlUsingPDController::getCOBManualAdjustmentX()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingPDController::getCOBManualAdjustmentX()");
   return cob_x_manual_adjustment_m_;
 }
 
 double BalanceControlUsingPDController::getCOBManualAdjustmentY()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingPDController::getCOBManualAdjustmentY()");
   return cob_y_manual_adjustment_m_;
 }
 
 double BalanceControlUsingPDController::getCOBManualAdjustmentZ()
   {
-ROS_DEBUG_ONCE("$@#double BalanceControlUsingPDController::getCOBManualAdjustmentZ()");
   return cob_z_manual_adjustment_m_;
 }

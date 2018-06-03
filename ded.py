@@ -1,8 +1,9 @@
+#code to put ROS_DEBUG_* in c++ code function with skipping of multi parameter line function
 import re
 import sys
 
 file_name = sys.argv[1]
-
+arg=sys.argv[2]
 
 
 with open(file_name,'r+') as handfile :
@@ -57,7 +58,11 @@ for i in range(len(hand)):
 			#write plus line then type ("dbg_pub(" + NameOfFunc + ");"
 			
 			#handfile.write('\n'+'dbg_pub("'+mhm[0]+'");')
-			mod='  '+'{'+'\n'+'ROS_DEBUG_ONCE("'+mhm[0]+'");'+'\n' 
+			mod='  '+'{'+'\n'+'ROS_DEBUG_STREAM("'+mhm[0]+'");'+'\n' 
+			if re.search('.*Callback.*',mhm[0]) :
+				mod='  '+'{'+'\n'+'ROS_DEBUG_THROTTLE(10,"'+str(arg)+mhm[0]+'");'+'\n' 
+			else:
+				mod='  '+'{'+'\n'+'ROS_DEBUG_STREAM("'+str(arg)+mhm[0]+'");'+'\n' 
 			found=found+1
 			skip=1
 

@@ -77,7 +77,6 @@ static const int StepDataStatus4 = 4; //
 
 THORMANG3OnlineWalking::THORMANG3OnlineWalking()
   {
-ROS_DEBUG_ONCE("$$#THORMANG3OnlineWalking::THORMANG3OnlineWalking()");
   thormang3_kd_ = new KinematicsDynamics(WholeBody);
 
   present_right_foot_pose_.x = 0.0;    present_right_foot_pose_.y = -0.5*thormang3_kd_->leg_side_offset_m_;
@@ -230,14 +229,13 @@ ROS_DEBUG_ONCE("$$#THORMANG3OnlineWalking::THORMANG3OnlineWalking()");
 
 THORMANG3OnlineWalking::~THORMANG3OnlineWalking()
   {
-ROS_DEBUG_ONCE("$$#THORMANG3OnlineWalking::~THORMANG3OnlineWalking()");
 }
 bool THORMANG3OnlineWalking::setInitialPose(double r_foot_x, double r_foot_y, double r_foot_z, double r_foot_roll, double r_foot_pitch, double r_foot_yaw,
                                             double l_foot_x, double l_foot_y, double l_foot_z, double l_foot_roll, double l_foot_pitch, double l_foot_yaw,
                                             double center_of_body_x, double center_of_body_y, double center_of_body_z,
                                             double center_of_body_roll, double center_of_body_pitch, double center_of_body_yaw)
   {
-ROS_DEBUG_ONCE("$$#bool THORMANG3OnlineWalking::setInitialPose(double r_foot_x, double r_foot_y, double r_foot_z, double r_foot_roll, double r_foot_pitch, double r_foot_yaw,");
+
 
   if(real_running || ctrl_running)
     return false;
@@ -272,37 +270,31 @@ ROS_DEBUG_ONCE("$$#bool THORMANG3OnlineWalking::setInitialPose(double r_foot_x, 
 
 void THORMANG3OnlineWalking::setInitalWaistYawAngle(double waist_yaw_angle_rad)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setInitalWaistYawAngle(double waist_yaw_angle_rad)");
   goal_waist_yaw_angle_rad_ = waist_yaw_angle_rad;
 }
 
 void THORMANG3OnlineWalking::setInitialRightShoulderAngle(double shoulder_angle_rad)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setInitialRightShoulderAngle(double shoulder_angle_rad)");
   r_init_shoulder_angle_rad_ = shoulder_angle_rad;
 }
 
 void THORMANG3OnlineWalking::setInitialLeftShoulderAngle(double shoulder_angle_rad)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setInitialLeftShoulderAngle(double shoulder_angle_rad)");
   l_init_shoulder_angle_rad_ = shoulder_angle_rad;
 }
 
 void THORMANG3OnlineWalking::setInitialRightElbowAngle(double elbow_angle_rad)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setInitialRightElbowAngle(double elbow_angle_rad)");
   r_init_elbow_angle_rad_ = elbow_angle_rad;
 }
 
 void THORMANG3OnlineWalking::setInitialLeftElbowAngle(double elbow_angle_rad)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setInitialLeftElbowAngle(double elbow_angle_rad)");
   l_init_elbow_angle_rad_ = elbow_angle_rad;
 }
 
 void THORMANG3OnlineWalking::setCurrentIMUSensorOutput(double gyro_x, double gyro_y, double quat_x, double quat_y, double quat_z, double quat_w)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setCurrentIMUSensorOutput(double gyro_x, double gyro_y, double quat_x, double quat_y, double quat_z, double quat_w)");
   imu_data_mutex_lock_.lock();
 
   current_gyro_roll_rad_per_sec_  = gyro_x;
@@ -320,7 +312,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setCurrentIMUSensorOutput(double
 
 void THORMANG3OnlineWalking::initialize()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::initialize()");
   if(real_running)
     return;
 
@@ -528,7 +519,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::initialize()");
 
 void THORMANG3OnlineWalking::reInitialize()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::reInitialize()");
   if(real_running)
     return;
 
@@ -637,26 +627,22 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::reInitialize()");
 
 void THORMANG3OnlineWalking::start()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::start()");
   ctrl_running = true;
   real_running = true;
 }
 
 void THORMANG3OnlineWalking::stop()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::stop()");
   ctrl_running = false;
 }
 
 bool THORMANG3OnlineWalking::isRunning()
   {
-ROS_DEBUG_ONCE("$$#bool THORMANG3OnlineWalking::isRunning()");
   return real_running;
 }
 
 bool THORMANG3OnlineWalking::addStepData(robotis_framework::StepData step_data)
   {
-ROS_DEBUG_ONCE("$$#bool THORMANG3OnlineWalking::addStepData(robotis_framework::StepData step_data)");
   step_data_mutex_lock_.lock();
   added_step_data_.push_back(step_data);
 
@@ -668,7 +654,6 @@ ROS_DEBUG_ONCE("$$#bool THORMANG3OnlineWalking::addStepData(robotis_framework::S
 
 int THORMANG3OnlineWalking::getNumofRemainingUnreservedStepData()
   {
-ROS_DEBUG_ONCE("$$#int THORMANG3OnlineWalking::getNumofRemainingUnreservedStepData()");
   int step_idx = step_idx_data_(preview_size_ - 1);
   int remain_step_num = 0;
   if(step_idx != NO_STEP_IDX)
@@ -684,7 +669,6 @@ ROS_DEBUG_ONCE("$$#int THORMANG3OnlineWalking::getNumofRemainingUnreservedStepDa
 
 void THORMANG3OnlineWalking::eraseLastStepData()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::eraseLastStepData()");
   step_data_mutex_lock_.lock();
   if(getNumofRemainingUnreservedStepData() != 0)
   {
@@ -695,7 +679,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::eraseLastStepData()");
 
 void THORMANG3OnlineWalking::getReferenceStepDatafotAddition(robotis_framework::StepData *ref_step_data_for_addition)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::getReferenceStepDatafotAddition(robotis_framework::StepData *ref_step_data_for_addition)");
   reference_step_data_for_addition_.time_data.start_time_delay_ratio_x = 0.0;
   reference_step_data_for_addition_.time_data.start_time_delay_ratio_y = 0.0;
   reference_step_data_for_addition_.time_data.start_time_delay_ratio_z = 0.0;
@@ -713,7 +696,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::getReferenceStepDatafotAddition(
 
 void THORMANG3OnlineWalking::calcStepIdxData()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcStepIdxData()");
   unsigned int step_idx = 0, previous_step_idx = 0;
   unsigned int step_data_size = added_step_data_.size();
   if(added_step_data_.size() == 0)
@@ -815,7 +797,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcStepIdxData()");
 
 void THORMANG3OnlineWalking::calcRefZMP()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcRefZMP()");
   int ref_zmp_idx = 0;
   int step_idx = 0;
   if(walking_time_ == 0)
@@ -939,7 +920,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcRefZMP()");
 
 void THORMANG3OnlineWalking::calcDesiredPose()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcDesiredPose()");
   ////Original LIPM
   //u_x = -K*x_LIPM + x_feed_forward_term;
   //x_LIPM = A*x_LIPM + b*u_x;
@@ -996,7 +976,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::calcDesiredPose()");
 
 void THORMANG3OnlineWalking::process()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::process()");
   if(!ctrl_running)
   {
     return;
@@ -1706,13 +1685,11 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::process()");
 
 double THORMANG3OnlineWalking::wsin(double time, double period, double period_shift, double mag, double mag_shift)
   {
-ROS_DEBUG_ONCE("$$#double THORMANG3OnlineWalking::wsin(double time, double period, double period_shift, double mag, double mag_shift)");
   return mag * sin(2 * M_PI / period * time - period_shift) + mag_shift;
 }
 
 double THORMANG3OnlineWalking::wsigmoid(double time, double period, double time_shift, double mag, double mag_shift, double sigmoid_ratio, double distortion_ratio)
   {
-ROS_DEBUG_ONCE("$$#double THORMANG3OnlineWalking::wsigmoid(double time, double period, double time_shift, double mag, double mag_shift, double sigmoid_ratio, double distortion_ratio)");
   double value = mag_shift, Amplitude = 0.0, sigmoid_distor_gain = 1.0, t = 0.0;
   if ((sigmoid_ratio >= 1.0) && (sigmoid_ratio < 2.0))
   {
@@ -1760,7 +1737,6 @@ ROS_DEBUG_ONCE("$$#double THORMANG3OnlineWalking::wsigmoid(double time, double p
 
 void THORMANG3OnlineWalking::parseBalanceOffsetData(const std::string &path)
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::parseBalanceOffsetData(const std::string &path)");
   YAML::Node doc;
   try
   {
@@ -1787,7 +1763,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::parseBalanceOffsetData(const std
 
 void THORMANG3OnlineWalking::initBalanceOffset()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::initBalanceOffset()");
   if (init_balance_offset_ == false)
   {
     if((added_step_data_.size() != 0) && real_running)
@@ -1826,7 +1801,6 @@ ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::initBalanceOffset()");
 
 void THORMANG3OnlineWalking::setBalanceOffset()
   {
-ROS_DEBUG_ONCE("$$#void THORMANG3OnlineWalking::setBalanceOffset()");
   initBalanceOffset();
 
   bool is_DSP = false;
