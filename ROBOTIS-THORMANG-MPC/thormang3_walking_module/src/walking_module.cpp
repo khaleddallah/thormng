@@ -73,7 +73,7 @@ OnlineWalkingModule::OnlineWalkingModule()
 : control_cycle_msec_(8)
   {
   gazebo_          = false;
-  directo          = false;
+  directo          = 0;
   enable_          = false;
   module_name_     = "walking_module";
   control_mode_    = robotis_framework::PositionControl;
@@ -1482,7 +1482,7 @@ void OnlineWalkingModule::stop()
 void OnlineWalkingModule::modifyMotorExo ()
   {
   //=================copy directo to result_=====================
-  if (directo == true){
+  if (directo == 1){
     for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
       result_it != result_.end();
       result_it++)
@@ -1494,14 +1494,16 @@ void OnlineWalkingModule::modifyMotorExo ()
   }
 
   //=================trans result_ to result2=================
-  for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
-      result_it != result_.end();
-      result_it++)
-  {
-    
-    if(result_it != result_.end())
-      result2[result_it->first]->goal_position_ = result_[result_it->first]->goal_position_;
-  }
+  if (directo == 0 || directo == 1){
+    for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
+        result_it != result_.end();
+        result_it++)
+    {
+      
+      if(result_it != result_.end())
+        result2[result_it->first]->goal_position_ = result_[result_it->first]->goal_position_;
+    }
+
 
   //=================right leg=========================
   //r_hip
@@ -1525,7 +1527,18 @@ void OnlineWalkingModule::modifyMotorExo ()
   //l_kn
   result2["l_leg_kn_p" ]->goal_position_ =  result2["l_leg_kn_p" ]->goal_position_;
  
-
+}
+else if (directo==2)
+{
+      for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
+      result_it != result_.end();
+      result_it++)
+    {
+    
+    if(result_it != result_.end())
+      result2[result_it->first]->goal_position_ = result3[result_it->first] ;
+    }
+}
  /*
   if (gazebo_ == false){
     for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();

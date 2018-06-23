@@ -172,7 +172,7 @@ private:
   //std::map<std::string, robotis_framework::DynamixelState *> result2;
 
   bool            gazebo_;
-  bool            directo;
+  int            directo;
   int             control_cycle_msec_;
   boost::thread   queue_thread_;
   boost::mutex    process_mutex_;
