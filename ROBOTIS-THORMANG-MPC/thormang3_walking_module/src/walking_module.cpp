@@ -1481,6 +1481,18 @@ void OnlineWalkingModule::stop()
 
 void OnlineWalkingModule::modifyMotorExo ()
   {
+  //=================copy directo to result_=====================
+  if (directo == true){
+    for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
+      result_it != result_.end();
+      result_it++)
+    {
+    
+    if(result_it != result_.end())
+      result_[result_it->first]->goal_position_ = result3[result_it->first] ;
+    }
+  }
+
   //=================trans result_ to result2=================
   for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
       result_it != result_.end();
@@ -1527,16 +1539,7 @@ void OnlineWalkingModule::modifyMotorExo ()
   }
   */
 
-  if (directo == true){
-    for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
-      result_it != result_.end();
-      result_it++)
-    {
-    
-    if(result_it != result_.end())
-      result_[result_it->first]->goal_position_ = result3[result_it->first] ;
-    }
-  }
+
 }
 
 void OnlineWalkingModule::wtdExo (double *x , double *y , double kx ,double ky)
