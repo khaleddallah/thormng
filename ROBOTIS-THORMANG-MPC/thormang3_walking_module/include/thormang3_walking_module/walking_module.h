@@ -44,6 +44,7 @@
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/WrenchStamped.h>
+#include <sensor_msgs/JointState.h>
 
 #include <boost/thread.hpp>
 
@@ -57,6 +58,8 @@
 #include "thormang3_walking_module_msgs/AddStepDataArray.h"
 #include "thormang3_walking_module_msgs/StartWalking.h"
 #include "thormang3_walking_module_msgs/IsRunning.h"
+#include "thormang3_walking_module_msgs/en_directo.h"
+
 #include "thormang3_walking_module_msgs/RemoveExistingStepData.h"
 #include "thormang3_walking_module_msgs/ResultExo.h"
 
@@ -126,6 +129,9 @@ private:
 #endif
 
   /* ROS Topic Callback Functions */
+  bool enable_directo(thormang3_walking_module_msgs::en_directo::Request  &req,
+                                thormang3_walking_module_msgs::en_directo::Response &res);
+  void direct_motor_callback(const sensor_msgs::JointState::ConstPtr &msg);
   void imuDataOutputCallback(const sensor_msgs::Imu::ConstPtr &msg);
   void JohnnyFtLeftCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg);
   void JohnnyFtRightCallback(const geometry_msgs::WrenchStamped::ConstPtr &msg);
@@ -162,8 +168,11 @@ private:
   void updateJointFeedBackGain();
 
   std::map<std::string, int> joint_name_to_index_;
-  std::map<std::string, double> result2;
+  std::map<std::string, double> result3;
+  //std::map<std::string, robotis_framework::DynamixelState *> result2;
+
   bool            gazebo_;
+  bool            directo;
   int             control_cycle_msec_;
   boost::thread   queue_thread_;
   boost::mutex    process_mutex_;

@@ -197,7 +197,20 @@ void RobotisController::initializeSyncWrite()
 bool RobotisController::initialize(const std::string robot_file_path, const std::string init_file_path)
 {
   std::string dev_desc_dir_path = ros::package::getPath("robotis_device") + "/devices";
+  
+  result_n["r_leg_hip_y"] = new DynamixelState();
+  result_n["r_leg_hip_r"] = new DynamixelState();
+  result_n["r_leg_hip_p"] = new DynamixelState();
+  result_n["r_leg_kn_p" ] = new DynamixelState();
+  result_n["r_leg_an_p" ] = new DynamixelState();
+  result_n["r_leg_an_r" ] = new DynamixelState();
 
+  result_n["l_leg_hip_y"] = new DynamixelState();
+  result_n["l_leg_hip_r"] = new DynamixelState();
+  result_n["l_leg_hip_p"] = new DynamixelState();
+  result_n["l_leg_kn_p" ] = new DynamixelState();
+  result_n["l_leg_an_p" ] = new DynamixelState();
+  result_n["l_leg_an_r" ] = new DynamixelState();
   // load robot info : port , device
   robot_ = new Robot(robot_file_path, dev_desc_dir_path);
 
@@ -643,6 +656,8 @@ void RobotisController::msgQueueThread()
   current_module_pub_       = ros_node.advertise<robotis_controller_msgs::JointCtrlModule>(
                                                               "/robotis/present_joint_ctrl_modules", 10);
 
+  goal_joint_state_pub_n  = ros_node.advertise<sensor_msgs::JointState>("/robotis/goal_joint_states_n", 10);
+
   if (gazebo_mode_ == true)
   {
     for (auto& it : robot_->dxls_)
@@ -883,6 +898,7 @@ void RobotisController::process()
 
   sensor_msgs::JointState goal_state;
   sensor_msgs::JointState present_state;
+  sensor_msgs::JointState goal_state_n;
 
   present_state.header.stamp = ros::Time::now();
   goal_state.header.stamp = present_state.header.stamp;
@@ -1091,7 +1107,8 @@ void RobotisController::process()
           {
             if ((*module_it)->getControlMode() == PositionControl)
             {
-              joint_msg.data = dxl_state->goal_position_;
+              //joint_msg.data = dxl_state->goal_position_;
+              joint_msg.data = result_n[joint_name]->goal_position_;
               gazebo_joint_position_pub_[joint_name].publish(joint_msg);
             }
             else if ((*module_it)->getControlMode() == VelocityControl)
@@ -1233,8 +1250,8 @@ void RobotisController::process()
           if (dxl->ctrl_module_name_ == (*module_it)->getModuleName())
           {
             //do_sync_write = true;
-            DynamixelState *result_state = (*module_it)->result_[joint_name];
-
+            DynamixelState *result_state = (*module_it)->result2[joint_name];
+            result_n[joint_name]=(*module_it)->result_[joint_name];
             if (result_state == NULL)
             {
               ROS_ERROR("[%s] %s ", (*module_it)->getModuleName().c_str(), joint_name.c_str());
@@ -1402,6 +1419,11 @@ void RobotisController::process()
     present_state.velocity.push_back(dxl->dxl_state_->present_velocity_);
     present_state.effort.push_back(dxl->dxl_state_->present_torque_);
 
+    goal_state_n.name.push_back(joint_name);
+    goal_state_n.position.push_back(result_n[joint_name]->goal_position_);
+    goal_state_n.velocity.push_back(result_n[joint_name]->goal_velocity_);
+    goal_state_n.effort.push_back(result_n[joint_name]->goal_torque_);
+
     goal_state.name.push_back(joint_name);
     goal_state.position.push_back(dxl->dxl_state_->goal_position_);
     goal_state.velocity.push_back(dxl->dxl_state_->goal_velocity_);
@@ -1410,6 +1432,7 @@ void RobotisController::process()
 
   // -> publish present joint_states & goal joint states topic
   present_joint_state_pub_.publish(present_state);
+  goal_joint_state_pub_n.publish(goal_state_n);
   goal_joint_state_pub_.publish(goal_state);
 
   if (DEBUG_PRINT)

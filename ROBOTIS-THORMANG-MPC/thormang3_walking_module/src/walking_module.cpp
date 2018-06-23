@@ -73,6 +73,7 @@ OnlineWalkingModule::OnlineWalkingModule()
 : control_cycle_msec_(8)
   {
   gazebo_          = false;
+  directo          = false;
   enable_          = false;
   module_name_     = "walking_module";
   control_mode_    = robotis_framework::PositionControl;
@@ -90,19 +91,19 @@ OnlineWalkingModule::OnlineWalkingModule()
   result_["l_leg_an_p" ] = new robotis_framework::DynamixelState();
   result_["l_leg_an_r" ] = new robotis_framework::DynamixelState();
 
-  result2["r_leg_hip_y"] = 0;
-  result2["r_leg_hip_r"] = 0;
-  result2["r_leg_hip_p"] = 0;
-  result2["r_leg_kn_p" ] = 0;
-  result2["r_leg_an_p" ] = 0;
-  result2["r_leg_an_r" ] = 0;
+  result2["r_leg_hip_y"] = new robotis_framework::DynamixelState();
+  result2["r_leg_hip_r"] = new robotis_framework::DynamixelState();
+  result2["r_leg_hip_p"] = new robotis_framework::DynamixelState();
+  result2["r_leg_kn_p" ] = new robotis_framework::DynamixelState();
+  result2["r_leg_an_p" ] = new robotis_framework::DynamixelState();
+  result2["r_leg_an_r" ] = new robotis_framework::DynamixelState();
 
-  result2["l_leg_hip_y"] = 0;
-  result2["l_leg_hip_r"] = 0;
-  result2["l_leg_hip_p"] = 0;
-  result2["l_leg_kn_p" ] = 0;
-  result2["l_leg_an_p" ] = 0;
-  result2["l_leg_an_r" ] = 0;
+  result2["l_leg_hip_y"] = new robotis_framework::DynamixelState();
+  result2["l_leg_hip_r"] = new robotis_framework::DynamixelState();
+  result2["l_leg_hip_p"] = new robotis_framework::DynamixelState();
+  result2["l_leg_kn_p" ] = new robotis_framework::DynamixelState();
+  result2["l_leg_an_p" ] = new robotis_framework::DynamixelState();
+  result2["l_leg_an_r" ] = new robotis_framework::DynamixelState();
   
 
   joint_name_to_index_["r_leg_hip_y"] = 0;
@@ -272,6 +273,7 @@ void OnlineWalkingModule::queueThread()
   ros::ServiceServer set_balance_param_server  = ros_node.advertiseService("/robotis/walking/set_balance_param",         &OnlineWalkingModule::setBalanceParamServiceCallback,        this);
   ros::ServiceServer set_joint_feedback_gain   = ros_node.advertiseService("/robotis/walking/joint_feedback_gain",       &OnlineWalkingModule::setJointFeedBackGainServiceCallback,   this);
   ros::ServiceServer remove_existing_step_data = ros_node.advertiseService("/robotis/walking/remove_existing_step_data", &OnlineWalkingModule::removeExistingStepDataServiceCallback, this);
+  ros::ServiceServer directo_service           = ros_node.advertiseService("/directo",                                   &OnlineWalkingModule::enable_directo,                        this);
 
   /* sensor topic subscribe */
   ros::Subscriber imu_data_sub      = ros_node.subscribe("/robotis/sensor/imu/imu", 3, &OnlineWalkingModule::imuDataOutputCallback, this);
@@ -279,10 +281,13 @@ void OnlineWalkingModule::queueThread()
   ros::Subscriber johnny5FtLeft      = ros_node.subscribe("/gazebo/johnny5/sensor/ft/left_foot", 3, &OnlineWalkingModule::JohnnyFtLeftCallback, this);
   ros::Subscriber johnny5FtRight      = ros_node.subscribe("/gazebo/johnny5/sensor/ft/right_foot", 3, &OnlineWalkingModule::JohnnyFtRightCallback, this);
 
+  ros::Subscriber direct_motor  = ros_node.subscribe("/robotis/motor", 3, &OnlineWalkingModule::direct_motor_callback, this);
 
   ros::WallDuration duration(control_cycle_msec_ / 1000.0);
   if(ros::param::get("gazebo", gazebo_) == false)
     gazebo_ = false;
+  if(ros::param::get("directo",directo) == false)
+    directo = false;
 
   while(ros_node.ok())
     callback_queue.callAvailable(duration);
@@ -634,6 +639,15 @@ bool OnlineWalkingModule::startWalkingServiceCallback(thormang3_walking_module_m
 
   return true;
 }
+
+bool OnlineWalkingModule::enable_directo(thormang3_walking_module_msgs::en_directo::Request &req,
+                                                   thormang3_walking_module_msgs::en_directo::Response &res)
+  {
+  //res=new bool;
+  directo=req.en;
+  return true ;
+}
+
 
 bool OnlineWalkingModule::IsRunningServiceCallback(thormang3_walking_module_msgs::IsRunning::Request &req,
                                                    thormang3_walking_module_msgs::IsRunning::Response &res)
@@ -1081,7 +1095,7 @@ bool OnlineWalkingModule::checkBalanceOnOff()
       (fabs(online_walking->balance_ctrl_.left_foot_torque_roll_ctrl_.d_gain_    ) < 1e-7) &&
       (fabs(online_walking->balance_ctrl_.left_foot_torque_pitch_ctrl_.d_gain_   ) < 1e-7))
   {
-    return false;
+    return true;
   }
   else
     return true;
@@ -1109,6 +1123,28 @@ bool OnlineWalkingModule::removeExistingStepDataServiceCallback(thormang3_walkin
   return true;
 }
 
+void OnlineWalkingModule::direct_motor_callback(const sensor_msgs::JointState::ConstPtr &msg){
+/*
+  result2["l_leg_hip_y"] = msg.l_leg_hip_y ;
+  result2["l_leg_hip_r"] = msg.l_leg_hip_r ;
+  result2["l_leg_hip_p"] = msg.l_leg_hip_p  ;
+  result2["l_leg_kn_p" ] = msg.l_leg_kn_p ;
+  result2["l_leg_an_p" ] = msg.l_leg_an_p ;
+  result2["l_leg_an_r" ] = msg.l_leg_an_r ;
+
+  result2["r_leg_hip_y"] = msg.r_leg_hip_y ;
+  result2["r_leg_hip_r"] = msg.r_leg_hip_r ;
+  result2["r_leg_hip_p"] = msg.r_leg_hip_p ;
+  result2["r_leg_kn_p" ] = msg.r_leg_kn_p ;
+  result2["r_leg_an_p" ] = msg.r_leg_an_p ;
+  result2["r_leg_an_r" ] = msg.r_leg_an_r ;
+*/
+
+  for (unsigned int i = 0; i < msg->name.size(); i++)
+  {
+      result3[msg->name[i]] = msg->position[i];
+  }
+}
 
 void OnlineWalkingModule::imuDataOutputCallback(const sensor_msgs::Imu::ConstPtr &msg)
   {
@@ -1383,9 +1419,9 @@ void OnlineWalkingModule::process(std::map<std::string, robotis_framework::Dynam
   result_["l_leg_an_p" ]->goal_position_ = online_walking->out_angle_rad_[10];
   result_["l_leg_an_r" ]->goal_position_ = online_walking->out_angle_rad_[11];
  
-  pubExoRes_();
-  modifyMotorExo ();
-  pubExoRes2();
+  //pubExoRes_();
+modifyMotorExo ();
+  //pubExoRes2();
 
 #ifdef WALKING_TUNE
   walking_joint_states_msg_.header.stamp = ros::Time::now();
@@ -1452,45 +1488,33 @@ void OnlineWalkingModule::modifyMotorExo ()
   {
     
     if(result_it != result_.end())
-      result2[result_it->first] = result_[result_it->first]->goal_position_;
+      result2[result_it->first]->goal_position_ = result_[result_it->first]->goal_position_;
   }
 
   //=================right leg=========================
   //r_hip
-  wtdExo (&result2["r_leg_hip_y"] , &result2["r_leg_hip_r"] , hip_kx , hip_ky );
+  wtdExo (&result2["r_leg_hip_y"]->goal_position_ , &result2["r_leg_hip_r"]->goal_position_ , hip_kx , hip_ky );
   //r_ankle
-  wtdExo (&result2["r_leg_an_r"] , &result2["r_leg_an_p"], an_kx , an_ky );
+  wtdExo (&result2["r_leg_an_r"]->goal_position_ , &result2["r_leg_an_p"]->goal_position_ , an_kx , an_ky );
   //r_hip_p
-  result2["r_leg_hip_p"] = 2 * result2["r_leg_hip_p"];
+  result2["r_leg_hip_p"]->goal_position_ = 2 * result2["r_leg_hip_p"]->goal_position_;
   //r_kn
-  result2["r_leg_kn_p" ] =  result2["r_leg_kn_p" ];
+  result2["r_leg_kn_p" ]->goal_position_ =  result2["r_leg_kn_p" ]->goal_position_;
 
-  //add offset right
-  result2["r_leg_hip_y"] = result2["r_leg_hip_y"] + (r_leg_hip_y_ofst/180) ;
-  result2["r_leg_hip_r"] = result2["r_leg_hip_r"] + (r_leg_hip_r_ofst/180) ;
-  result2["r_leg_hip_p"] = result2["r_leg_hip_p"] + (r_leg_hip_p_ofst/180) ;
-  result2["r_leg_kn_p" ] = result2["r_leg_kn_p" ] + (r_leg_kn_p_ofst/180)  ;
-  result2["r_leg_an_p" ] = result2["r_leg_an_p" ] + (r_leg_an_p_ofst/180)  ;
-  result2["r_leg_an_r" ] = result2["r_leg_an_r" ] + (r_leg_an_r_ofst/180)  ;
+
 
     //=================Left leg=========================
   //l_hip
-  wtdExo (&result2["l_leg_hip_y"] , &result2["l_leg_hip_r"] , hip_kx , hip_ky );
+  wtdExo (&result2["l_leg_hip_y"]->goal_position_ , &result2["l_leg_hip_r"]->goal_position_ , hip_kx , hip_ky );
   //l_ankle
-  wtdExo (&result2["l_leg_an_p"] , &result2["l_leg_an_r"] ,an_kx , an_ky );
+  wtdExo (&result2["l_leg_an_p"]->goal_position_ , &result2["l_leg_an_r"]->goal_position_ ,an_kx , an_ky );
   //l_hip_p
-  result2["l_leg_hip_p"] = 2 * result2["l_leg_hip_p"];
+  result2["l_leg_hip_p"]->goal_position_ = 2 * result2["l_leg_hip_p"]->goal_position_;
   //l_kn
-  result2["l_leg_kn_p" ] =  result2["l_leg_kn_p" ];
+  result2["l_leg_kn_p" ]->goal_position_ =  result2["l_leg_kn_p" ]->goal_position_;
  
-  //add offset left
-  result2["l_leg_hip_y"] = result2["l_leg_hip_y"] + (l_leg_hip_y_ofst/180) ;
-  result2["l_leg_hip_r"] = result2["l_leg_hip_r"] + (l_leg_hip_r_ofst/180) ;
-  result2["l_leg_hip_p"] = result2["l_leg_hip_p"] + (l_leg_hip_p_ofst/180) ;
-  result2["l_leg_kn_p" ] = result2["l_leg_kn_p" ] + (l_leg_kn_p_ofst/180)  ;
-  result2["l_leg_an_p" ] = result2["l_leg_an_p" ] + (l_leg_an_p_ofst/180)  ;
-  result2["l_leg_an_r" ] = result2["l_leg_an_r" ] + (l_leg_an_r_ofst/180)  ;
- 
+
+ /*
   if (gazebo_ == false){
     for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
       result_it != result_.end();
@@ -1498,7 +1522,19 @@ void OnlineWalkingModule::modifyMotorExo ()
     {
     
     if(result_it != result_.end())
-      result_[result_it->first]->goal_position_ = result2[result_it->first] ;
+      result_[result_it->first]->goal_position_ = result2[result_it->first]->goal_position_ ;
+    }
+  }
+  */
+
+  if (directo == true){
+    for(std::map<std::string, robotis_framework::DynamixelState*>::iterator result_it = result_.begin();
+      result_it != result_.end();
+      result_it++)
+    {
+    
+    if(result_it != result_.end())
+      result_[result_it->first]->goal_position_ = result3[result_it->first] ;
     }
   }
 }
@@ -1571,24 +1607,26 @@ void OnlineWalkingModule::pubExoRes_()
   resultExoMsg.r_leg_an_r = result_["r_leg_an_r" ]->goal_position_*180;
 
   ExoRes_.publish(resultExoMsg);
+  
 }
 
 void OnlineWalkingModule::pubExoRes2()
   {
+/*  
+  resultExoMsg.l_leg_hip_y = result2["l_leg_hip_y"]->goal_position_*180;
+  resultExoMsg.l_leg_hip_r = result2["l_leg_hip_r"]->goal_position_*180;
+  resultExoMsg.l_leg_hip_p = result2["l_leg_hip_p"]->goal_position_*180;
+  resultExoMsg.l_leg_kn_p = result2["l_leg_kn_p" ]->goal_position_*180;
+  resultExoMsg.l_leg_an_p = result2["l_leg_an_p" ]->goal_position_*180;
+  resultExoMsg.l_leg_an_r = result2["l_leg_an_r" ]->goal_position_*180;
 
-  resultExoMsg.l_leg_hip_y = result2["l_leg_hip_y"]*180;
-  resultExoMsg.l_leg_hip_r = result2["l_leg_hip_r"]*180;
-  resultExoMsg.l_leg_hip_p = result2["l_leg_hip_p"]*180;
-  resultExoMsg.l_leg_kn_p = result2["l_leg_kn_p" ]*180;
-  resultExoMsg.l_leg_an_p = result2["l_leg_an_p" ]*180;
-  resultExoMsg.l_leg_an_r = result2["l_leg_an_r" ]*180;
-
-  resultExoMsg.r_leg_hip_y = result2["r_leg_hip_y"]*180;
-  resultExoMsg.r_leg_hip_r = result2["r_leg_hip_r"]*180;
-  resultExoMsg.r_leg_hip_p = result2["r_leg_hip_p"]*180;
-  resultExoMsg.r_leg_kn_p = result2["r_leg_kn_p" ]*180;
-  resultExoMsg.r_leg_an_p = result2["r_leg_an_p" ]*180;
-  resultExoMsg.r_leg_an_r = result2["r_leg_an_r" ]*180;
+  resultExoMsg.r_leg_hip_y = result2["r_leg_hip_y"]->goal_position_*180;
+  resultExoMsg.r_leg_hip_r = result2["r_leg_hip_r"]->goal_position_*180;
+  resultExoMsg.r_leg_hip_p = result2["r_leg_hip_p"]->goal_position_*180;
+  resultExoMsg.r_leg_kn_p = result2["r_leg_kn_p" ]->goal_position_*180;
+  resultExoMsg.r_leg_an_p = result2["r_leg_an_p" ]->goal_position_*180;
+  resultExoMsg.r_leg_an_r = result2["r_leg_an_r" ]->goal_position_*180;
 
   ExoRes2.publish(resultExoMsg);
+  */
 }

@@ -5,6 +5,7 @@
     <arg name="use_lidar" default="true" />
     
     <param name="gazebo"                   value="false"    type="bool"/>
+    <param name="directo"                  value="true"    type="bool"/>
     <param name="gazebo_robot_name"        value="thormang3"/>
     
     <param name="offset_file_path"         value="$(find thormang3_manager)/config/offset.yaml"/>
@@ -25,9 +26,9 @@
     <!-- THORMANG3 Manager -->
     <node name="thormang3_manager" pkg="thormang3_manager" type="thormang3_manager" output="screen"/>
       
-	<node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="true">
-    <param name="port" value="/dev/ttyACM0"/>
-    </node>
+	<!--node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="true"-->
+    <!--param name="port" value="/dev/ttyACM0"/-->
+    <!--/node-->
 
     <!-- Robot Model & TF -->
     <include file="$(find thormang3_description)/launch/thormang3_mpc.launch"/> 

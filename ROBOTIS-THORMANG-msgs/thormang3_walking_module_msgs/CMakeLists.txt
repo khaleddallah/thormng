@@ -37,6 +37,7 @@ add_message_files(
 add_service_files(
   FILES
   IsRunning.srv
+  en_directo.srv
   SetBalanceParam.srv
   SetDampingBalanceParam.srv
   GetReferenceStepData.srv

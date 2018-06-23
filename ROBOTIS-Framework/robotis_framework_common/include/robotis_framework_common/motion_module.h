@@ -51,6 +51,8 @@ protected:
 
 public:
   std::map<std::string, DynamixelState *> result_;
+  std::map<std::string, DynamixelState *> result2;
+
 
   virtual ~MotionModule() { }
 

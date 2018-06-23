@@ -89,6 +89,7 @@ public:
 
   /* bulk read */
   std::map<std::string, dynamixel::GroupBulkRead *>   port_to_bulk_read_;
+  std::map<std::string, DynamixelState *> result_n;
 
   /* sync write */
   std::map<std::string, dynamixel::GroupSyncWrite *>  port_to_sync_write_position_;
@@ -105,6 +106,9 @@ public:
   ros::Publisher  goal_joint_state_pub_;
   ros::Publisher  present_joint_state_pub_;
   ros::Publisher  current_module_pub_;
+
+  ros::Publisher  goal_joint_state_pub_n;
+
 
   std::map<std::string, ros::Publisher> gazebo_joint_position_pub_;
   std::map<std::string, ros::Publisher> gazebo_joint_velocity_pub_;
