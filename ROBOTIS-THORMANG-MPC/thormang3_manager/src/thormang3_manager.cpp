@@ -47,6 +47,7 @@
 #include "thormang3_manipulation_module/manipulation_module.h"
 #include "thormang3_walking_module/walking_module.h"
 #include "thormang3_gripper_module/gripper_module.h"
+#include "changer/changer.h"
 
 
 using namespace thormang3;
@@ -102,6 +103,7 @@ int main(int argc, char **argv)
     controller->addMotionModule((robotis_framework::MotionModule*)GripperModule::getInstance());
     controller->addMotionModule((robotis_framework::MotionModule*)HeadControlModule::getInstance());
     controller->addMotionModule((robotis_framework::MotionModule*)OnlineWalkingModule::getInstance());
+    controller->addMotionModule((robotis_framework::MotionModule*)changerM::getInstance());
 
     controller->startTimer();
 
