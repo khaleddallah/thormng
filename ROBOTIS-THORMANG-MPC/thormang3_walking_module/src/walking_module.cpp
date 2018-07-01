@@ -252,6 +252,13 @@ void OnlineWalkingModule::queueThread()
   ros_node.setCallbackQueue(&callback_queue);
 
   /* publish topics */
+  cob_plot = ros_node.advertise<geometry_msgs::Point>("cob_plot",10);
+  zmp_plot = ros_node.advertise<geometry_msgs::Point>("zmp_plot",10);
+
+  exo_vis_pup_ = ros_node.advertise<visualization_msgs::Marker>("robot_pose_vis", 10);
+  exo_vis_zmp_pup_ = ros_node.advertise<visualization_msgs::Marker>("robot_pose_zmp_vis", 10);
+  footstep_vis_pub_ = ros_node.advertise<visualization_msgs::Marker>("footstep_vis", 10);
+
   robot_pose_pub_ = ros_node.advertise<thormang3_walking_module_msgs::RobotPose>("/robotis/walking/robot_pose", 1);
   status_msg_pub_ = ros_node.advertise<robotis_controller_msgs::StatusMsg>("robotis/status", 1);
   pelvis_base_msg_pub_ = ros_node.advertise<geometry_msgs::PoseStamped>("/robotis/pelvis_pose_base_walking", 1);
@@ -304,6 +311,8 @@ void OnlineWalkingModule::queueThread()
 
 void OnlineWalkingModule::publishRobotPose(void)
   {
+  THORMANG3OnlineWalking *online_walking = THORMANG3OnlineWalking::getInstance();
+
   //process_mutex_.lock();
   robot_pose_msg_.global_to_center_of_body.position.x = desired_matrix_g_to_cob_.coeff(0, 3);
   robot_pose_msg_.global_to_center_of_body.position.y = desired_matrix_g_to_cob_.coeff(1, 3);
@@ -327,6 +336,67 @@ void OnlineWalkingModule::publishRobotPose(void)
   tf::quaternionEigenToMsg(quaterniond_g_to_lf,  robot_pose_msg_.global_to_left_foot.orientation);
 
   robot_pose_pub_.publish(robot_pose_msg_);
+
+  geometry_msgs::Point p1,p2,p3,p4;
+  p1.x = robot_pose_msg_.global_to_center_of_body.position.x - online_walking->ref_zmp_x_at_this_time_;
+  p1.y = robot_pose_msg_.global_to_center_of_body.position.y;
+  p1.z = robot_pose_msg_.global_to_center_of_body.position.z;
+
+  p2.x = 0;
+  p2.y = robot_pose_msg_.global_to_right_foot.position.y;
+  p2.z = robot_pose_msg_.global_to_right_foot.position.z;
+
+  p3.x = 0;
+  p3.y = robot_pose_msg_.global_to_left_foot.position.y;
+  p3.z = robot_pose_msg_.global_to_left_foot.position.z;
+
+  visualization_msgs::Marker points;
+  points.header.frame_id = "/pelvis_link";
+  points.header.stamp = ros::Time::now();
+  points.ns = "thormang3";
+  points.action = visualization_msgs::Marker::ADD;
+  points.pose.orientation.w = 1.0;
+
+  points.id = 0;
+  points.type = visualization_msgs::Marker::POINTS;
+  points.scale.x = 0.05;
+  points.scale.y = 0.05;
+  points.scale.z = 0.05;
+  points.color.g = 1.0f;
+  points.color.a = 0.4;
+
+  points.points.push_back(p1); 
+  points.points.push_back(p2);  
+  points.points.push_back(p3); 
+
+  exo_vis_pup_.publish(points);
+  cob_plot.publish(p1);
+
+  visualization_msgs::Marker points2;
+  points2.header.frame_id = "/pelvis_link";
+  points2.header.stamp = ros::Time::now();
+  points2.ns = "thormang3";
+  points2.action = visualization_msgs::Marker::ADD;
+  points2.pose.orientation.w = 1.0;
+
+  points2.id = 0;
+  points2.type = visualization_msgs::Marker::POINTS;
+  points2.scale.x = 0.03;
+  points2.scale.y = 0.03;
+  points2.scale.z = 0.03;
+  points2.color.r = 1.0f;
+  points2.color.a = 1.0;
+
+  p4.x = 0;
+  p4.y = online_walking->ref_zmp_y_at_this_time_;
+  p4.z = 0;
+
+  points2.points.push_back(p4); 
+  exo_vis_zmp_pup_.publish(points2);
+  zmp_plot.publish(p4);
+
+
+  publishVisualize (cur_step_data_array);
 
 //  geometry_msgs::PoseStamped pose_msg;
 //  pose_msg.header.stamp = ros::Time::now();
@@ -563,6 +633,8 @@ bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_ms
     }
 
     req_step_data_array.push_back(step_data);
+    cur_step_data_array.push_back(step_data);
+
   }
 
   if(req.remove_existing_step_data == true)
@@ -579,6 +651,8 @@ bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_ms
       res.result |= thormang3_walking_module_msgs::AddStepDataArray::Response::ROBOT_IS_WALKING_NOW;
       std::string status_msg  = WalkingStatusMSG::FAILED_TO_ADD_STEP_DATA_MSG;
       publishStatusMsg(robotis_controller_msgs::StatusMsg::STATUS_ERROR, status_msg);
+      //publishVisualize (req_step_data_array);
+      //cur_step_data_array = req_step_data_array;
       return true;
     }
   }
@@ -590,8 +664,11 @@ bool OnlineWalkingModule::addStepDataServiceCallback(thormang3_walking_module_ms
     return true;
   }
 
-  for(unsigned int i = 0; i < req_step_data_array.size() ; i++)
+  for(unsigned int i = 0; i < req_step_data_array.size() ; i++){
     online_walking->addStepData(req_step_data_array[i]);
+    cur_step_data_array[i]=req_step_data_array[i];
+    ROS_INFO("hihihihihi");
+  }
 
   if( req.auto_start == true)
   {
@@ -1646,3 +1723,72 @@ void OnlineWalkingModule::pubExoRes2()
   ExoRes2.publish(resultExoMsg);
   */
 }
+
+void OnlineWalkingModule::publishVisualize (std::vector<robotis_framework::StepData> msg)
+{
+
+  visualization_msgs::Marker marker;
+  double max ;
+  //visualization_msgs::MarkerArray broadcast;
+  //std::vector<visualization_msgs::Marker> markers;
+
+  visualization_msgs::Marker m;
+  visualization_msgs::Marker points;
+  marker.header.frame_id = "/pelvis_link";
+  marker.header.stamp = ros::Time::now();
+  marker.ns = "thormang3";
+  marker.action = visualization_msgs::Marker::ADD;
+  marker.pose.orientation.w = 1.0;
+  marker.id = 0;
+  marker.type = visualization_msgs::Marker::POINTS;
+  marker.scale.x = 0.03;
+  marker.scale.y = 0.03;
+  marker.scale.z = 0.03;
+  marker.color.b = 1.0f;
+  marker.color.a = 1.0;
+
+  geometry_msgs::Point pr,pl;
+  for(unsigned int i = 0; i < msg.size() ; i++)
+  {
+  // pb.x    = 0.0;
+  // pb.y    = 0.0;
+  // pb.z    = msg[i].position_data.body_pose.z;
+  // pb.orientation.x = msg[i].position_data.body_pose.roll;
+  // pb.orientation.y = msg[i].position_data.body_pose.pitch;
+  // pb.orientation.z = msg[i].position_data.body_pose.yaw;
+  //pb.orientation.w = 1.0;
+  //marker.pose = pb ;
+  // marker.points.push_back(pb); 
+    
+  // if (robot_pose_msg_.global_to_right_foot.position.x > robot_pose_msg_.global_to_left_foot.position.x)
+  //   max = robot_pose_msg_.global_to_right_foot.position.x ;
+  // else
+  //   max = robot_pose_msg_.global_to_left_foot.position.x ;
+
+  pr.x     = msg[i].position_data.right_foot_pose.x - robot_pose_msg_.global_to_center_of_body.position.x;
+  pr.y     = msg[i].position_data.right_foot_pose.y;
+  pr.z     = msg[i].position_data.right_foot_pose.z;
+  // pr.orientation.x  = msg[i].position_data.right_foot_pose.roll;
+  // pr.orientation.y  = msg[i].position_data.right_foot_pose.pitch;
+  // pr.orientation.z  = msg[i].position_data.right_foot_pose.yaw;
+  ////pr.orientation.w  = 1.0;
+  //marker.pose = pr ;
+  marker.points.push_back(pr); 
+
+  pl.x     = msg[i].position_data.left_foot_pose.x - robot_pose_msg_.global_to_center_of_body.position.x;
+  pl.y     = msg[i].position_data.left_foot_pose.y;
+  pl.z     = msg[i].position_data.left_foot_pose.z;
+  // pl.orientation.x  = msg[i].position_data.left_foot_pose.roll;
+  // pl.orientation.y  = msg[i].position_data.left_foot_pose.pitch;
+  // pl.orientation.z  = msg[i].position_data.left_foot_pose.yaw;
+  //pl.orientation.w  = 1.0;
+  //marker.pose = pl ;
+  marker.points.push_back(pl); 
+
+  } 
+  footstep_vis_pub_.publish(marker);
+}
+
+
+
+  

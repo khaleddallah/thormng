@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   thormang3_kinematics_dynamics
   thormang3_balance_control
   thormang3_walking_module_msgs
+  visualization_msgs
 )
 
 find_package(Eigen REQUIRED)
@@ -40,7 +41,7 @@ pkg_check_modules(yaml_cpp yaml-cpp REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES thormang3_walking_module
-  CATKIN_DEPENDS roscpp robotis_math robotis_framework_common thormang3_balance_control thormang3_kinematics_dynamics
+  CATKIN_DEPENDS roscpp robotis_math robotis_framework_common thormang3_balance_control thormang3_kinematics_dynamics visualization_msgs
 )
 
 ################################################################################

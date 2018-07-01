@@ -132,6 +132,24 @@ public:
 
   std_msgs::Float64MultiArray map_info;
   Eigen::MatrixXd tata_mat_robot_to_cob_modified_;
+
+    //These matrix and parameters are for preview control
+  Eigen::MatrixXd A_, b_, c_;
+  Eigen::MatrixXd k_x_;
+  Eigen::MatrixXd f_;
+  double k_s_;
+  double sum_of_zmp_x_ ;
+  double sum_of_zmp_y_ ;
+  double sum_of_cx_ ;
+  double sum_of_cy_ ;
+  Eigen::MatrixXd u_x, u_y;
+  Eigen::MatrixXd x_lipm_, y_lipm_;
+
+  int current_start_idx_for_ref_zmp_;
+
+  double ref_zmp_x_at_this_time_, ref_zmp_y_at_this_time_;
+  Eigen::MatrixXd reference_zmp_x_, reference_zmp_y_;
+
 private:
   void calcStepIdxData();
   void calcRefZMP();
@@ -205,22 +223,22 @@ private:
   double preview_time_;
   int preview_size_;
 
-  //These matrix and parameters are for preview control
-  Eigen::MatrixXd A_, b_, c_;
-  Eigen::MatrixXd k_x_;
-  Eigen::MatrixXd f_;
-  double k_s_;
-  double sum_of_zmp_x_ ;
-  double sum_of_zmp_y_ ;
-  double sum_of_cx_ ;
-  double sum_of_cy_ ;
-  Eigen::MatrixXd u_x, u_y;
-  Eigen::MatrixXd x_lipm_, y_lipm_;
+  // //These matrix and parameters are for preview control
+  // Eigen::MatrixXd A_, b_, c_;
+  // Eigen::MatrixXd k_x_;
+  // Eigen::MatrixXd f_;
+  // double k_s_;
+  // double sum_of_zmp_x_ ;
+  // double sum_of_zmp_y_ ;
+  // double sum_of_cx_ ;
+  // double sum_of_cy_ ;
+  // Eigen::MatrixXd u_x, u_y;
+  // Eigen::MatrixXd x_lipm_, y_lipm_;
 
-  int current_start_idx_for_ref_zmp_;
+  // int current_start_idx_for_ref_zmp_;
 
-  double ref_zmp_x_at_this_time_, ref_zmp_y_at_this_time_;
-  Eigen::MatrixXd reference_zmp_x_, reference_zmp_y_;
+  // double ref_zmp_x_at_this_time_, ref_zmp_y_at_this_time_;
+  // Eigen::MatrixXd reference_zmp_x_, reference_zmp_y_;
 
   bool real_running, ctrl_running;
 

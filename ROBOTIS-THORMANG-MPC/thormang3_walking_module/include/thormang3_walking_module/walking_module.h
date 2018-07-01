@@ -66,6 +66,10 @@
 #include "thormang3_walking_module_msgs/SetBalanceParam.h"
 #include "thormang3_walking_module_msgs/SetJointFeedBackGain.h"
 
+#include <visualization_msgs/Marker.h>
+#include <visualization_msgs/MarkerArray.h>
+
+
 #define WALKING_TUNE
 #ifdef WALKING_TUNE
 #include "thormang3_walking_module_msgs/WalkingJointStatesStamped.h"
@@ -79,6 +83,9 @@ class OnlineWalkingModule : public robotis_framework::MotionModule, public robot
 public:
   OnlineWalkingModule();
   virtual ~OnlineWalkingModule();
+
+  std::vector<robotis_framework::StepData> cur_step_data_array;
+
   double hip_kx = 0 ;
   double hip_ky = 0 ; 
   double an_kx = 0 ;
@@ -167,6 +174,8 @@ private:
   void setJointFeedBackGain(thormang3_walking_module_msgs::JointFeedBackGain& msg);
   void updateJointFeedBackGain();
 
+  void publishVisualize (std::vector<robotis_framework::StepData> msg);
+
   std::map<std::string, int> joint_name_to_index_;
   std::map<std::string, double> result3;
   //std::map<std::string, robotis_framework::DynamixelState *> result2;
@@ -187,6 +196,14 @@ private:
   /* ROS Topic Publish Functions */
   int r_foot_ft_publish_checker_;
   int l_foot_ft_publish_checker_;
+
+  ros::Publisher exo_vis_pup_;
+  ros::Publisher exo_vis_zmp_pup_;
+  ros::Publisher footstep_vis_pub_;
+
+  ros::Publisher cob_plot;
+  ros::Publisher zmp_plot;
+
   ros::Publisher robot_pose_pub_;
   ros::Publisher status_msg_pub_;
   ros::Publisher pelvis_base_msg_pub_;
