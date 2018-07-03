@@ -1,0 +1,1 @@
+controller_joint_names: ['hip_left_y_j', 'hip_left_r_j', 'hip_left_p_j', 'kn_left_p_j', 'an_left_p', 'foot_left_r_j', 'hip_right_y_jt', 'hip_right_r_j', 'hip_right_p_j', 'kn_right_p_j', 'an_right_p_j', 'foot_right_r_j', ]

@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+
+<!--launch>
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find exo_ros_33)/robots/exo_ros_33.urdf -urdf -model exo_ros_33"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+</launch-->
+
+<launch>
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+  </include>
+
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+   command="$(find xacro)/xacro.py '$(find exo_ros_33)/robots/exo_ros_33.xacro'" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-urdf -model exo_ros_33 -z 0.9 -param robot_description"/>
+
+    <!--node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" /-->
+
+  <!--node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" /-->
+  <!-- ros_control robotis humanoid launch file -->
+  <!--group if ="$(arg position_controller)">
+    <include file="$(find thormang3_gazebo)/launch/position_controller.launch" />
+  </group-->
+
+  <rosparam file="$(find exo_ros_33)/config/position_controller.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+  output="screen" ns="/exo_ros_33" args="joint_state_controller
+
+                 
+                 l_leg_hip_y_position
+                 l_leg_hip_r_position
+                 l_leg_hip_p_position
+                 l_leg_kn_p_position
+                 l_leg_an_p_position
+                 l_leg_an_r_position
+                 r_leg_hip_y_position
+                 r_leg_hip_r_position
+                 r_leg_hip_p_position
+                 r_leg_kn_p_position
+                 r_leg_an_p_position
+                 r_leg_an_r_position
+              " />
+
+  </launch>
