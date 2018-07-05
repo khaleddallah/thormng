@@ -1,8 +1,5 @@
 <robot
-  name="thormang3"
-  xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
-    <xacro:property name="pi" value="3.141592654" />
+  name="exo_fri2">
   <link
     name="pelvis_link">
     <inertial>
@@ -12,12 +9,12 @@
       <mass
         value="0.876180506785054" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.0018274599707449"
+        ixy="2.77946712790342E-06"
+        ixz="-2.8214836938785E-05"
+        iyy="0.000542716087592879"
+        iyz="-1.88988098707489E-06"
+        izz="0.00181893616699862" />
     </inertial>
     <visual>
       <origin
@@ -52,12 +49,12 @@
       <mass
         value="0.0865282088524624" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="1.13911359505298E-06"
+        ixy="-1.11411508271771E-10"
+        ixz="-2.37226666721844E-08"
+        iyy="6.2899579319631E-06"
+        iyz="-4.85731050099276E-09"
+        izz="5.15088996081038E-06" />
     </inertial>
     <visual>
       <origin
@@ -114,12 +111,12 @@
       <mass
         value="0.577322605082582" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00181457155966255"
+        ixy="-1.38251521700881E-05"
+        ixz="-0.000341824932119138"
+        iyy="0.00199152298330253"
+        iyz="-2.11084833211533E-06"
+        izz="0.000385594954323664" />
     </inertial>
     <visual>
       <origin
@@ -176,12 +173,12 @@
       <mass
         value="0.286678540994592" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00114218481999952"
+        ixy="-6.6656854843246E-07"
+        ixz="-4.17701505256595E-07"
+        iyy="0.00105234709309922"
+        iyz="0.000208313575818116"
+        izz="9.25186266106955E-05" />
     </inertial>
     <visual>
       <origin
@@ -238,12 +235,12 @@
       <mass
         value="0.501847265279983" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.000745259566339444"
+        ixy="-5.13138154637278E-05"
+        ixz="-4.31450822433219E-05"
+        iyy="0.000968498963909832"
+        iyz="-0.000141965074802525"
+        izz="0.000582611386949195" />
     </inertial>
     <visual>
       <origin
@@ -300,12 +297,12 @@
       <mass
         value="0.0325752774497041" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="4.18208814046054E-06"
+        ixy="1.56710141350867E-12"
+        ixz="2.25348451477354E-13"
+        iyy="2.63816527708645E-06"
+        iyz="-2.79139167451849E-19"
+        izz="6.82025341754691E-06" />
     </inertial>
     <visual>
       <origin
@@ -362,12 +359,12 @@
       <mass
         value="2.0447635642258" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="2.92766891537317E-05"
+        ixy="2.23425331154983E-06"
+        ixz="7.29798818128467E-06"
+        iyy="7.35944581513633E-05"
+        iyz="-1.46086744570418E-07"
+        izz="7.40029664850696E-05" />
     </inertial>
     <visual>
       <origin
@@ -424,12 +421,12 @@
       <mass
         value="0.0865285731833129" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="1.13912084419969E-06"
+        ixy="1.11411552257724E-10"
+        ixz="-2.37218589140582E-08"
+        iyy="6.2899651385115E-06"
+        iyz="4.8575118536712E-09"
+        izz="5.15088992167497E-06" />
     </inertial>
     <visual>
       <origin
@@ -486,12 +483,12 @@
       <mass
         value="0.577327897793504" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00181455865797064"
+        ixy="1.3624437201598E-05"
+        ixz="-0.00034151634759538"
+        iyy="0.00199123255685572"
+        iyz="2.10370363346488E-06"
+        izz="0.000385318948306946" />
     </inertial>
     <visual>
       <origin
@@ -548,12 +545,12 @@
       <mass
         value="0.286679006041324" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00114082497447434"
+        ixy="6.32801216900449E-07"
+        ixz="-4.92592484266524E-07"
+        iyy="0.00105234766959689"
+        iyz="-0.000207601330706595"
+        izz="9.11579594381596E-05" />
     </inertial>
     <visual>
       <origin
@@ -610,12 +607,12 @@
       <mass
         value="0.501848142816981" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.000745283229708751"
+        ixy="5.13026291501537E-05"
+        ixz="-4.31583183152432E-05"
+        iyy="0.000968382519973806"
+        iyz="0.000141975658542831"
+        izz="0.00058251910660915" />
     </inertial>
     <visual>
       <origin
@@ -672,12 +669,12 @@
       <mass
         value="0.0325752774497039" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="4.18208814046053E-06"
+        ixy="1.5670981579651E-12"
+        ixz="2.2534842189336E-13"
+        iyy="2.63816527708159E-06"
+        iyz="-2.29567390544923E-19"
+        izz="6.82025341754205E-06" />
     </inertial>
     <visual>
       <origin
@@ -734,12 +731,12 @@
       <mass
         value="1.99852541528706" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="2.86919257638339E-05"
+        ixy="-1.77579615167557E-06"
+        ixz="8.47452589586996E-06"
+        iyy="6.36105474883179E-05"
+        iyz="1.27098628999202E-07"
+        izz="6.39182398896403E-05" />
     </inertial>
     <visual>
       <origin
@@ -787,29 +784,4 @@
       friction="0.0" />
   </joint> 
 <xacro:insert_transmission name="r_leg_an_r" />
-
-    <!-- ros_control plugin -->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/thormang3</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-
-    <xacro:macro name="insert_transmission" params="name">
-    <transmission name="${name}_tran">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${name}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint> 
-
-      
-      <actuator name="${name}_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-  </xacro:macro>
-
-
 </robot>

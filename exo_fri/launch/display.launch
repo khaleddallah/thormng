@@ -4,8 +4,9 @@
   <arg
     name="gui"
     default="False" />
-  <param name="robot_description"
-   command="$(find xacro)/xacro.py '$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro'" />
+  <param
+    name="robot_description"
+    textfile="$(find exo_fri)/urdf/exo_fri.urdf" />
   <param
     name="use_gui"
     value="$(arg gui)" />
@@ -21,5 +22,5 @@
     name="rviz"
     pkg="rviz"
     type="rviz"
-    args="-d $(find all_exo_new_urdf_7_4)/urdf.rviz" />
+    args="-d $(find exo_fri)/urdf.rviz" />
 </launch>

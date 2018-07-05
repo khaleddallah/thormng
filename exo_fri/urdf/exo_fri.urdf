@@ -1,23 +1,20 @@
 <robot
-  name="thormang3"
-  xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
-    <xacro:property name="pi" value="3.141592654" />
+  name="exo_fri">
   <link
     name="pelvis_link">
     <inertial>
       <origin
-        xyz="-0.0229570391634383 9.79841631490452E-06 -0.0791579286364339"
+        xyz="-0.0229570391634382 9.7984163149184E-06 -0.0791579286364339"
         rpy="0 0 0" />
       <mass
         value="0.876180506785054" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.0018274599707449"
+        ixy="2.77946712790511E-06"
+        ixz="-2.82148369387848E-05"
+        iyy="0.000542716087592879"
+        iyz="-1.88988098707481E-06"
+        izz="0.00181893616699862" />
     </inertial>
     <visual>
       <origin
@@ -25,7 +22,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/pelvis_link.STL" />
+          filename="package://exo_fri/meshes/pelvis_link.STL" />
       </geometry>
       <material
         name="">
@@ -39,7 +36,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/pelvis_link.STL" />
+          filename="package://exo_fri/meshes/pelvis_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -47,17 +44,17 @@
     name="l_leg_hip_y_link">
     <inertial>
       <origin
-        xyz="0.000194866698194046 3.98997327107631E-05 0.00285846754175562"
+        xyz="0.00019487 3.99E-05 0.0028585"
         rpy="0 0 0" />
       <mass
-        value="0.0865282088524624" />
+        value="0.086528" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="1.1391E-06"
+        ixy="-1.1141E-10"
+        ixz="-2.3723E-08"
+        iyy="6.29E-06"
+        iyz="-4.8573E-09"
+        izz="5.1509E-06" />
     </inertial>
     <visual>
       <origin
@@ -65,12 +62,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_y_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_y_link.STL" />
       </geometry>
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -79,7 +76,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_y_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_y_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -103,23 +100,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_hip_y" />
+  </joint>
   <link
     name="l_leg_hip_r_link">
     <inertial>
       <origin
-        xyz="-0.0228672177413694 0.0267340296554695 -0.057861572875431"
+        xyz="-0.0228672177413695 0.0267340296554694 -0.0578615728754311"
         rpy="0 0 0" />
       <mass
-        value="0.577322605082582" />
+        value="0.577322605082581" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00181457155966255"
+        ixy="-1.3825152170088E-05"
+        ixz="-0.000341824932119139"
+        iyy="0.00199152298330253"
+        iyz="-2.1108483321173E-06"
+        izz="0.000385594954323664" />
     </inertial>
     <visual>
       <origin
@@ -127,7 +123,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_r_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -141,7 +137,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_r_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -165,23 +161,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_hip_r" />
+  </joint>
   <link
     name="l_leg_hip_p_link">
     <inertial>
       <origin
-        xyz="-0.000116198463840173 0.0284688740026196 -0.159183589997654"
+        xyz="-0.0001162 0.028469 -0.15918"
         rpy="0 0 0" />
       <mass
-        value="0.286678540994592" />
+        value="0.28668" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.0011422"
+        ixy="-6.6657E-07"
+        ixz="-4.177E-07"
+        iyy="0.0010523"
+        iyz="0.00020831"
+        izz="9.2519E-05" />
     </inertial>
     <visual>
       <origin
@@ -189,12 +184,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_p_link.STL" />
       </geometry>
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -203,7 +198,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_hip_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_hip_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -227,23 +222,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_hip_p" />
+  </joint>
   <link
     name="l_leg_kn_p_link">
     <inertial>
       <origin
-        xyz="-0.0348628624504665 -0.0190683597425377 -0.127805036988548"
+        xyz="-0.034863 -0.019068 -0.12781"
         rpy="0 0 0" />
       <mass
-        value="0.501847265279983" />
+        value="0.50185" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00074526"
+        ixy="-5.1314E-05"
+        ixz="-4.3145E-05"
+        iyy="0.0009685"
+        iyz="-0.00014197"
+        izz="0.00058261" />
     </inertial>
     <visual>
       <origin
@@ -251,12 +245,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_kn_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_kn_p_link.STL" />
       </geometry>
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -265,7 +259,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_kn_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_kn_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -289,23 +283,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_kn_p" />
+  </joint>
   <link
     name="l_leg_an_p_link">
     <inertial>
       <origin
-        xyz="-0.0299520881007188 2.09226775349514E-08 3.0086740876456E-09"
+        xyz="-0.029952 2.0923E-08 3.0087E-09"
         rpy="0 0 0" />
       <mass
-        value="0.0325752774497041" />
+        value="0.032575" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="4.1821E-06"
+        ixy="1.5671E-12"
+        ixz="2.2535E-13"
+        iyy="2.6382E-06"
+        iyz="-2.7914E-19"
+        izz="6.8203E-06" />
     </inertial>
     <visual>
       <origin
@@ -313,12 +306,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_an_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_an_p_link.STL" />
       </geometry>
       <material
         name="">
         <color
-          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -327,7 +320,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_an_p_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_an_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -351,23 +344,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_an_p" />
+  </joint>
   <link
     name="l_leg_an_r_link">
     <inertial>
       <origin
-        xyz="0.0362143728561817 0.00041776190047349 -0.0460605874777161"
+        xyz="0.0362143728561809 0.000417761900473684 -0.0460605874777153"
         rpy="0 0 0" />
       <mass
-        value="2.0447635642258" />
+        value="0.204476356422574" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="2.927668915373E-05"
+        ixy="2.23425331154953E-06"
+        ixz="7.29798818128176E-06"
+        iyy="7.35944581513601E-05"
+        iyz="-1.46086744569576E-07"
+        izz="7.40029664850679E-05" />
     </inertial>
     <visual>
       <origin
@@ -375,7 +367,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_an_r_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_an_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -389,7 +381,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/l_leg_an_r_link.STL" />
+          filename="package://exo_fri/meshes/l_leg_an_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -413,23 +405,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="l_leg_an_r" />
+  </joint>
   <link
     name="r_leg_hip_y_link">
     <inertial>
       <origin
-        xyz="0.000194859448184315 -3.99012608066768E-05 0.00285850027010753"
+        xyz="0.000194859448184287 -0.250039901260808 0.00285850027010739"
         rpy="0 0 0" />
       <mass
         value="0.0865285731833129" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="1.13912084419969E-06"
+        ixy="1.11411552257707E-10"
+        ixz="-2.37218589140564E-08"
+        iyy="6.28996513851151E-06"
+        iyz="4.85751185367082E-09"
+        izz="5.15088992167497E-06" />
     </inertial>
     <visual>
       <origin
@@ -437,7 +428,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_y_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_y_link.STL" />
       </geometry>
       <material
         name="">
@@ -451,7 +442,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_y_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_y_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -459,7 +450,7 @@
     name="r_leg_hip_y"
     type="revolute">
     <origin
-      xyz="0.023 -0.125 -0.0813"
+      xyz="0.023 0.125 -0.0813"
       rpy="0 0 0" />
     <parent
       link="pelvis_link" />
@@ -475,23 +466,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_hip_y" />
+  </joint>
   <link
     name="r_leg_hip_r_link">
     <inertial>
       <origin
-        xyz="-0.023877009103276 -0.0267341360094503 -0.0578620358278071"
+        xyz="-0.0238770091032761 -0.0267341360094503 -0.0578620358278071"
         rpy="0 0 0" />
       <mass
         value="0.577327897793504" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00181455865797064"
+        ixy="1.36244372015979E-05"
+        ixz="-0.000341516347595382"
+        iyy="0.00199123255685572"
+        iyz="2.10370363346493E-06"
+        izz="0.000385318948306947" />
     </inertial>
     <visual>
       <origin
@@ -499,7 +489,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_r_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -513,7 +503,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_r_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -521,7 +511,7 @@
     name="r_leg_hip_r"
     type="revolute">
     <origin
-      xyz="0 0 0"
+      xyz="0 -0.25 0"
       rpy="0 0 0" />
     <parent
       link="r_leg_hip_y_link" />
@@ -537,8 +527,7 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_hip_r" />
+  </joint>
   <link
     name="r_leg_hip_p_link">
     <inertial>
@@ -548,12 +537,12 @@
       <mass
         value="0.286679006041324" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.00114082497447434"
+        ixy="6.32801216900556E-07"
+        ixz="-4.92592484266445E-07"
+        iyy="0.00105234766959689"
+        iyz="-0.000207601330706595"
+        izz="9.11579594381597E-05" />
     </inertial>
     <visual>
       <origin
@@ -561,7 +550,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_p_link.STL" />
       </geometry>
       <material
         name="">
@@ -575,7 +564,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_hip_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_hip_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -599,23 +588,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_hip_p" />
+  </joint>
   <link
     name="r_leg_kn_p_link">
     <inertial>
       <origin
-        xyz="-0.0348599742971025 0.0190722316896734 -0.127803416335954"
+        xyz="-0.0348599742971063 0.0190722316896763 -0.12780341633595"
         rpy="0 0 0" />
       <mass
-        value="0.501848142816981" />
+        value="0.501848142816943" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="0.000745283229708701"
+        ixy="5.13026291501211E-05"
+        ixz="-4.31583183153078E-05"
+        iyy="0.000968382519973676"
+        iyz="0.000141975658542857"
+        izz="0.000582519106609088" />
     </inertial>
     <visual>
       <origin
@@ -623,7 +611,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_kn_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_kn_p_link.STL" />
       </geometry>
       <material
         name="">
@@ -637,7 +625,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_kn_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_kn_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -661,23 +649,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_kn_p" />
+  </joint>
   <link
     name="r_leg_an_p_link">
     <inertial>
       <origin
-        xyz="-0.0299520881006903 2.09226773250498E-08 3.00867425417906E-09"
+        xyz="-0.0299520881006903 2.09226773267845E-08 3.00867425417906E-09"
         rpy="0 0 0" />
       <mass
         value="0.0325752774497039" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="4.18208814046053E-06"
+        ixy="1.56709815891564E-12"
+        ixz="2.25348416550116E-13"
+        iyy="2.63816527708157E-06"
+        iyz="-2.29567386501375E-19"
+        izz="6.82025341754204E-06" />
     </inertial>
     <visual>
       <origin
@@ -685,7 +672,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_an_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_an_p_link.STL" />
       </geometry>
       <material
         name="">
@@ -699,7 +686,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_an_p_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_an_p_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -723,23 +710,22 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_an_p" />
+  </joint>
   <link
     name="r_leg_an_r_link">
     <inertial>
       <origin
-        xyz="0.0365974815210963 -0.00127278229934455 -0.0459051713323503"
+        xyz="0.0365974815210944 -0.00127278229934491 -0.0459051713323491"
         rpy="0 0 0" />
       <mass
-        value="1.99852541528706" />
+        value="0.199852541528696" />
       <inertia
-        ixx="1.0"
-        ixy="0.0"
-        ixz="0.0"
-        iyy="1.0"
-        iyz="0.0"
-        izz="1.0" />
+        ixx="2.86919257638311E-05"
+        ixy="-1.77579615167507E-06"
+        ixz="8.47452589586504E-06"
+        iyy="6.3610547488312E-05"
+        iyz="1.27098628997817E-07"
+        izz="6.39182398896373E-05" />
     </inertial>
     <visual>
       <origin
@@ -747,7 +733,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_an_r_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_an_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -761,7 +747,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://exo_fri2/meshes/r_leg_an_r_link.STL" />
+          filename="package://exo_fri/meshes/r_leg_an_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -785,31 +771,5 @@
     <dynamics 
       damping="0.9" 
       friction="0.0" />
-  </joint> 
-<xacro:insert_transmission name="r_leg_an_r" />
-
-    <!-- ros_control plugin -->
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/thormang3</robotNamespace>
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-
-    <xacro:macro name="insert_transmission" params="name">
-    <transmission name="${name}_tran">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${name}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint> 
-
-      
-      <actuator name="${name}_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-  </xacro:macro>
-
-
+  </joint>
 </robot>
