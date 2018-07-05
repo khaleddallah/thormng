@@ -195,7 +195,7 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   parseOffsetData(offset_path);
 
   online_walking->hip_roll_feedforward_angle_rad_ = 0.0*M_PI/180.0;
-  online_walking->balance_ctrl_.setCOBManualAdjustment(-8.0*0.001,0, 0.00);
+  online_walking->balance_ctrl_.setCOBManualAdjustment(-10.0*0.001,0, 0.00);
 
   online_walking->initialize();
 
