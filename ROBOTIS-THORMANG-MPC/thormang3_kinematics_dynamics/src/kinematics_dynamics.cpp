@@ -144,13 +144,248 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[44]->parent_             =  41;
     thormang3_link_data_[44]->sibling_            =  -1;
     thormang3_link_data_[44]->child_              =  27;
-    thormang3_link_data_[44]->mass_               =  6.869;
+    thormang3_link_data_[44]->mass_               =  0.87618;
     thormang3_link_data_[44]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[44]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[44]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.011 , 0.000 , 0.058 );
+    thormang3_link_data_[44]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[44]->joint_limit_max_    =  100.0;
     thormang3_link_data_[44]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[44]->inertia_            =  robotis_framework::getInertiaXYZ( 0.03603 , 0.00000 , 0.00016 , 0.02210 , 0.00000 , 0.03830 );
+    thormang3_link_data_[44]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );
+  
+
+
+    /* ----- left leg -----*/
+
+    // left leg hip yaw
+    thormang3_link_data_[16]->name_               =  "l_leg_hip_y";
+    thormang3_link_data_[16]->parent_             =  44;
+    thormang3_link_data_[16]->sibling_            =  -1;
+    thormang3_link_data_[16]->child_              =  18;
+    thormang3_link_data_[16]->mass_               =  0.086;
+    thormang3_link_data_[16]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.023 ,0.125, -0.0813 );
+    thormang3_link_data_[16]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
+    thormang3_link_data_[16]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.00019487, 0.0000399, 0.0028585 );
+    thormang3_link_data_[16]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[16]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[16]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );
+  
+
+    // left leg hip roll
+    thormang3_link_data_[18]->name_               =  "l_leg_hip_r";
+    thormang3_link_data_[18]->parent_             =  16;
+    thormang3_link_data_[18]->sibling_            =  -1;
+    thormang3_link_data_[18]->child_              =  20;
+    thormang3_link_data_[18]->mass_               =  0.577;
+    thormang3_link_data_[18]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 ,0.0, 0.0 );
+    thormang3_link_data_[18]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0,0.0,0.0);
+    thormang3_link_data_[18]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.022867, 0.02665, -0.057897);
+    thormang3_link_data_[18]->joint_limit_max_    =  2.0 * M_PI; //0.3 * M_PI;
+    thormang3_link_data_[18]->joint_limit_min_    =  -2.0 * M_PI; //-0.3 * M_PI;
+    thormang3_link_data_[16]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );    
+
+    // left leg hip pitch
+    thormang3_link_data_[20]->name_               =  "l_leg_hip_p";
+    thormang3_link_data_[20]->parent_             =  18;
+    thormang3_link_data_[20]->sibling_            =  -1;
+    thormang3_link_data_[20]->child_              =  22;
+    thormang3_link_data_[20]->mass_               =  0.286;
+    thormang3_link_data_[20]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000765, -0.00018721, -0.14104 );
+    thormang3_link_data_[20]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
+    thormang3_link_data_[20]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0326799, 0.0184, -0.15583 );
+    thormang3_link_data_[20]->joint_limit_max_    =  2.0 * M_PI; //0.4 * M_PI;
+    thormang3_link_data_[20]->joint_limit_min_    =  -2.0 * M_PI; //-0.4 * M_PI;
+    thormang3_link_data_[16]->inertia_        =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // left leg knee pitch
+    thormang3_link_data_[22]->name_               =  "l_leg_kn_p";
+    thormang3_link_data_[22]->parent_             =  20;
+    thormang3_link_data_[22]->sibling_            =  -1;
+    thormang3_link_data_[22]->child_              =  24;
+    thormang3_link_data_[22]->mass_               =  0.501;
+    thormang3_link_data_[22]->relative_position_  =  robotis_framework::getTransitionXYZ(0.050381 ,-0.00051236, -0.23986 );
+    thormang3_link_data_[22]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0,1.0,0.0 );
+    thormang3_link_data_[22]->center_of_mass_     =  robotis_framework::getTransitionXYZ(-0.037119, -0.02908, -0.127161);
+    thormang3_link_data_[22]->joint_limit_max_    =  2.0 * M_PI; //0.7 * M_PI;
+    thormang3_link_data_[22]->joint_limit_min_    =  -2.0 * M_PI; //-0.1 * M_PI;
+    thormang3_link_data_[22]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // left leg ankle pitch
+    thormang3_link_data_[24]->name_               =  "l_leg_an_p";
+    thormang3_link_data_[24]->parent_             =  22;
+    thormang3_link_data_[24]->sibling_            =  -1;
+    thormang3_link_data_[24]->child_              =  26;
+    thormang3_link_data_[24]->mass_               =  0.0325;
+    thormang3_link_data_[24]->relative_position_  =  robotis_framework::getTransitionXYZ(0.015862, -0.035899, -0.20884);
+    thormang3_link_data_[24]->joint_axis_         =  robotis_framework::getTransitionXYZ(0.0, 1.0, 0.0 );
+    thormang3_link_data_[24]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.029948, -0.0004901, -0.031986 );
+    thormang3_link_data_[24]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[24]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[24]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // left leg ankle pitch
+    thormang3_link_data_[26]->name_               =  "l_leg_an_r";
+    thormang3_link_data_[26]->parent_             =  24;
+    thormang3_link_data_[26]->sibling_            =  -1;
+    thormang3_link_data_[26]->child_              =  36;
+    thormang3_link_data_[26]->mass_               =  0.20448;
+    thormang3_link_data_[26]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0, 0.0 ,0.0);
+    thormang3_link_data_[26]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0 ,0.0, 0.0 );
+    thormang3_link_data_[26]->center_of_mass_     =  robotis_framework::getTransitionXYZ(-0.036963,-0.0454612, -0.0315070 );
+    thormang3_link_data_[26]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[26]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[26]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // left leg ft
+    thormang3_link_data_[36]->name_               =  "l_leg_ft";
+    thormang3_link_data_[36]->parent_             =  26;
+    thormang3_link_data_[36]->sibling_            =  -1;
+    thormang3_link_data_[36]->child_              =  46;
+    thormang3_link_data_[36]->mass_               =  1.689;
+    thormang3_link_data_[36]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.00 , 0.000 , 0.0 );
+    thormang3_link_data_[36]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[36]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.000 , 0.0 );
+    thormang3_link_data_[36]->joint_limit_max_    =  100.0;
+    thormang3_link_data_[36]->joint_limit_min_    =  -100.0;
+    thormang3_link_data_[36]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );  
+  
+
+    // left leg end
+    thormang3_link_data_[46]->name_               =  "l_leg_end";
+    thormang3_link_data_[46]->parent_             =  36;
+    thormang3_link_data_[46]->sibling_            =  -1;
+    thormang3_link_data_[46]->child_              =  -1;
+    thormang3_link_data_[46]->mass_               =  0.0;
+    thormang3_link_data_[46]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[46]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[46]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[46]->joint_limit_max_    =  100.0;
+    thormang3_link_data_[46]->joint_limit_min_    =  -100.0;
+    thormang3_link_data_[46]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );  
+  
+  
+
+
+ /* ----- right leg -----*/
+
+    // right leg hip yaw
+    thormang3_link_data_[15]->name_               =  "r_leg_hip_y";
+    thormang3_link_data_[15]->parent_             =  44;
+    thormang3_link_data_[15]->sibling_            =  16;
+    thormang3_link_data_[15]->child_              =  17;
+    thormang3_link_data_[15]->mass_               =  0.0865285;
+    thormang3_link_data_[15]->relative_position_  =  robotis_framework::getTransitionXYZ(0.023, -0.125, -0.0813);
+    thormang3_link_data_[15]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 1.0 );
+    thormang3_link_data_[15]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0001948 ,-3.99011 ,0.0028585 );
+    thormang3_link_data_[15]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[15]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[15]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg hip roll
+    thormang3_link_data_[17]->name_               =  "r_leg_hip_r";
+    thormang3_link_data_[17]->parent_             =  15;
+    thormang3_link_data_[17]->sibling_            =  -1;
+    thormang3_link_data_[17]->child_              =  19;
+    thormang3_link_data_[17]->mass_               =  0.5773;
+    thormang3_link_data_[17]->relative_position_  =  robotis_framework::getTransitionXYZ( 0 ,0, 0 );
+    thormang3_link_data_[17]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0, 0.0,0.0 );
+    thormang3_link_data_[17]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.023877, -0.025876,-0.058250 );
+    thormang3_link_data_[17]->joint_limit_max_    =  2.0 * M_PI; //0.3 * M_PI;
+    thormang3_link_data_[17]->joint_limit_min_    =  -2.0 * M_PI; //-0.3 * M_PI;
+    thormang3_link_data_[17]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg hip pitch
+    thormang3_link_data_[19]->name_               =  "r_leg_hip_p";
+    thormang3_link_data_[19]->parent_             =  17;
+    thormang3_link_data_[19]->sibling_            =  -1;
+    thormang3_link_data_[19]->child_              =  21;
+    thormang3_link_data_[19]->mass_               =  0.286;
+    thormang3_link_data_[19]->relative_position_  =  robotis_framework::getTransitionXYZ(-0.000235 ,0.0020842, -0.14103);
+    thormang3_link_data_[19]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 ,1.0, 0.0 );
+    thormang3_link_data_[19]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0119162, -0.016088, -0.15901 );
+    thormang3_link_data_[19]->joint_limit_max_    =  2.0 * M_PI; //0.4 * M_PI;
+    thormang3_link_data_[19]->joint_limit_min_    =  -2.0 * M_PI; //-0.4 * M_PI;
+    thormang3_link_data_[19]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg knee pitch
+    thormang3_link_data_[21]->name_               =  "r_leg_kn_p";
+    thormang3_link_data_[21]->parent_             =  19;
+    thormang3_link_data_[21]->sibling_            =  -1;
+    thormang3_link_data_[21]->child_              =  23;
+    thormang3_link_data_[21]->mass_               =  0.5018;
+    thormang3_link_data_[21]->relative_position_  =  robotis_framework::getTransitionXYZ(0.017958, 0.0039708, -0.2444 );
+    thormang3_link_data_[21]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0, 1.0, 0.0 );
+    thormang3_link_data_[21]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.0252867, 0.0309808, -0.1297050 );
+    thormang3_link_data_[21]->joint_limit_max_    =  2.0 * M_PI; //0.1 * M_PI;
+    thormang3_link_data_[21]->joint_limit_min_    =  -2.0 * M_PI; //-0.7 * M_PI;
+    thormang3_link_data_[21]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg ankle pitch
+    thormang3_link_data_[23]->name_               =  "r_leg_an_p";
+    thormang3_link_data_[23]->parent_             =  21;
+    thormang3_link_data_[23]->sibling_            =  -1;
+    thormang3_link_data_[23]->child_              =  25;
+    thormang3_link_data_[23]->mass_               =  0.0325;
+    thormang3_link_data_[23]->relative_position_  =  robotis_framework::getTransitionXYZ(0.015862 ,0.035899, -0.20884);
+    thormang3_link_data_[23]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 ,1.0 ,0.0 );
+    thormang3_link_data_[23]->center_of_mass_     =  robotis_framework::getTransitionXYZ(-0.02994225, -0.0006038, 0.00047370);
+    thormang3_link_data_[23]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[23]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[23]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg ankle roll
+    thormang3_link_data_[25]->name_               =  "r_leg_an_r";
+    thormang3_link_data_[25]->parent_             =  23;
+    thormang3_link_data_[25]->sibling_            =  -1;
+    thormang3_link_data_[25]->child_              =  37;
+    thormang3_link_data_[25]->mass_               =  0.1998;
+    thormang3_link_data_[25]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0, 0.0 ,0.0 );
+    thormang3_link_data_[25]->joint_axis_         =  robotis_framework::getTransitionXYZ(1.0, 0.0, 0.0 );
+    thormang3_link_data_[25]->center_of_mass_     =  robotis_framework::getTransitionXYZ(0.0358849, -0.000534, -0.0464786 );
+    thormang3_link_data_[25]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
+    thormang3_link_data_[25]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
+    thormang3_link_data_[25]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
+  
+
+    // right leg ft
+    thormang3_link_data_[37]->name_               =  "r_leg_ft";
+    thormang3_link_data_[37]->parent_             =  25;
+    thormang3_link_data_[37]->sibling_            =  -1;
+    thormang3_link_data_[37]->child_              =  45;
+    thormang3_link_data_[37]->mass_               =  1.689;
+    thormang3_link_data_[37]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.00 , 0.000 , 0.0);
+    thormang3_link_data_[37]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[37]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.000 , 0.0 );
+    thormang3_link_data_[37]->joint_limit_max_    =  100.0;
+    thormang3_link_data_[37]->joint_limit_min_    =  -100.0;
+    thormang3_link_data_[37]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );  
+  
+
+    // right leg end
+    thormang3_link_data_[45]->name_               =  "r_leg_end";
+    thormang3_link_data_[45]->parent_             =  37;
+    thormang3_link_data_[45]->sibling_            =  -1;
+    thormang3_link_data_[45]->child_              =  -1;
+    thormang3_link_data_[45]->mass_               =  0.0;
+    thormang3_link_data_[45]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 ,0.0 );
+    thormang3_link_data_[45]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[45]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[45]->joint_limit_max_    =  100.0;
+    thormang3_link_data_[45]->joint_limit_min_    =  -100.0;
+    thormang3_link_data_[45]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );  
+  
+
+
+
+
 
     // chest_link
     thormang3_link_data_[27]->name_               =  "torso_y";
@@ -297,7 +532,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[31]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[31]->joint_limit_max_    =  0.5 * M_PI;
     thormang3_link_data_[31]->joint_limit_min_    =  -0.5 * M_PI;
-    thormang3_link_data_[31]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[31]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
 
     // right arm gripper 1
     thormang3_link_data_[33]->name_               =  "r_arm_grip_1";
@@ -310,7 +545,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[33]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[33]->joint_limit_max_    =  0.5 * M_PI;
     thormang3_link_data_[33]->joint_limit_min_    =  -0.5 * M_PI;
-    thormang3_link_data_[33]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[33]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
 
     // right arm end effector
     thormang3_link_data_[35]->name_               =  "r_arm_end";
@@ -323,7 +558,7 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[35]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
     thormang3_link_data_[35]->joint_limit_max_    =  100.0;
     thormang3_link_data_[35]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[35]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
+    thormang3_link_data_[35]->inertia_            =  robotis_framework::getInertiaXYZ( 1.0 , 0.0 , 0.0 , 1.0 , 0.0 , 1.0 );  
 
     /*----- left arm -----*/
 
@@ -457,222 +692,12 @@ KinematicsDynamics::KinematicsDynamics(TreeSelect tree)
     thormang3_link_data_[34]->joint_limit_min_    =  -100.0;
     thormang3_link_data_[34]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
 
-    /* ----- right leg -----*/
-
-    // right leg hip yaw
-    thormang3_link_data_[15]->name_               =  "r_leg_hip_y";
-    thormang3_link_data_[15]->parent_             =  44;
-    thormang3_link_data_[15]->sibling_            =  16;
-    thormang3_link_data_[15]->child_              =  17;
-    thormang3_link_data_[15]->mass_               =  0.243;
-    thormang3_link_data_[15]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , -0.093 , -0.018 );
-    thormang3_link_data_[15]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -1.0 );
-    thormang3_link_data_[15]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.012 , 0.000 , -0.025 );
-    thormang3_link_data_[15]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[15]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[15]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00024 , 0.00000 , 0.00000 , 0.00101 , 0.00000 , 0.00092 );
-
-    // right leg hip roll
-    thormang3_link_data_[17]->name_               =  "r_leg_hip_r";
-    thormang3_link_data_[17]->parent_             =  15;
-    thormang3_link_data_[17]->sibling_            =  -1;
-    thormang3_link_data_[17]->child_              =  19;
-    thormang3_link_data_[17]->mass_               =  1.045;
-    thormang3_link_data_[17]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.057 , 0.000 , -0.075 );
-    thormang3_link_data_[17]->joint_axis_         =  robotis_framework::getTransitionXYZ( -1.0 , 0.0 , 0.0 );
-    thormang3_link_data_[17]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.068 , 0.000 , 0.000 );
-    thormang3_link_data_[17]->joint_limit_max_    =  2.0 * M_PI; //0.3 * M_PI;
-    thormang3_link_data_[17]->joint_limit_min_    =  -2.0 * M_PI; //-0.3 * M_PI;
-    thormang3_link_data_[17]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00056 , 0.00000 , 0.00000 , 0.00168 , 0.00000 , 0.00171 );
-
-    // right leg hip pitch
-    thormang3_link_data_[19]->name_               =  "r_leg_hip_p";
-    thormang3_link_data_[19]->parent_             =  17;
-    thormang3_link_data_[19]->sibling_            =  -1;
-    thormang3_link_data_[19]->child_              =  21;
-    thormang3_link_data_[19]->mass_               =  3.095;
-    thormang3_link_data_[19]->relative_position_  =  robotis_framework::getTransitionXYZ( -0.057 , -0.033 , 0.000 );
-    thormang3_link_data_[19]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , -1.0 , 0.0 );
-    thormang3_link_data_[19]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.022 , 0.007 , -0.168 );
-    thormang3_link_data_[19]->joint_limit_max_    =  2.0 * M_PI; //0.4 * M_PI;
-    thormang3_link_data_[19]->joint_limit_min_    =  -2.0 * M_PI; //-0.4 * M_PI;
-    thormang3_link_data_[19]->inertia_            =  robotis_framework::getInertiaXYZ( 0.04329 , -0.00027 , 0.00286 , 0.04042 , 0.00203 , 0.00560 );
-
-    // right leg knee pitch
-    thormang3_link_data_[21]->name_               =  "r_leg_kn_p";
-    thormang3_link_data_[21]->parent_             =  19;
-    thormang3_link_data_[21]->sibling_            =  -1;
-    thormang3_link_data_[21]->child_              =  23;
-    thormang3_link_data_[21]->mass_               =  2.401;
-    thormang3_link_data_[21]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , -0.060 , -0.300 );
-    thormang3_link_data_[21]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , -1.0 , 0.0 );
-    thormang3_link_data_[21]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.002 , 0.066 , -0.183 );
-    thormang3_link_data_[21]->joint_limit_max_    =  2.0 * M_PI; //0.1 * M_PI;
-    thormang3_link_data_[21]->joint_limit_min_    =  -2.0 * M_PI; //-0.7 * M_PI;
-    thormang3_link_data_[21]->inertia_            =  robotis_framework::getInertiaXYZ( 0.01971 , -0.00031 , -0.00294 , 0.01687 , -0.00140 , 0.00574 );
-
-    // right leg ankle pitch
-    thormang3_link_data_[23]->name_               =  "r_leg_an_p";
-    thormang3_link_data_[23]->parent_             =  21;
-    thormang3_link_data_[23]->sibling_            =  -1;
-    thormang3_link_data_[23]->child_              =  25;
-    thormang3_link_data_[23]->mass_               =  1.045;
-    thormang3_link_data_[23]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , 0.060 , -0.300 );
-    thormang3_link_data_[23]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
-    thormang3_link_data_[23]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.011 , 0.033 , 0.000 );
-    thormang3_link_data_[23]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[23]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[23]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00056 , 0.00000 , 0.00000 , 0.00168 , 0.00000 , 0.00171 );
-
-    // right leg ankle roll
-    thormang3_link_data_[25]->name_               =  "r_leg_an_r";
-    thormang3_link_data_[25]->parent_             =  23;
-    thormang3_link_data_[25]->sibling_            =  -1;
-    thormang3_link_data_[25]->child_              =  37;
-    thormang3_link_data_[25]->mass_               =  0.223;
-    thormang3_link_data_[25]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.057 , 0.033 , 0.000 );
-    thormang3_link_data_[25]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0 , 0.0 , 0.0 );
-    thormang3_link_data_[25]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.070 , 0.000 , -0.048 );
-    thormang3_link_data_[25]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[25]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[25]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00022 , 0.00000 , -0.00001 , 0.00099 , 0.00000 , 0.00091 );
-
-    // right leg ft
-    thormang3_link_data_[37]->name_               =  "r_leg_ft";
-    thormang3_link_data_[37]->parent_             =  25;
-    thormang3_link_data_[37]->sibling_            =  -1;
-    thormang3_link_data_[37]->child_              =  45;
-    thormang3_link_data_[37]->mass_               =  1.689;
-    thormang3_link_data_[37]->relative_position_  =  robotis_framework::getTransitionXYZ( -0.057 , 0.000 , -0.087 );
-    thormang3_link_data_[37]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[37]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , -0.009 , -0.013 );
-    thormang3_link_data_[37]->joint_limit_max_    =  100.0;
-    thormang3_link_data_[37]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[37]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00219 , 0.00000 , 0.00000 , 0.00433 , -0.00011 , 0.00609 );
-
-    // right leg end
-    thormang3_link_data_[45]->name_               =  "r_leg_end";
-    thormang3_link_data_[45]->parent_             =  37;
-    thormang3_link_data_[45]->sibling_            =  -1;
-    thormang3_link_data_[45]->child_              =  -1;
-    thormang3_link_data_[45]->mass_               =  0.0;
-    thormang3_link_data_[45]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -0.0275 );
-    thormang3_link_data_[45]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[45]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[45]->joint_limit_max_    =  100.0;
-    thormang3_link_data_[45]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[45]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
-
-    /* ----- left leg -----*/
-
-    // left leg hip yaw
-    thormang3_link_data_[16]->name_               =  "l_leg_hip_y";
-    thormang3_link_data_[16]->parent_             =  44;
-    thormang3_link_data_[16]->sibling_            =  -1;
-    thormang3_link_data_[16]->child_              =  18;
-    thormang3_link_data_[16]->mass_               =  0.243;
-    thormang3_link_data_[16]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , 0.093 , -0.018 );
-    thormang3_link_data_[16]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -1.0 );
-    thormang3_link_data_[16]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.012 , 0.000 , -0.025 );
-    thormang3_link_data_[16]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[16]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[16]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00024 , 0.00000 , 0.00000 , 0.00101 , 0.00000 , 0.00092 );
-
-    // left leg hip roll
-    thormang3_link_data_[18]->name_               =  "l_leg_hip_r";
-    thormang3_link_data_[18]->parent_             =  16;
-    thormang3_link_data_[18]->sibling_            =  -1;
-    thormang3_link_data_[18]->child_              =  20;
-    thormang3_link_data_[18]->mass_               =  1.045;
-    thormang3_link_data_[18]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.057 , 0.000 , -0.075 );
-    thormang3_link_data_[18]->joint_axis_         =  robotis_framework::getTransitionXYZ( -1.0 , 0.0 , 0.0 );
-    thormang3_link_data_[18]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.068 , 0.000 , 0.000 );
-    thormang3_link_data_[18]->joint_limit_max_    =  2.0 * M_PI; //0.3 * M_PI;
-    thormang3_link_data_[18]->joint_limit_min_    =  -2.0 * M_PI; //-0.3 * M_PI;
-    thormang3_link_data_[18]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00056 , 0.00000 , 0.00000 , 0.00168 , 0.00000 , 0.00171 );
-
-    // left leg hip pitch
-    thormang3_link_data_[20]->name_               =  "l_leg_hip_p";
-    thormang3_link_data_[20]->parent_             =  18;
-    thormang3_link_data_[20]->sibling_            =  -1;
-    thormang3_link_data_[20]->child_              =  22;
-    thormang3_link_data_[20]->mass_               =  3.095;
-    thormang3_link_data_[20]->relative_position_  =  robotis_framework::getTransitionXYZ( -0.057 , 0.033 , 0.000 );
-    thormang3_link_data_[20]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
-    thormang3_link_data_[20]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.022 , -0.007 , -0.168 );
-    thormang3_link_data_[20]->joint_limit_max_    =  2.0 * M_PI; //0.4 * M_PI;
-    thormang3_link_data_[20]->joint_limit_min_    =  -2.0 * M_PI; //-0.4 * M_PI;
-    thormang3_link_data_[20]->inertia_            =  robotis_framework::getInertiaXYZ( 0.04328 , 0.00028 , 0.00288 , 0.04042 , -0.00202 , 0.00560 );
-
-    // left leg knee pitch
-    thormang3_link_data_[22]->name_               =  "l_leg_kn_p";
-    thormang3_link_data_[22]->parent_             =  20;
-    thormang3_link_data_[22]->sibling_            =  -1;
-    thormang3_link_data_[22]->child_              =  24;
-    thormang3_link_data_[22]->mass_               =  2.401;
-    thormang3_link_data_[22]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , 0.060 , -0.300 );
-    thormang3_link_data_[22]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 1.0 , 0.0 );
-    thormang3_link_data_[22]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.002 , -0.066 , -0.183 );
-    thormang3_link_data_[22]->joint_limit_max_    =  2.0 * M_PI; //0.7 * M_PI;
-    thormang3_link_data_[22]->joint_limit_min_    =  -2.0 * M_PI; //-0.1 * M_PI;
-    thormang3_link_data_[22]->inertia_            =  robotis_framework::getInertiaXYZ( 0.01971 , 0.00031 , -0.00294 , 0.01687 , 0.00140 , 0.00574 );
-
-    // left leg ankle pitch
-    thormang3_link_data_[24]->name_               =  "l_leg_an_p";
-    thormang3_link_data_[24]->parent_             =  22;
-    thormang3_link_data_[24]->sibling_            =  -1;
-    thormang3_link_data_[24]->child_              =  26;
-    thormang3_link_data_[24]->mass_               =  1.045;
-    thormang3_link_data_[24]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.000 , -0.060 , -0.300 );
-    thormang3_link_data_[24]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , -1.0 , 0.0 );
-    thormang3_link_data_[24]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.011 , -0.033 , 0.000 );
-    thormang3_link_data_[24]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[24]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[24]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00056 , 0.00000 , 0.00000 , 0.00168 , 0.00000 , 0.00171 );
-
-    // left leg ankle pitch
-    thormang3_link_data_[26]->name_               =  "l_leg_an_r";
-    thormang3_link_data_[26]->parent_             =  24;
-    thormang3_link_data_[26]->sibling_            =  -1;
-    thormang3_link_data_[26]->child_              =  36;
-    thormang3_link_data_[26]->mass_               =  0.223;
-    thormang3_link_data_[26]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.057 , -0.033 , 0.000 );
-    thormang3_link_data_[26]->joint_axis_         =  robotis_framework::getTransitionXYZ( 1.0 , 0.0 , 0.0 );
-    thormang3_link_data_[26]->center_of_mass_     =  robotis_framework::getTransitionXYZ( -0.070 , 0.000 , -0.048 );
-    thormang3_link_data_[26]->joint_limit_max_    =  2.0 * M_PI; //0.45 * M_PI;
-    thormang3_link_data_[26]->joint_limit_min_    =  -2.0 * M_PI; //-0.45 * M_PI;
-    thormang3_link_data_[26]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00022 , 0.00000 , -0.00001 , 0.00099 , 0.00000 , 0.00091 );
-
-    // left leg ft
-    thormang3_link_data_[36]->name_               =  "l_leg_ft";
-    thormang3_link_data_[36]->parent_             =  26;
-    thormang3_link_data_[36]->sibling_            =  -1;
-    thormang3_link_data_[36]->child_              =  46;
-    thormang3_link_data_[36]->mass_               =  1.689;
-    thormang3_link_data_[36]->relative_position_  =  robotis_framework::getTransitionXYZ( -0.057 , 0.000 , -0.087 );
-    thormang3_link_data_[36]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[36]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.000 , 0.009 , -0.013 );
-    thormang3_link_data_[36]->joint_limit_max_    =  100.0;
-    thormang3_link_data_[36]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[36]->inertia_            =  robotis_framework::getInertiaXYZ( 0.00219 , 0.00000 , 0.00000 , 0.00433 , 0.00011 , 0.00609 );
-
-    // left leg end
-    thormang3_link_data_[46]->name_               =  "l_leg_end";
-    thormang3_link_data_[46]->parent_             =  36;
-    thormang3_link_data_[46]->sibling_            =  -1;
-    thormang3_link_data_[46]->child_              =  -1;
-    thormang3_link_data_[46]->mass_               =  0.0;
-    thormang3_link_data_[46]->relative_position_  =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , -0.0275 );
-    thormang3_link_data_[46]->joint_axis_         =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[46]->center_of_mass_     =  robotis_framework::getTransitionXYZ( 0.0 , 0.0 , 0.0 );
-    thormang3_link_data_[46]->joint_limit_max_    =  100.0;
-    thormang3_link_data_[46]->joint_limit_min_    =  -100.0;
-    thormang3_link_data_[46]->inertia_            =  robotis_framework::getInertiaXYZ( 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 );
-  }
+    
+}
 
   thigh_length_m_ = std::fabs(thormang3_link_data_[ID_R_LEG_START+2*3]->relative_position_.coeff(2,0));
   calf_length_m_  = std::fabs(thormang3_link_data_[ID_R_LEG_START+2*4]->relative_position_.coeff(2,0));
-  ankle_length_m_ = std::fabs(thormang3_link_data_[ID_R_LEG_FT]->relative_position_.coeff(2,0)
+  ankle_length_m_ = std::fabs(0.08+thormang3_link_data_[ID_R_LEG_FT]->relative_position_.coeff(2,0)
                               + thormang3_link_data_[ID_R_LEG_END]->relative_position_.coeff(2,0));
   leg_side_offset_m_ 	= 2.0*(std::fabs(thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0)));
 

@@ -6,15 +6,26 @@
     pkg="tf"
     type="static_transform_publisher"
     args="0 0 0 0 0 0 base_link base_footprint 40" />
-  <node
+<!--   <node
     name="spawn_model"
     pkg="gazebo_ros"
     type="spawn_model"
-    args="-file $(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.urdf -urdf -model all_exo_new_urdf_7_4"
-    output="screen" />
+    args="-file $(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro -urdf -model all_exo_new_urdf_7_4"
+    output="screen" /> -->
   <node
     name="fake_joint_calibration"
     pkg="rostopic"
     type="rostopic"
     args="pub /calibrated std_msgs/Bool true" />
+
+
+
+
+     <param name="robot_description"
+   command="$(find xacro)/xacro.py '$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro'" />
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-urdf -model all_exo_new_urdf_7_4 -z 0.9 -param robot_description"/>
+
+
 </launch>

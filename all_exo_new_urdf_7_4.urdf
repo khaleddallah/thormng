@@ -1,0 +1,828 @@
+<robot
+  name="all_exo_new_urdf_7_4">
+  <link
+    name="pelvis_link">
+    <inertial>
+      <origin
+        xyz="0.10486 -0.19698 0.14242"
+        rpy="0 0 0" />
+      <mass
+        value="0.87618" />
+      <inertia
+        ixx="0.00054272"
+        ixy="-2.7795E-06"
+        ixz="-1.8899E-06"
+        iyy="0.0018275"
+        iyz="2.8215E-05"
+        izz="0.0018189" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/pelvis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/pelvis_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  
+  <link
+    name="l_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="3.91489940153311E-05 0.064658467084771 0.000195019300466948"
+        rpy="0 0 0" />
+      <mass
+        value="0.0865282073086405" />
+      <inertia
+        ixx="6.28988232637541E-06"
+        ixy="-4.76591689072165E-09"
+        ixz="1.97203996620393E-08"
+        iyy="5.15088996299801E-06"
+        iyz="-2.37412429486974E-08"
+        izz="1.13918898641058E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="0.22985 -0.24294 0.078481"
+      rpy="1.5708 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="l_leg_hip_y_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+
+
+  <link
+    name="l_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="0.0267450489884957 -0.0578970138026583 -0.022764403905338"
+        rpy="0 0 0" />
+      <mass
+        value="0.57732261179279" />
+      <inertia
+        ixx="0.00199162169853065"
+        ixy="-2.92633289726119E-06"
+        ixz="-1.35971455170849E-05"
+        iyy="0.000385603527413131"
+        iyz="-0.000341820278449353"
+        izz="0.00181446392966293" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0.0618 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_y_link" />
+    <child
+      link="l_leg_hip_r_link" />
+    <axis
+      xyz="-0.0038502 0 0.99999" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="l_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="0.000116188399237854 -0.159183576861761 0.018732669909887"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678555449467" />
+      <inertia
+        ixx="0.00114218476024795"
+        ixy="4.17774250045668E-07"
+        ixz="6.6659846718969E-07"
+        iyy="9.2518603710799E-05"
+        iyz="0.000208313587693521"
+        izz="0.00105234705913894" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="-0.00019015 -0.14104 0.00076427"
+      rpy="-1.5521 1.3637 -1.5538" />
+    <parent
+      link="l_leg_hip_r_link" />
+    <child
+      link="l_leg_hip_p_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="l_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="-0.029092 -0.12792 -0.034415"
+        rpy="0 0 0" />
+      <mass
+        value="0.50185" />
+      <inertia
+        ixx="0.00096851"
+        ixy="-0.00014254"
+        ixz="-4.989E-05"
+        iyy="0.00058261"
+        iyz="-4.2913E-05"
+        izz="0.00074525" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0 -0.2451 0"
+      rpy="-0.33198 -1.5667 0.56022" />
+    <parent
+      link="l_leg_hip_p_link" />
+    <child
+      link="l_leg_kn_p_link" />
+    <axis
+      xyz="0.99999 -0.0013273 0.0038502" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="l_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="0.029948 -0.00049014 -0.031986"
+        rpy="0 0 0" />
+      <mass
+        value="0.032575" />
+      <inertia
+        ixx="4.1828E-06"
+        ixy="4.3165E-08"
+        ixz="-1.5865E-12"
+        iyy="6.8195E-06"
+        iyz="2.5966E-14"
+        izz="2.6382E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="-0.00028227 -0.20999 0.00091884"
+      rpy="-1.0239 1.5634 -1.0252" />
+    <parent
+      link="l_leg_kn_p_link" />
+    <child
+      link="l_leg_an_p_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="l_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="-0.036963 -0.045461 0.00047949"
+        rpy="0 0 0" />
+      <mass
+        value="0.20448" />
+      <inertia
+        ixx="2.905E-05"
+        ixy="-6.5652E-06"
+        ixz="-2.2266E-06"
+        iyy="7.423E-05"
+        iyz="-1.1026E-07"
+        izz="7.3595E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.031986"
+      rpy="0.022566 -0.00036929 -4.1669E-06" />
+    <parent
+      link="l_leg_an_p_link" />
+    <child
+      link="l_leg_an_r_link" />
+    <axis
+      xyz="-0.99987 0.016364 0" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="-3.60098880210595E-05 0.0646585007264543 0.000195615502412011"
+        rpy="0 0 0" />
+      <mass
+        value="0.0865285747250378" />
+      <inertia
+        ixx="6.28792400897117E-06"
+        ixy="4.38378294955236E-09"
+        ixz="-1.02517952463626E-07"
+        iyy="5.15088991911781E-06"
+        iyz="-2.38139008830233E-08"
+        izz="1.14116218729898E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="-0.020151 -0.24294 0.078481"
+      rpy="1.5708 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="r_leg_hip_y_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0281204156627468 -0.0574298724097849 -0.0233214951273973"
+        rpy="0 0 0" />
+      <mass
+        value="0.577328048094972" />
+      <inertia
+        ixx="0.0019911506063478"
+        ixy="-3.02166901134013E-05"
+        ixz="4.67708719458105E-06"
+        iyy="0.000385657690986369"
+        iyz="-0.000341155469876317"
+        izz="0.00181430252622785" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0.0618 0"
+      rpy="0.00061113 -1.5247E-19 0.030665" />
+    <parent
+      link="r_leg_hip_y_link" />
+    <child
+      link="r_leg_hip_r_link" />
+    <axis
+      xyz="0.019919 0 0.9998" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="-0.000119618394748278 -0.159183675797561 0.0186713820055504"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678786770336" />
+      <inertia
+        ixx="0.00114082283895834"
+        ixy="-4.92449747489993E-07"
+        ixz="-6.32813919597127E-07"
+        iyy="9.11577765871152E-05"
+        iyz="0.000207600861223223"
+        izz="0.00105234571661871" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="-0.0022456 -0.14102 -0.00019031"
+      rpy="-1.3075 -1.4942 1.2923" />
+    <parent
+      link="r_leg_hip_r_link" />
+    <child
+      link="r_leg_hip_p_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="0.026877 -0.12913 -0.032014"
+        rpy="0 0 0" />
+      <mass
+        value="0.50185" />
+      <inertia
+        ixx="0.00097462"
+        ixy="0.00013623"
+        ixz="4.2383E-05"
+        iyy="0.0005759"
+        iyz="-4.2272E-05"
+        izz="0.00074567" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0 -0.2451 0"
+      rpy="0.67324 1.5453 0.65202" />
+    <parent
+      link="r_leg_hip_p_link" />
+    <child
+      link="r_leg_kn_p_link" />
+    <axis
+      xyz="0.99968 -0.015892 -0.019926" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="0.0299500118317793 -0.0003527129613492 0.032486237708059"
+        rpy="0 0 0" />
+      <mass
+        value="0.0325752783592806" />
+      <inertia
+        ixx="4.18245398109744E-06"
+        ixy="3.1064678573424E-08"
+        ixz="-1.5602630172373E-12"
+        iyy="6.81988765602678E-06"
+        iyz="1.83746921930297E-14"
+        izz="2.63816535620326E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="-0.0032248 -0.2099 0.0056129"
+      rpy="1.8156 1.4885 1.7989" />
+    <parent
+      link="r_leg_kn_p_link" />
+    <child
+      link="r_leg_an_p_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+  <link
+    name="r_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0371352402831432 -0.0454478413493261 -0.00193667776316983"
+        rpy="0 0 0" />
+      <mass
+        value="0.199852749313156" />
+      <inertia
+        ixx="2.84966330505607E-05"
+        ixy="-8.0821623992085E-06"
+        ixz="1.6544987600387E-06"
+        iyy="6.41096702074288E-05"
+        iyz="1.12058650825974E-07"
+        izz="6.36141684782746E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://all_exo_new_urdf_7_4/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0.032486"
+      rpy="-0.014623 0.00017221 -1.2591E-06" />
+    <parent
+      link="r_leg_an_p_link" />
+    <child
+      link="r_leg_an_r_link" />
+    <axis
+      xyz="-0.99993 0.011776 0" />
+    <limit
+      lower="0"
+      upper="6.28"
+      effort="1000"
+      velocity="6.5" />
+    <dynamics
+      damping="0.1"
+      friction="0" />
+    </joint>
+
+
+
+  
+</robot>

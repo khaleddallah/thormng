@@ -1,0 +1,751 @@
+<robot
+  name="thormang3"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:property name="pi" value="3.141592654" />
+
+
+ <link
+    name="pelvis_link">
+    <inertial>
+      <origin
+        xyz="-0.0229570391634382 9.79841631493228E-06 -0.0791579286364338"
+        rpy="0 0 0" />
+      <mass
+        value="0.876180506785054" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> 
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/pelvis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/pelvis_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="l_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="0.00019487 3.99E-05 0.0028585"
+        rpy="0 0 0" />
+      <mass
+        value="0.086528" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="0.023 0.125 -0.0813"
+      rpy="0 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="l_leg_hip_y_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="l_leg_hip_y" />
+  <link
+    name="l_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0228672098615242 0.026657202473467 -0.0578970138026583"
+        rpy="0 0 0" />
+      <mass
+        value="0.57732261179279" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_y_link" />
+    <child
+      link="l_leg_hip_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="l_leg_hip_r" />
+  <link
+    name="l_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="0.032679916729136 0.0184001566504312 -0.155832585944074"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678555449467" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="0.000765 -0.00018721 -0.14104"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_r_link" />
+    <child
+      link="l_leg_hip_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="l_leg_hip_p" />
+  <link
+    name="l_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0371195392851623 -0.0290806755044999 -0.127161963516103"
+        rpy="0 0 0" />
+      <mass
+        value="0.501847197637449" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0.050381 -0.00051236 -0.23986"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_p_link" />
+    <child
+      link="l_leg_kn_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="l_leg_kn_p" />
+  <link
+    name="l_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="0.0299480772894787 -0.000490139450893823 -0.0319861956901267"
+        rpy="0 0 0" />
+      <mass
+        value="0.0325752781010226" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="-0.0282 -0.0282 0"
+        rpy="${pi/2} ${pi} 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0282 -0.0282 0"
+        rpy="${pi/2} ${pi} 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<joint
+    name="l_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="0.015862 -0.035899 -0.20884"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_kn_p_link" />
+    <child
+      link="l_leg_an_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+
+  <!-- 
+  <joint
+    name="l_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="-0.0035327 -0.00026509 -0.20997"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_kn_p_link" />
+    <child
+      link="l_leg_an_p_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint>  -->
+<xacro:insert_transmission name="l_leg_an_p" />
+  <link
+    name="l_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0369632207617154 -0.0454612151697915 -0.0315070725221814"
+        rpy="0 0 0" />
+      <mass
+        value="0.204476468319054" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="-0.0282 0.0370 0"
+        rpy="${-pi/2} ${-pi} 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.0282 0.0370 0"
+        rpy="${-pi/2} ${-pi} 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_an_p_link" />
+    <child
+      link="l_leg_an_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="l_leg_an_r" />
+  <link
+    name="r_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="0.000194859023416288 -3.99011003911799E-05 0.0028585007264543"
+        rpy="0 0 0" />
+      <mass
+        value="0.0865285747250378" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="0.023 -0.125 -0.0813"
+      rpy="0 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="r_leg_hip_y_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_hip_y" />
+  <link
+    name="r_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0238770079585271 -0.0258761502101602 -0.0582507810958505"
+        rpy="0 0 0" />
+      <mass
+        value="0.577328048094973" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_y_link" />
+    <child
+      link="r_leg_hip_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_hip_r" />
+  <link
+    name="r_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="0.0119162167049422 -0.0160889612900433 -0.159019579168821"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678786770337" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="-0.000235 0.0020842 -0.14103"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_r_link" />
+    <child
+      link="r_leg_hip_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_hip_p" />
+  <link
+    name="r_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0252867564411349 0.0309808685867961 -0.129705092898568"
+        rpy="0 0 0" />
+      <mass
+        value="0.501849157200233" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0.017958 0.0039708 -0.2444"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_p_link" />
+    <child
+      link="r_leg_kn_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_kn_p" />
+  <link
+    name="r_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0299422548828775 -0.000603810508363528 0.000473709358195573"
+        rpy="0 0 0" />
+      <mass
+        value="0.0325752783592805" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="0.015862 0.035899 -0.20884"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_kn_p_link" />
+    <child
+      link="r_leg_an_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_an_p" />
+  <link
+    name="r_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="0.0358849369545741 -0.00053467979911986 -0.0464786355713222"
+        rpy="0 0 0" />
+      <mass
+        value="0.199852807617439" />
+<inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" /> </inertial> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_an_p_link" />
+    <child
+      link="r_leg_an_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit 
+      velocity="6.5" 
+      effort="1000" 
+      lower="${-pi*0.9}" 
+      upper="${pi*0.9}" />
+    <dynamics 
+      damping="0.1" 
+      friction="0.0" />
+  </joint> 
+<xacro:insert_transmission name="r_leg_an_r" />
+
+    <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/thormang3</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+    <xacro:macro name="insert_transmission" params="name">
+    <transmission name="${name}_tran">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint> 
+
+      
+      <actuator name="${name}_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+
+</robot>

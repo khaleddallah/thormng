@@ -3,9 +3,13 @@
 <launch>    
     <arg name="use_present" default="FALSE" />
     
-    <param name="robot_description"
+<!--     <param name="robot_description"
     command="$(find xacro)/xacro.py '$(find thormang3_description)/urdf/thormang3.xacro'" />
-    
+     -->
+
+
+     <param name="robot_description"
+     command="$(find xacro)/xacro.py '$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro'" />
     <!-- send joint values -->
     <node name="robotis_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <param name="use_gui" value="FALSE"/>

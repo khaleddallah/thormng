@@ -6,7 +6,7 @@
     default="False" />
   <param
     name="robot_description"
-    textfile="$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.urdf" />
+    textfile="$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro" />
   <param
     name="use_gui"
     value="$(arg gui)" />

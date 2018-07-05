@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>    
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="robot_name" default="thormang3" />
+
+  <arg name="pinned" default="false"/>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+	 command="$(find xacro)/xacro.py '$(find all_exo_new_urdf_7_4)/urdf/all_exo_new_urdf_7_4.xacro'" />
+	 
+</launch>

@@ -1,0 +1,715 @@
+<robot
+  name="exo3">
+  <link
+    name="pelvis_link">
+    <inertial>
+      <origin
+        xyz="-0.0229570391634382 9.79841631493228E-06 -0.0791579286364338"
+        rpy="0 0 0" />
+      <mass
+        value="0.876180506785054" />
+      <inertia
+        ixx="0.0018274599707449"
+        ixy="2.77946712790388E-06"
+        ixz="-2.82148369387854E-05"
+        iyy="0.000542716087592879"
+        iyz="-1.88988098707529E-06"
+        izz="0.00181893616699862" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/pelvis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/pelvis_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="l_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="0.00019487 3.99E-05 0.0028585"
+        rpy="0 0 0" />
+      <mass
+        value="0.086528" />
+      <inertia
+        ixx="1.1391E-06"
+        ixy="-1.1141E-10"
+        ixz="-2.3723E-08"
+        iyy="6.29E-06"
+        iyz="-4.8573E-09"
+        izz="5.1509E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="0.023 0.125 -0.0813"
+      rpy="0 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="l_leg_hip_y_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="l_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0228672098615242 0.026657202473467 -0.0578970138026583"
+        rpy="0 0 0" />
+      <mass
+        value="0.57732261179279" />
+      <inertia
+        ixx="0.0018145712595036"
+        ixy="-1.42788361438728E-05"
+        ixz="-0.000341806477751158"
+        iyy="0.00199151436868998"
+        iyz="-4.24239917577178E-06"
+        izz="0.000385603527413131" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_y_link" />
+    <child
+      link="l_leg_hip_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="l_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="0.032679916729136 0.0184001566504312 -0.155832585944074"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678555449467" />
+      <inertia
+        ixx="0.00109766395282413"
+        ixy="-4.33668874240306E-05"
+        ixz="0.000211619413639588"
+        iyy="0.00105321955565092"
+        iyz="0.000201698351735855"
+        izz="0.000136166914622637" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="0.000765 -0.00018721 -0.14104"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_r_link" />
+    <child
+      link="l_leg_hip_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="l_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0371195392851623 -0.0290806755044999 -0.127161963516103"
+        rpy="0 0 0" />
+      <mass
+        value="0.501847197637449" />
+      <inertia
+        ixx="0.000743351806811445"
+        ixy="-5.28895214340486E-05"
+        ixz="-4.63291190422424E-05"
+        iyy="0.00096853459109222"
+        iyz="-0.000141414322901028"
+        izz="0.000584483910415871" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0.050381 -0.00051236 -0.23986"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_hip_p_link" />
+    <child
+      link="l_leg_kn_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="l_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="0.0299480772894787 -0.000490139450893823 -0.0319861956901267"
+        rpy="0 0 0" />
+      <mass
+        value="0.0325752781010226" />
+      <inertia
+        ixx="4.18279460088871E-06"
+        ixy="4.31654985141695E-08"
+        ixz="-1.58654211800639E-12"
+        iyy="6.81954692472973E-06"
+        iyz="2.59657210797218E-14"
+        izz="2.63816524469736E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="-0.0035327 -0.00026509 -0.20997"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_kn_p_link" />
+    <child
+      link="l_leg_an_p_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="l_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0369632207617154 -0.0454612151697915 -0.0315070725221814"
+        rpy="0 0 0" />
+      <mass
+        value="0.204476468319054" />
+      <inertia
+        ixx="2.90497940214471E-05"
+        ixy="-6.5651206273394E-06"
+        ixz="-2.22664662511733E-06"
+        iyy="7.42294356015338E-05"
+        iyz="-1.10255877547297E-07"
+        izz="7.35948114762979E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/l_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="l_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="l_leg_an_p_link" />
+    <child
+      link="l_leg_an_r_link" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_hip_y_link">
+    <inertial>
+      <origin
+        xyz="0.000194859023416288 -3.99011003911799E-05 0.0028585007264543"
+        rpy="0 0 0" />
+      <mass
+        value="0.0865285747250378" />
+      <inertia
+        ixx="1.13912095207424E-06"
+        ixy="1.11410861161037E-10"
+        ixz="-2.37218084077256E-08"
+        iyy="6.28996524419591E-06"
+        iyz="4.85749257153174E-09"
+        izz="5.15088991911781E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_y"
+    type="revolute">
+    <origin
+      xyz="0.023 -0.125 -0.0813"
+      rpy="0 0 0" />
+    <parent
+      link="pelvis_link" />
+    <child
+      link="r_leg_hip_y_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_hip_r_link">
+    <inertial>
+      <origin
+        xyz="-0.0238770079585271 -0.0258761502101602 -0.0582507810958505"
+        rpy="0 0 0" />
+      <mass
+        value="0.577328048094973" />
+      <inertia
+        ixx="0.0018145589879105"
+        ixy="1.86697078708302E-05"
+        ixz="-0.000341277661370656"
+        iyy="0.00199082000435136"
+        iyz="2.58316513440987E-05"
+        izz="0.00038573183130016" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_y_link" />
+    <child
+      link="r_leg_hip_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_hip_p_link">
+    <inertial>
+      <origin
+        xyz="0.0119162167049422 -0.0160889612900433 -0.159019579168821"
+        rpy="0 0 0" />
+      <mass
+        value="0.286678786770337" />
+      <inertia
+        ixx="0.00113459314865265"
+        ixy="1.62949619200086E-05"
+        ixz="8.0589762179723E-05"
+        iyy="0.00105887331308655"
+        iyz="-0.000191213526187752"
+        izz="9.08598704249653E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_hip_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_hip_p"
+    type="revolute">
+    <origin
+      xyz="-0.000235 0.0020842 -0.14103"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_r_link" />
+    <child
+      link="r_leg_hip_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_kn_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0252867564411349 0.0309808685867961 -0.129705092898568"
+        rpy="0 0 0" />
+      <mass
+        value="0.501849157200233" />
+      <inertia
+        ixx="0.000749537517045014"
+        ixy="3.60981923292043E-05"
+        ixz="-3.22295673042985E-05"
+        iyy="0.00096552086224131"
+        iyz="0.000150693128088677"
+        izz="0.000581130320590421" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_kn_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_kn_p"
+    type="revolute">
+    <origin
+      xyz="0.017958 0.0039708 -0.2444"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_hip_p_link" />
+    <child
+      link="r_leg_kn_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_an_p_link">
+    <inertial>
+      <origin
+        xyz="-0.0299422548828775 -0.000603810508363528 0.000473709358195573"
+        rpy="0 0 0" />
+      <mass
+        value="0.0325752783592805" />
+      <inertia
+        ixx="4.18215960680285E-06"
+        ixy="3.01427082636767E-08"
+        ixz="4.29418209436284E-08"
+        iyy="2.63966704904228E-06"
+        iyz="-6.09409672295196E-08"
+        izz="6.81868033748236E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_p_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_p"
+    type="revolute">
+    <origin
+      xyz="0.015862 0.035899 -0.20884"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_kn_p_link" />
+    <child
+      link="r_leg_an_p_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="r_leg_an_r_link">
+    <inertial>
+      <origin
+        xyz="0.0358849369545741 -0.00053467979911986 -0.0464786355713222"
+        rpy="0 0 0" />
+      <mass
+        value="0.199852807617439" />
+      <inertia
+        ixx="2.90543990160774E-05"
+        ixy="-2.47317359090037E-06"
+        ixz="9.02195098558628E-06"
+        iyy="6.35247388818592E-05"
+        iyz="3.37056813986097E-07"
+        izz="6.36415178935691E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo3/meshes/r_leg_an_r_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="r_leg_an_r"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="r_leg_an_p_link" />
+    <child
+      link="r_leg_an_r_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>
