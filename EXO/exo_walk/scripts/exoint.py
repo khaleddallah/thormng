@@ -66,12 +66,12 @@ def init_exo():
     #     pub.publish(hello_str)
     #     rate.sleep()
 
-def walk():
+def walk(t=1.5 , l=0.1 ,s=2):
     msg=FootStepCommand()
     msg.command = "forward";
-    msg.step_num = 10 ;
-    msg.step_time = 1.0;
-    msg.step_length = 0.1;
+    msg.step_num = s ;
+    msg.step_time = t;
+    msg.step_length = l;
     msg.side_step_length = 0.0;
     msg.step_angle_rad = 0.0;
     g_foot_pub.publish(msg)
@@ -100,6 +100,11 @@ if __name__ == '__main__':
                 elif (y=='b'):
                     stop()
                     print("stop working...")
+                elif (y=='e'):
+                    t=input("enter time:\n")
+                    l=input("enter len:\n")
+                    s=input("enter step:\n")
+                    walk(t,l,s)
                 elif(y=='c'):
                     raise KeyboardInterrupt
                 else:

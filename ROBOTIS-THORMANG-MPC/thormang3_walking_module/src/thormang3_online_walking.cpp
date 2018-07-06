@@ -99,9 +99,9 @@ THORMANG3OnlineWalking::THORMANG3OnlineWalking()
   initial_body_pose_       = previous_step_body_pose_;
 
   mat_cob_to_rhip_ = robotis_framework::getTranslation4D(0.0,       thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0), 0.0);
-  mat_rhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -1.0*(thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
+  mat_rhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -0.35*(thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
   mat_cob_to_lhip_ = robotis_framework::getTranslation4D(0.0,       thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0), 0.0);
-  mat_lhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -1.0*(thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
+  mat_lhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -0.35*(thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
 
   mat_rfoot_to_rft_ = robotis_framework::getRotation4d(M_PI,0,0);
   mat_lfoot_to_lft_ = robotis_framework::getRotation4d(M_PI,0,0);

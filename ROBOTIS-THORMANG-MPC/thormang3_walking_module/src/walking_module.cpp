@@ -186,8 +186,8 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   // online_walking->setInitialPose(0.196, -0.290, -0.450, 0.51, 0.501, 0.49,
   //                                0.021,  -0.276 , -0.453, 0.494, 0.490, 0.495,
   //                                0,      0,     0, 0, 0, 0);
-  online_walking->setInitialPose(0,  -0.12, -0.50, 0, 0, 0,
-                                 0,  0.12, -0.50, 0, 0, 0,
+  online_walking->setInitialPose(0,  -0.09, -0.46, 0, 0, 0,
+                                 0,   0.09, -0.46, 0, 0, 0,
                                  0,      0,     0, 0, 0, 0);
 
 
@@ -195,7 +195,7 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   parseOffsetData(offset_path);
 
   online_walking->hip_roll_feedforward_angle_rad_ = 0.0*M_PI/180.0;
-  online_walking->balance_ctrl_.setCOBManualAdjustment(-10.0*0.001,0, 0.00);
+  online_walking->balance_ctrl_.setCOBManualAdjustment(0.20,0.0, 0.0);
 
   online_walking->initialize();
 
@@ -348,11 +348,15 @@ void OnlineWalkingModule::publishRobotPose(void)
 
   p2.x = 0;
   p2.y = robot_pose_msg_.global_to_right_foot.position.y;
-  p2.z = robot_pose_msg_.global_to_right_foot.position.z;
+  //p2.z = robot_pose_msg_.global_to_right_foot.position.z;
+  p2.z   = -0.63;
+
 
   p3.x = 0;
   p3.y = robot_pose_msg_.global_to_left_foot.position.y;
-  p3.z = robot_pose_msg_.global_to_left_foot.position.z;
+  //p3.z = robot_pose_msg_.global_to_left_foot.position.z;
+  p3.z = -0.63;
+
 
   visualization_msgs::Marker points;
   points.header.frame_id = "/pelvis_link";
@@ -1749,7 +1753,7 @@ void OnlineWalkingModule::publishVisualize (std::vector<robotis_framework::StepD
   marker.scale.y = 0.03;
   marker.scale.z = 0.03;
   marker.color.b = 1.0f;
-  marker.color.a = 1.0;
+  marker.color.a = 0.70;
 
   geometry_msgs::Point pr,pl;
   for(unsigned int i = 0; i < msg.size() ; i++)
@@ -1771,7 +1775,9 @@ void OnlineWalkingModule::publishVisualize (std::vector<robotis_framework::StepD
 
   pr.x     = msg[i].position_data.right_foot_pose.x - robot_pose_msg_.global_to_center_of_body.position.x;
   pr.y     = msg[i].position_data.right_foot_pose.y;
-  pr.z     = msg[i].position_data.right_foot_pose.z;
+  //pr.z     = msg[i].position_data.right_foot_pose.z;
+  pr.z     = -0.63;
+
   // pr.orientation.x  = msg[i].position_data.right_foot_pose.roll;
   // pr.orientation.y  = msg[i].position_data.right_foot_pose.pitch;
   // pr.orientation.z  = msg[i].position_data.right_foot_pose.yaw;
@@ -1781,7 +1787,9 @@ void OnlineWalkingModule::publishVisualize (std::vector<robotis_framework::StepD
 
   pl.x     = msg[i].position_data.left_foot_pose.x - robot_pose_msg_.global_to_center_of_body.position.x;
   pl.y     = msg[i].position_data.left_foot_pose.y;
-  pl.z     = msg[i].position_data.left_foot_pose.z;
+  //pl.z     = msg[i].position_data.left_foot_pose.z;
+  pl.z     = -0.63;
+
   // pl.orientation.x  = msg[i].position_data.left_foot_pose.roll;
   // pl.orientation.y  = msg[i].position_data.left_foot_pose.pitch;
   // pl.orientation.z  = msg[i].position_data.left_foot_pose.yaw;
