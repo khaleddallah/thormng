@@ -186,8 +186,8 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   // online_walking->setInitialPose(0.196, -0.290, -0.450, 0.51, 0.501, 0.49,
   //                                0.021,  -0.276 , -0.453, 0.494, 0.490, 0.495,
   //                                0,      0,     0, 0, 0, 0);
-  online_walking->setInitialPose(0,  -0.09, -0.46, 0, 0, 0,
-                                 0,   0.09, -0.46, 0, 0, 0,
+  online_walking->setInitialPose(0,  -0.08, -0.47, 0, 0, 0,
+                                 0,   0.08, -0.47, 0, 0, 0,
                                  0,      0,     0, 0, 0, 0);
 
 
