@@ -38,28 +38,45 @@
   </joint>
 -->
   <!-- pelvis_link -->
-  <link name="pelvis_link">
-    <collision>
-      <origin xyz="-0.01 0 0.07" rpy="0 0 0"/>
+<link
+    name="pelvis_link">
+    <inertial>
+      <origin
+        xyz="-0.0229570391634383 9.79841631490452E-06 -0.0791579286364339"
+        rpy="0 0 0" />
+      <mass
+        value="0.876180506785054" />
+      <inertia
+        ixx="1.0"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="1.0"
+        iyz="0.0"
+        izz="1.0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <box size="0.2 0.25 0.17" />
+        <mesh
+          filename="package://exo_fri2/meshes/pelvis_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://exo_fri2/meshes/pelvis_link.STL" />
       </geometry>
     </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://thormang3_description/meshes/robotis_pelvis_link.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-
-    <inertial>
-      <origin xyz="-0.011 0.000 0.058" rpy="0 0 0"/>
-      <mass value="6.869"/>
-      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
-      <!--<inertia ixx="0.03603" ixy="0.0" ixz="0.00016" iyy="0.02210" iyz="0.0" izz="0.03830" />--> 
-    </inertial>
   </link>
 
 

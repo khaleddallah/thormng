@@ -188,7 +188,7 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   //                                0,      0,     0, 0, 0, 0);
   online_walking->setInitialPose(0,  -0.12, -0.47, 0, 0, 0,
                                  0,   0.12, -0.47, 0, 0, 0,
-                                 0,      0,     0, 0, 0, 0);
+                                 0.05,      0,     0, 0, 0, 0);
 
 
   std::string offset_path = ros::package::getPath("thormang3_walking_module") + "/config/motorConfigExo.yaml";

@@ -80,11 +80,11 @@ THORMANG3OnlineWalking::THORMANG3OnlineWalking()
   thormang3_kd_ = new KinematicsDynamics(WholeBody);
 
   present_right_foot_pose_.x = 0.0;    present_right_foot_pose_.y = -0.5*thormang3_kd_->leg_side_offset_m_;
-  present_right_foot_pose_.z = -0.630*MMtoM;
+  present_right_foot_pose_.z = 0.0;//-0.50*MMtoM;
   present_right_foot_pose_.roll = 0.0; present_right_foot_pose_.pitch = 0.0; present_right_foot_pose_.yaw = 0.0;
 
   present_left_foot_pose_.x = 0.0;    present_left_foot_pose_.y = 0.5*thormang3_kd_->leg_side_offset_m_;
-  present_left_foot_pose_.z = -0.630*MMtoM;
+  present_left_foot_pose_.z = 0.0;//-0.50*MMtoM;
   present_left_foot_pose_.roll = 0.0; present_left_foot_pose_.pitch = 0.0; present_left_foot_pose_.yaw = 0.0;
 
   present_body_pose_.x = 0.0;    present_body_pose_.y = 0.0;     present_body_pose_.z = 0.0;
