@@ -99,9 +99,9 @@ THORMANG3OnlineWalking::THORMANG3OnlineWalking()
   initial_body_pose_       = previous_step_body_pose_;
 
   mat_cob_to_rhip_ = robotis_framework::getTranslation4D(0.0,       thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0), 0.0);
-  mat_rhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -0.3*(thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
+  mat_rhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -1.0*(thormang3_kd_->thormang3_link_data_[ID_R_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
   mat_cob_to_lhip_ = robotis_framework::getTranslation4D(0.0,       thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0), 0.0);
-  mat_lhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -0.3*(thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
+  mat_lhip_to_cob_ = robotis_framework::getTranslation4D(0.0, -1.0*(thormang3_kd_->thormang3_link_data_[ID_L_LEG_START]->relative_position_.coeff(1, 0)), 0.0);
 
   mat_rfoot_to_rft_ = robotis_framework::getRotation4d(M_PI,0,0);
   mat_lfoot_to_lft_ = robotis_framework::getRotation4d(M_PI,0,0);
@@ -119,9 +119,9 @@ THORMANG3OnlineWalking::THORMANG3OnlineWalking()
   mat_g_to_robot_   = mat_g_to_cob_ * mat_cob_to_robot_;
   mat_robot_to_g_   = robotis_framework::getInverseTransformation(mat_g_to_robot_);
 
-  mat_g_to_rfoot_ = robotis_framework::getTransformationXYZRPY(present_right_foot_pose_.x, 0.3*present_right_foot_pose_.y, present_right_foot_pose_.z,
+  mat_g_to_rfoot_ = robotis_framework::getTransformationXYZRPY(present_right_foot_pose_.x, present_right_foot_pose_.y, present_right_foot_pose_.z,
       present_right_foot_pose_.roll, present_right_foot_pose_.pitch, present_right_foot_pose_.yaw);
-  mat_g_to_lfoot_ = robotis_framework::getTransformationXYZRPY(present_left_foot_pose_.x, 0.3*present_left_foot_pose_.y, present_left_foot_pose_.z,
+  mat_g_to_lfoot_ = robotis_framework::getTransformationXYZRPY(present_left_foot_pose_.x, present_left_foot_pose_.y, present_left_foot_pose_.z,
       present_left_foot_pose_.roll, present_left_foot_pose_.pitch, present_left_foot_pose_.yaw);
 
   mat_robot_to_rfoot_ = mat_robot_to_g_ * mat_g_to_rfoot_;
@@ -881,12 +881,12 @@ void THORMANG3OnlineWalking::calcRefZMP()
         if( added_step_data_[step_idx].position_data.moving_foot == RIGHT_FOOT_SWING )
         {
           reference_zmp_x_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.x;
-          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.y;
+          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.y*0.35;
         }
         else if( added_step_data_[step_idx].position_data.moving_foot == LEFT_FOOT_SWING )
         {
           reference_zmp_x_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.x;
-          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.y;
+          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.y*0.35;
         }
         else if( added_step_data_[step_idx].position_data.moving_foot == STANDING )
         {

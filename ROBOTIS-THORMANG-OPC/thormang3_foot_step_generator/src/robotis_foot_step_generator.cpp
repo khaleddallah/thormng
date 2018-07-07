@@ -64,7 +64,7 @@ FootStepGenerator::FootStepGenerator()
   start_end_time_sec_ = 1.6;
   dsp_ratio_ = 0.2;
 
-  foot_z_swap_m_ = 0.1;
+  foot_z_swap_m_ = 0.04;
   body_z_swap_m_ = 0.01;
 
   default_y_feet_offset_m_ = 0.186;
