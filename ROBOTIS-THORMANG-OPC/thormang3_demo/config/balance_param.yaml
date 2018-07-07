@@ -1,5 +1,5 @@
 ####### cob_offset #######
-cob_x_offset_m : -0.15
+cob_x_offset_m : 0.15
 cob_y_offset_m :  0.0
 
 ####### FeedForward #####

@@ -188,14 +188,14 @@ void OnlineWalkingModule::initialize(const int control_cycle_msec, robotis_frame
   //                                0,      0,     0, 0, 0, 0);
   online_walking->setInitialPose(0,  -0.12, -0.47, 0, 0, 0,
                                  0,   0.12, -0.47, 0, 0, 0,
-                                 0.05,      0,     0, 0, 0, 0);
+                                 0.1,      0,     0, 0, 0.1, 0);
 
 
   std::string offset_path = ros::package::getPath("thormang3_walking_module") + "/config/motorConfigExo.yaml";
   parseOffsetData(offset_path);
 
   online_walking->hip_roll_feedforward_angle_rad_ = 0.0*M_PI/180.0;
-  online_walking->balance_ctrl_.setCOBManualAdjustment(0.20,0.0, 0.0);
+  online_walking->balance_ctrl_.setCOBManualAdjustment(0.30,0.0, 0.0);
 
   online_walking->initialize();
 

@@ -881,12 +881,12 @@ void THORMANG3OnlineWalking::calcRefZMP()
         if( added_step_data_[step_idx].position_data.moving_foot == RIGHT_FOOT_SWING )
         {
           reference_zmp_x_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.x;
-          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.y*0.35;
+          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.left_foot_pose.y*0.2;
         }
         else if( added_step_data_[step_idx].position_data.moving_foot == LEFT_FOOT_SWING )
         {
           reference_zmp_x_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.x;
-          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.y*0.35;
+          reference_zmp_y_(ref_zmp_idx, 0) = added_step_data_[step_idx].position_data.right_foot_pose.y*0.2;
         }
         else if( added_step_data_[step_idx].position_data.moving_foot == STANDING )
         {
