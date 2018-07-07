@@ -616,7 +616,7 @@ BalanceControlUsingPDController::BalanceControlUsingPDController()
   cob_z_manual_adjustment_m_ = 0;
 
   // maximum adjustment
-  cob_x_adjustment_abs_max_m_ = 0.1;
+  cob_x_adjustment_abs_max_m_ = 0.10;
   cob_y_adjustment_abs_max_m_ = 0.05;
   cob_z_adjustment_abs_max_m_ = 0.05;
   cob_roll_adjustment_abs_max_rad_  = 15.0*DEGREE2RADIAN;
